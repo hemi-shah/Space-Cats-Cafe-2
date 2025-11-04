@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6b148f9119801428aa3e3e06de88d5a3
+guid: 3ef514b37e69d4b138ff5e32ddfab1e3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7631298062564082103
-    second: OrderTicketBlankSprite_0
+      213: 7076929351989926625
+    second: CaramelSyrupTicketSprite_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OrderTicketBlankSprite_0
+      name: CaramelSyrupTicketSprite_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 400
-        height: 750
+        x: 2
+        y: 4
+        width: 46
+        height: 167
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7b14242d721d7e960800000000000000
-      internalID: 7631298062564082103
+      spriteID: 1ea15ed10cd463260800000000000000
+      internalID: 7076929351989926625
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      OrderTicketBlankSprite_0: 7631298062564082103
+      CaramelSyrupTicketSprite_0: 7076929351989926625
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

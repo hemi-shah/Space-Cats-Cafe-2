@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c904b2791d6d14b94aafd3857aa0126d
+guid: 7cc660f1d035d4fdda2e343351d719ff
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8641527963725720249
-    second: IcedDrinkCoffeeSprite_0
+      213: 2506929039048947638
+    second: AlmondMilkTicketSprite_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IcedDrinkCoffeeSprite_0
+      name: AlmondMilkTicketSprite_0
       rect:
         serializedVersion: 2
-        x: 36
-        y: 0
-        width: 206
-        height: 275
+        x: 7
+        y: 5
+        width: 61
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 745168d0a10231880800000000000000
-      internalID: -8641527963725720249
+      spriteID: 6b7bf91cda66ac220800000000000000
+      internalID: 2506929039048947638
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IcedDrinkCoffeeSprite_0: -8641527963725720249
+      AlmondMilkTicketSprite_0: 2506929039048947638
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
