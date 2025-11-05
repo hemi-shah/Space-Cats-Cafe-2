@@ -3,9 +3,7 @@ using Game399.Shared;
 using Game399.Shared.DependencyInjection;
 using Game399.Shared.DependencyInjection.Implementation;
 using Game399.Shared.Diagnostics;
-using Game399.Shared.Models;
 using Game399.Shared.Services;
-using Game399.Shared.Services.Implementation;
 
 namespace Game.Runtime
 {
@@ -20,17 +18,11 @@ namespace Game.Runtime
             var logger = new UnityGameLogger();
             container.RegisterSingletonInstance<IGameLog>(logger);
 
-            var gameState = new GameState();
-            gameState.GoodGuy.Name = "Good Sandy";
-            gameState.GoodGuy.Health.Value = 10;
-            gameState.GoodGuy.Damage.Value = 1;
-            gameState.BadGuy.Name = "Bad Sandy";
-            gameState.BadGuy.Health.Value = 10;
-            gameState.BadGuy.Damage.Value = 1;
-            container.RegisterSingletonInstance(gameState);
+            var drinkService = new DrinkService(logger);
+            container.RegisterSingletonInstance<IDrinkService>(drinkService);
 
-            var damageService = new DamageService(logger);
-            container.RegisterSingletonInstance<IDamageService>(damageService);
+            var drinkState = new DrinkState();
+            container.RegisterSingletonInstance(drinkState);
             
             return container;
         });
