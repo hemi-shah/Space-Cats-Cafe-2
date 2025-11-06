@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class TemperatureSelectionScreen : ScreenController
 {
     [SerializeField] private Button hotButton;
-    [SerializeField] private Button icedButton;
+    [SerializeField] private Button coldButton;
 
     protected override void SetupButtons()
     {
@@ -13,25 +13,27 @@ public class TemperatureSelectionScreen : ScreenController
         if (hotButton != null)
         {
             hotButton.onClick.AddListener(OnHotSelected);
-            Debug.Log("TempScreen: Hot button ready");
+            Debug.Log("HotOrIcedStation: Hot button ready");
         }
         
-        if (icedButton != null)
+        if (coldButton != null)
         {
-            icedButton.onClick.AddListener(OnIcedSelected);
-            Debug.Log("TempScreen: Iced button ready");
+            coldButton.onClick.AddListener(OnColdSelected);
+            Debug.Log("HotOrIcedStation: Cold button ready");
         }
     }
 
     private void OnHotSelected()
     {
-        Debug.Log("Hot selected!");
+        Debug.Log("Hot drink selected!");
+        NavigationBar.Instance?.MarkStationCompleted(GameStateType.ChoosingTemperature);
         GameStateManager.Instance.ChangeState(GameStateType.ChoosingMilk);
     }
 
-    private void OnIcedSelected()
+    private void OnColdSelected()
     {
-        Debug.Log("Iced selected!");
+        Debug.Log("Iced drink selected!");
+        NavigationBar.Instance?.MarkStationCompleted(GameStateType.ChoosingTemperature);
         GameStateManager.Instance.ChangeState(GameStateType.PlayingIceGame);
     }
 }

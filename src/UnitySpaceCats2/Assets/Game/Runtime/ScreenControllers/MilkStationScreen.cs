@@ -49,12 +49,14 @@ public class MilkStationScreen : ScreenController
     {
         selectedMilk = milkType;
         Debug.Log($"{milkType} selected!");
+        NavigationBar.Instance?.MarkStationCompleted(GameStateType.ChoosingMilk);
         GameStateManager.Instance.ChangeState(GameStateType.PumpingSyrup);
     }
 
     private void OnSkip()
     {
         Debug.Log("Milk skipped");
+        NavigationBar.Instance?.MarkStationCompleted(GameStateType.ChoosingMilk);
         GameStateManager.Instance.ChangeState(GameStateType.PumpingSyrup);
     }
 }

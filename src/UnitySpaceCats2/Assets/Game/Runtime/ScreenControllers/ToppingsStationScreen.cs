@@ -42,6 +42,7 @@ public class ToppingsStationScreen : ScreenController
     private void OnContinue()
     {
         Debug.Log("Toppings complete!");
+        NavigationBar.Instance?.MarkStationCompleted(GameStateType.PlacingToppings);
         GameStateManager.Instance.ChangeState(GameStateType.ServingDrinks);
     }
 }

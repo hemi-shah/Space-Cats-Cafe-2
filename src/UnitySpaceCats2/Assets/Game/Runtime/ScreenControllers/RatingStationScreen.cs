@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ReviewScreen : ScreenController
+public class RatingStationScreen : ScreenController
 {
     [SerializeField] private Text scoreText;
     [SerializeField] private Text feedbackText;
@@ -14,7 +14,7 @@ public class ReviewScreen : ScreenController
         if (nextOrderButton != null)
         {
             nextOrderButton.onClick.AddListener(OnNextOrder);
-            Debug.Log("ReviewScreen: Next Order button ready");
+            Debug.Log("RatingStation: Next Order button ready");
         }
     }
 
@@ -30,17 +30,18 @@ public class ReviewScreen : ScreenController
         if (feedbackText != null)
         {
             if (score >= 90)
-                feedbackText.text = "Perfect!";
+                feedbackText.text = "Perfect! The cat is very happy!";
             else if (score >= 70)
-                feedbackText.text = "Good job!";
+                feedbackText.text = "Good job! The cat enjoyed it.";
             else
-                feedbackText.text = "Keep practicing!";
+                feedbackText.text = "Keep practicing! The cat wants better.";
         }
     }
 
     private void OnNextOrder()
     {
         Debug.Log("Next order!");
+        NavigationBar.Instance?.MarkStationCompleted(GameStateType.ServingDrinks);
         GameStateManager.Instance.ClearHistory();
         GameStateManager.Instance.ChangeState(GameStateType.WaitingforCustomers);
     }

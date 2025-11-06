@@ -6,7 +6,6 @@ public class SyrupStationScreen : ScreenController
     [SerializeField] private Button vanillaButton;
     [SerializeField] private Button caramelButton;
     [SerializeField] private Button hazelnutButton;
-    [SerializeField] private Button continueButton;
 
     protected override void SetupButtons()
     {
@@ -26,12 +25,6 @@ public class SyrupStationScreen : ScreenController
         {
             hazelnutButton.onClick.AddListener(() => OnSyrupSelected("Hazelnut"));
         }
-        
-        if (continueButton != null)
-        {
-            continueButton.onClick.AddListener(OnContinue);
-            Debug.Log("SyrupScreen: Continue button ready");
-        }
     }
 
     private void OnSyrupSelected(string syrup)
@@ -42,6 +35,7 @@ public class SyrupStationScreen : ScreenController
     private void OnContinue()
     {
         Debug.Log("Syrup done!");
+        NavigationBar.Instance?.MarkStationCompleted(GameStateType.PumpingSyrup);
         GameStateManager.Instance.ChangeState(GameStateType.PouringEspresso);
     }
 }

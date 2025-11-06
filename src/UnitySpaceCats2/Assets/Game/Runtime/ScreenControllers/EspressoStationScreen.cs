@@ -49,6 +49,7 @@ public class EspressoStationScreen : ScreenController
     private void OnContinue()
     {
         Debug.Log("Moving to toppings");
+        NavigationBar.Instance?.MarkStationCompleted(GameStateType.PouringEspresso);
         GameStateManager.Instance.ChangeState(GameStateType.PlacingToppings);
     }
 }

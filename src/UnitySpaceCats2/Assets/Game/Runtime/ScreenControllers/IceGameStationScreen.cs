@@ -29,6 +29,7 @@ public class IceGameStationScreen : ScreenController
     private void OnIceGameComplete()
     {
         Debug.Log("Ice game completed!");
+        NavigationBar.Instance?.MarkStationCompleted(GameStateType.PlayingIceGame);
         GameStateManager.Instance.ChangeState(GameStateType.ChoosingMilk);
     }
 }
