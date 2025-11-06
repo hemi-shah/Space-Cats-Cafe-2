@@ -16,9 +16,22 @@ namespace Game399.Shared
             set => SetAndNotifyIfChanged(value);
         }
 
+        /// <summary>
+        /// Subscribe to value changes. Immediately invokes with current value.
+        /// </summary>
         public event Action<T> ChangeEvent
         {
             add => AddAndCall(value);
+            remove => _event -= value;
+        }
+
+        /// <summary>
+        /// Subscribe to value changes WITHOUT immediate invocation.
+        /// Use this when you want to handle the initial state separately.
+        /// </summary>
+        public event Action<T> ChangeEventNoInit
+        {
+            add => _event += value;
             remove => _event -= value;
         }
 
@@ -48,6 +61,14 @@ namespace Game399.Shared
         {
             _event += action;
             action?.Invoke(Value);
+        }
+
+        /// <summary>
+        /// Manually trigger all subscribers with the current value
+        /// </summary>
+        public void NotifySubscribers()
+        {
+            _event?.Invoke(Value);
         }
 
         public bool Equals(T other)
