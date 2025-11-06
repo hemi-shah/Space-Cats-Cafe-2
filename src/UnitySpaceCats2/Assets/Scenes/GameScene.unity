@@ -787,7 +787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TemperatureSelectionScreen
   associatedState: 6
   hotButton: {fileID: 181309400}
-  icedButton: {fileID: 1010387077}
+  coldButton: {fileID: 0}
 --- !u!1 &358434773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,6 +1584,7 @@ RectTransform:
   - {fileID: 1140166439}
   - {fileID: 1169377721}
   - {fileID: 1385543072}
+  - {fileID: 1299458180}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3365,6 +3366,56 @@ MonoBehaviour:
   associatedState: 5
   takeOrderButton: {fileID: 1188952194}
   orderDetailsText: {fileID: 0}
+--- !u!1 &1299458179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1299458180}
+  - component: {fileID: 1299458181}
+  m_Layer: 5
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1299458180
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299458179}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 687329221}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1299458181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299458179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25bf7c4d94a7b49998850e712fa4cffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  audioSource: {fileID: 0}
+  backgroundMusic: {fileID: 8300000, guid: 948af114e80494a91987afc19c6f5a9d, type: 3}
 --- !u!1 &1348740484
 GameObject:
   m_ObjectHideFlags: 0
@@ -4892,7 +4943,6 @@ MonoBehaviour:
   vanillaButton: {fileID: 0}
   caramelButton: {fileID: 0}
   hazelnutButton: {fileID: 0}
-  continueButton: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

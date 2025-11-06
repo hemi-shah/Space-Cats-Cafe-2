@@ -1,24 +1,49 @@
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour, IAudioService
 {
+    public static AudioManager Instance { get; private set; }
+
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip backgroundMusic;
 
-    public void PlayBackgroundMusic()
+    private void Awake()
     {
-        // if the music is already playing then return
-        if (audioSource.isPlaying) return;
-        
-        // if music is not playing, play it
-        audioSource.clip = backgroundMusic;
-        audioSource.loop = true;
-        audioSource.Play();
+        // singleton setup
+        if (Instance && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        if (!audioSource)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.loop = true;
+        }
     }
 
-    public void StopBackgroundMusic()
+    private void Start()
     {
-        audioSource.Stop();
+        PlayBackgroundMusic();
+    }
+
+    public void PlayBackgroundMusic()
+    {
+        if (!backgroundMusic)
+        {
+            Debug.LogWarning("No background music assigned");
+            return;
+        }
+
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = backgroundMusic;
+            audioSource.Play();
+            Debug.Log("Background music started playing");
+        }
     }
 }
