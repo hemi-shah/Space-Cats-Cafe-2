@@ -22,13 +22,13 @@ public class OrderingScreen : ScreenController
         base.OnScreenShow();
         if (orderDetailsText != null)
         {
-            orderDetailsText.text = "Customer wants:\n- Iced Coffee\n- 2 Pumps Vanilla\n- Oat Milk";
+            orderDetailsText.text = "A cute cat approaches!\n\nReady to take their order?";
         }
     }
 
     private void OnTakeOrder()
     {
-        Debug.Log("Order taken!");
-        GameStateManager.Instance.ChangeState(GameStateType.ChoosingTemperature);
+        Debug.Log("Order taken from cat!");
+        GameStateManager.Instance.ChangeState(GameStateType.OrderTicketReceived);
     }
 }

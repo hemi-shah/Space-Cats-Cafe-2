@@ -7,14 +7,14 @@ using UnityEngine.UI;
 public class NavigationBar : MonoBehaviour
 {
     [Header("Navigation Buttons")]
-    [SerializeField] private Button tempButton;
-    [SerializeField] private Button milkButton;
+    [SerializeField] private Button waitingScreenButton;
+    [SerializeField] private Button hotOrColdDrinkButton;
+    [SerializeField] private Button iceGameButton;
     [SerializeField] private Button syrupButton;
     [SerializeField] private Button espressoButton;
-    [SerializeField] private Button iceButton;
+    [SerializeField] private Button milkButton;
+    [SerializeField] private Button toppingsButton;
     [SerializeField] private Button reviewButton;
-    [SerializeField] private Button ticketsButton;
-    [SerializeField] private Button pauseButton;
 
     [Header("Visual Feedback")]
     [SerializeField] private Color normalColor = Color.white;
@@ -43,22 +43,22 @@ public class NavigationBar : MonoBehaviour
 
     private void SetupButtonListeners()
     {
-        if (tempButton != null)
-            tempButton.onClick.AddListener(() => NavigateTo(GameStateType.ChoosingTemperature));
-        if (milkButton != null)
-            milkButton.onClick.AddListener(() => NavigateTo(GameStateType.ChoosingMilk));
+        if (waitingScreenButton != null)
+            waitingScreenButton.onClick.AddListener(() => NavigateTo(GameStateType.WaitingforCustomers));
+        if (hotOrColdDrinkButton != null)
+            hotOrColdDrinkButton.onClick.AddListener(() => NavigateTo(GameStateType.ChoosingTemperature));
+        if (iceGameButton != null)
+            iceGameButton.onClick.AddListener(() => NavigateTo(GameStateType.PlayingIceGame));
         if (syrupButton != null)
             syrupButton.onClick.AddListener(() => NavigateTo(GameStateType.PumpingSyrup));
         if (espressoButton != null)
             espressoButton.onClick.AddListener(() => NavigateTo(GameStateType.PouringEspresso));
-        if (iceButton != null)
-            iceButton.onClick.AddListener(() => NavigateTo(GameStateType.PlayingIceGame));
+        if (milkButton != null)
+            milkButton.onClick.AddListener(() => NavigateTo(GameStateType.ChoosingMilk));
+        if (toppingsButton != null)
+            toppingsButton.onClick.AddListener(() => NavigateTo(GameStateType.PlacingToppings));
         if (reviewButton != null)
             reviewButton.onClick.AddListener(() => NavigateTo(GameStateType.ServingDrinks));
-        if (ticketsButton != null)
-            ticketsButton.onClick.AddListener(() => NavigateTo(GameStateType.TakingOrder));
-        if (pauseButton != null)
-            pauseButton.onClick.AddListener(() => NavigateTo(GameStateType.Pause));
     }
 
     private void NavigateTo(GameStateType targetState)
@@ -95,14 +95,14 @@ public class NavigationBar : MonoBehaviour
     /// </summary>
     private void OnStateChanged(GameStateType newState)
     {
-        UpdateButtonVisual(tempButton, GameStateType.ChoosingTemperature, newState);
-        UpdateButtonVisual(milkButton, GameStateType.ChoosingMilk, newState);
+        UpdateButtonVisual(waitingScreenButton, GameStateType.WaitingforCustomers, newState);
+        UpdateButtonVisual(hotOrColdDrinkButton, GameStateType.ChoosingTemperature, newState);
+        UpdateButtonVisual(iceGameButton, GameStateType.PlayingIceGame, newState);
         UpdateButtonVisual(syrupButton, GameStateType.PumpingSyrup, newState);
         UpdateButtonVisual(espressoButton, GameStateType.PouringEspresso, newState);
-        UpdateButtonVisual(iceButton, GameStateType.PlayingIceGame, newState);
+        UpdateButtonVisual(milkButton, GameStateType.ChoosingMilk, newState);
+        UpdateButtonVisual(toppingsButton, GameStateType.PlacingToppings, newState);
         UpdateButtonVisual(reviewButton, GameStateType.ServingDrinks, newState);
-        UpdateButtonVisual(ticketsButton, GameStateType.TakingOrder, newState);
-        UpdateButtonVisual(pauseButton, GameStateType.Pause, newState);
     }
 
     private void UpdateButtonVisual(Button button, GameStateType buttonState, GameStateType currentState)
@@ -147,14 +147,14 @@ public class NavigationBar : MonoBehaviour
     {
         switch (state)
         {
-            case GameStateType.ChoosingTemperature: return tempButton;
-            case GameStateType.ChoosingMilk: return milkButton;
+            case GameStateType.WaitingforCustomers: return waitingScreenButton;
+            case GameStateType.ChoosingTemperature: return hotOrColdDrinkButton;
+            case GameStateType.PlayingIceGame: return iceGameButton;
             case GameStateType.PumpingSyrup: return syrupButton;
             case GameStateType.PouringEspresso: return espressoButton;
-            case GameStateType.PlayingIceGame: return iceButton;
+            case GameStateType.ChoosingMilk: return milkButton;
+            case GameStateType.PlacingToppings: return toppingsButton;
             case GameStateType.ServingDrinks: return reviewButton;
-            case GameStateType.TakingOrder: return ticketsButton;
-            case GameStateType.Pause: return pauseButton;
             default: return null;
         }
     }

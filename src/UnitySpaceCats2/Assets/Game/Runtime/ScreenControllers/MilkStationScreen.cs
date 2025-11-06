@@ -3,25 +3,33 @@ using UnityEngine.UI;
 
 public class MilkStationScreen : ScreenController
 {
-    [SerializeField] private Slider milkAmountSlider;
-    [SerializeField] private Button confirmButton;
+    [SerializeField] private Button oatMilkButton;
+    [SerializeField] private Button almondMilkButton;
+    [SerializeField] private Button wholeMilkButton;
     [SerializeField] private Button skipButton;
 
-    private float currentMilkAmount = 0f;
+    private string selectedMilk = "";
 
     protected override void SetupButtons()
     {
         associatedState = GameStateType.ChoosingMilk;
         
-        if (milkAmountSlider != null)
+        if (oatMilkButton != null)
         {
-            milkAmountSlider.onValueChanged.AddListener(OnMilkChanged);
+            oatMilkButton.onClick.AddListener(() => OnMilkSelected("Oat Milk"));
+            Debug.Log("MilkScreen: Oat Milk button ready");
         }
         
-        if (confirmButton != null)
+        if (almondMilkButton != null)
         {
-            confirmButton.onClick.AddListener(OnConfirm);
-            Debug.Log("MilkScreen: Confirm button ready");
+            almondMilkButton.onClick.AddListener(() => OnMilkSelected("Almond Milk"));
+            Debug.Log("MilkScreen: Almond Milk button ready");
+        }
+        
+        if (wholeMilkButton != null)
+        {
+            wholeMilkButton.onClick.AddListener(() => OnMilkSelected("Whole Milk"));
+            Debug.Log("MilkScreen: Whole Milk button ready");
         }
         
         if (skipButton != null)
@@ -34,19 +42,13 @@ public class MilkStationScreen : ScreenController
     protected override void OnScreenShow()
     {
         base.OnScreenShow();
-        currentMilkAmount = 0f;
-        if (milkAmountSlider != null)
-            milkAmountSlider.value = 0f;
+        selectedMilk = "";
     }
 
-    private void OnMilkChanged(float amount)
+    private void OnMilkSelected(string milkType)
     {
-        currentMilkAmount = amount;
-    }
-
-    private void OnConfirm()
-    {
-        Debug.Log($"Milk confirmed: {currentMilkAmount}");
+        selectedMilk = milkType;
+        Debug.Log($"{milkType} selected!");
         GameStateManager.Instance.ChangeState(GameStateType.PumpingSyrup);
     }
 

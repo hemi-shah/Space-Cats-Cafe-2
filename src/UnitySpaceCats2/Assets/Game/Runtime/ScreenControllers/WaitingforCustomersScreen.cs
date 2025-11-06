@@ -5,6 +5,7 @@ public class WaitingForCustomersScreen : ScreenController
 {
     [SerializeField] private Button pauseButton;
     [SerializeField] private Button catsEncounteredButton;
+    [SerializeField] private Button takeOrderButton;
 
     protected override void SetupButtons()
     {
@@ -19,7 +20,13 @@ public class WaitingForCustomersScreen : ScreenController
         if (catsEncounteredButton != null)
         {
             catsEncounteredButton.onClick.AddListener(OnCatsClicked);
-            Debug.Log("WaitingScreen: Cats button ready");
+            Debug.Log("WaitingScreen: Cats Encountered button ready");
+        }
+        
+        if (takeOrderButton != null)
+        {
+            takeOrderButton.onClick.AddListener(OnTakeOrder);
+            Debug.Log("WaitingScreen: Take Order button ready");
         }
     }
 
@@ -31,7 +38,13 @@ public class WaitingForCustomersScreen : ScreenController
 
     private void OnCatsClicked()
     {
-        Debug.Log("Cats clicked!");
+        Debug.Log("Cats Encountered clicked!");
         GameStateManager.Instance.ChangeState(GameStateType.ViewingCollectedCats);
+    }
+
+    private void OnTakeOrder()
+    {
+        Debug.Log("Taking order from cat!");
+        GameStateManager.Instance.ChangeState(GameStateType.TakingOrder);
     }
 }
