@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class OrderingScreen : ScreenController
 {
-    [SerializeField] private Button takeOrderButton;
+    //[SerializeField] private Button takeOrderButton;
     [SerializeField] private Text orderDetailsText;
 
     [SerializeField] private Image catImage;
@@ -12,11 +12,13 @@ public class OrderingScreen : ScreenController
     {
         associatedState = GameStateType.TakingOrder;
         
+        /*
         if (takeOrderButton != null)
         {
             takeOrderButton.onClick.AddListener(OnTakeOrder);
             Debug.Log("OrderingScreen: Button ready");
         }
+        */
     }
 
     protected override void OnScreenShow()

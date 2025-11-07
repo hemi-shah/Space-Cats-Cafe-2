@@ -260,6 +260,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f39cab65ab0da4450b8d8196e21ecdcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrderManager
+  hotChance: 0.5
+  syrupChance: 0.75
+  milkChance: 0.75
+  whippedCreamChance: 0.75
+  drizzleChance: 0.35
 --- !u!1 &181309398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,7 +1136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7122642, b: 0.7122642, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1391,7 +1396,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 61}
-  m_SizeDelta: {x: 100, y: 125}
+  m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &599766387
 MonoBehaviour:
@@ -1406,14 +1411,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7122642, b: 0.7122642, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -2846892803073936734, guid: 31792f9a00ced4ff3b1f513b0dcc0102, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1772,12 +1777,12 @@ RectTransform:
   - {fileID: 1450255657}
   - {fileID: 1089364788}
   - {fileID: 579951754}
-  - {fileID: 1194013423}
   - {fileID: 543441425}
   - {fileID: 329272021}
   - {fileID: 358434774}
   - {fileID: 1277654510}
   - {fileID: 1376950619}
+  - {fileID: 1194013423}
   - {fileID: 1348740485}
   - {fileID: 1140166439}
   - {fileID: 1169377721}
@@ -1990,7 +1995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7122642, b: 0.7122642, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2065,14 +2070,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7122642, b: 0.7122642, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 8365531958859003678, guid: 706e20b3b96f743ea8f5439df8d54d82, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2553,7 +2558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7122642, b: 0.7122642, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3670,7 +3675,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194013422}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3736,6 +3741,8 @@ MonoBehaviour:
   associatedState: 13
   orderDetailsText: {fileID: 0}
   startMakingButton: {fileID: 0}
+  panel: {fileID: 1602923120}
+  orderTicket: {fileID: 1602923122}
 --- !u!1 &1196387363
 GameObject:
   m_ObjectHideFlags: 0
@@ -4082,7 +4089,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrderingScreen
   associatedState: 5
-  takeOrderButton: {fileID: 1188952194}
   orderDetailsText: {fileID: 0}
   catImage: {fileID: 814563176}
 --- !u!1 &1299458179
@@ -4790,13 +4796,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1602923121}
+  - component: {fileID: 1602923122}
   m_Layer: 6
-  m_Name: Content
+  m_Name: OrderTicket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1602923121
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4827,6 +4834,43 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1602923122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602923120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22253e318dd544ae2b561511c40c0a80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrderTicket
+  emptyHotCup: {fileID: -4833567462236879316, guid: 701eb55b364e247de977c6fa53dd1a68, type: 3}
+  emptyColdCup: {fileID: 8672665393381472785, guid: f20813a6872314864adc814194461d0d, type: 3}
+  oneIce: {fileID: -1164694450169534480, guid: 57f3b68b8284241808047fc9a4a467c7, type: 3}
+  twoIce: {fileID: -2120018857538684983, guid: b07ff776b243748da95de4220e5639f8, type: 3}
+  threeIce: {fileID: 7281043078792934742, guid: 6880d1486e4c9438eb92a983a0479eaa, type: 3}
+  fourIce: {fileID: 1558660359701262088, guid: 03cc3e1d5634a42e88e54fb082a75d55, type: 3}
+  chocolateSyrupPump: {fileID: -6631738594552011289, guid: bcfdeb4c992c74ea29c8d7b3833f4d21, type: 3}
+  caramelSyrupPump: {fileID: 7076929351989926625, guid: 3ef514b37e69d4b138ff5e32ddfab1e3, type: 3}
+  mochaSyrupPump: {fileID: -6318704623854855201, guid: 05416820c4cff43c9bdb423b5e198a17, type: 3}
+  dairyMilk: {fileID: 4101728276100452072, guid: 49afa083d1de944a9820d785b31dafaf, type: 3}
+  almondMilk: {fileID: 2506929039048947638, guid: 7cc660f1d035d4fdda2e343351d719ff, type: 3}
+  oatMilk: {fileID: -6035085950175472393, guid: be766874c0ffc4588a9e12545b641476, type: 3}
+  whippedCream: {fileID: 8365531958859003678, guid: 706e20b3b96f743ea8f5439df8d54d82, type: 3}
+  chocolateSyrup: {fileID: -2846892803073936734, guid: 31792f9a00ced4ff3b1f513b0dcc0102, type: 3}
+  caramelSyrup: {fileID: -2268633549858360423, guid: cfa933bc5a4c241979cf534385284d21, type: 3}
+  drinkTypeImage: {fileID: 521900219}
+  iceAmountImage: {fileID: 829934208}
+  syrupTypeImage: {fileID: 741051071}
+  milkTypeImage: {fileID: 1875471411}
+  whippedCreamImage: {fileID: 747941700}
+  chocolateSyrupImage: {fileID: 599766387}
+  caramelSyrupImage: {fileID: 1714725553}
+  orderNumberText: {fileID: 2072439255}
+  drinkNameText: {fileID: 1927390838}
+  contentRoot: {fileID: 1602923121}
 --- !u!1 &1664069565
 GameObject:
   m_ObjectHideFlags: 0
@@ -5131,7 +5175,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 120, y: 61}
-  m_SizeDelta: {x: 100, y: 125}
+  m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1714725553
 MonoBehaviour:
@@ -5146,14 +5190,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7122642, b: 0.7122642, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -2268633549858360423, guid: cfa933bc5a4c241979cf534385284d21, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5613,7 +5657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7122642, b: 0.7122642, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
