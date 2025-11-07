@@ -3743,6 +3743,15 @@ MonoBehaviour:
   startMakingButton: {fileID: 0}
   panel: {fileID: 1602923120}
   orderTicket: {fileID: 1602923122}
+  currentOrderData:
+    isHot: 0
+    hasWhippedCream: 0
+    hasChocolateSyrup: 0
+    hasCaramelSyrup: 0
+    numberOfIceCubes: 0
+    milk: 0
+    syrup: 0
+    drinkName: 
 --- !u!1 &1196387363
 GameObject:
   m_ObjectHideFlags: 0
@@ -4512,7 +4521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1347350076058257255, guid: 80043627e78914fa79b653c6f31620c7, type: 3}
+  m_Sprite: {fileID: 2130674701812295956, guid: 5aa33d3f6ac4d4e01bc36a1da8cfdcf7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
