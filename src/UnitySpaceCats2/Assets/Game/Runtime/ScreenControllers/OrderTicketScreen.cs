@@ -9,6 +9,8 @@ public class OrderTicketScreen : ScreenController
     [SerializeField] private GameObject panel; // root of orderticket
     
     [SerializeField] private OrderTicket orderTicket;
+    
+    [SerializeField] private OrderTicketData currentOrderData;
 
     void Start()
     {
@@ -31,11 +33,20 @@ public class OrderTicketScreen : ScreenController
             if (OrderManager.Instance != null)
             {
                 OrderTicketData ticketData = OrderManager.Instance.GenerateRandomOrderData();
+                currentOrderData = ticketData;
                 int ticketNumber = OrderManager.Instance.GetAndIncrementNextOrderNumber();
                 orderTicket.Setup(ticketNumber, ticketData);
                 orderTicket.SetContentVisible(true);
             }
         }
+        
+        if (newState != GameStateType.Title || newState != GameStateType.Pause || newState != GameStateType.ChoosingCat || newState != GameStateType.ViewingCollectedCats || newState != GameStateType.WaitingforCustomers)
+        {
+            panel.SetActive(true);
+            orderTicket.SetContentVisible(true);
+            
+        }
+        
         else
         {
             if (panel != null)

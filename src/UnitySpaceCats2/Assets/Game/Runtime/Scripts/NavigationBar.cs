@@ -97,7 +97,7 @@ public class NavigationBar : MonoBehaviour
 
             case GameStateType.TakingOrder:
                 // Lock everything except order taking
-                LockAllStations();
+                // LockAllStations();
                 break;
 
             case GameStateType.OrderTicketReceived:
