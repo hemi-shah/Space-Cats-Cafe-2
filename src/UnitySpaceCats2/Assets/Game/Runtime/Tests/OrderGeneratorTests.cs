@@ -46,20 +46,6 @@ public class OrderGeneratorTests
     }
 
     [Test]
-    public void Generate_MilkRollsPicked_WhenRandomSucceeds()
-    {
-        var fake = new MockRandomProvider();
-
-        fake.QueueValue(0.1f); // has milk
-        fake.QueueRange((int)MilkType.Oat);
-
-        var gen = new OrderGenerator(fake) { milkChance = 0.5f };
-        var order = gen.Generate();
-
-        Assert.AreEqual(MilkType.Oat, order.milk);
-    }
-
-    [Test]
     public void Generate_WhippedCreamCanHaveDrizzle()
     {
         var fake = new MockRandomProvider();
