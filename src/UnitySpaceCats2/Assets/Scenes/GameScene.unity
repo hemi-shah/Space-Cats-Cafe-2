@@ -4034,7 +4034,6 @@ RectTransform:
 =======
   m_Children:
   - {fileID: 814563175}
->>>>>>> origin/OrderGeneration
   m_Father: {fileID: 687329221}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4185,10 +4184,7 @@ RectTransform:
   - {fileID: 886177134}
   - {fileID: 205684087}
   - {fileID: 1188952193}
-<<<<<<< HEAD
-=======
   - {fileID: 810296789}
->>>>>>> origin/OrderGeneration
   m_Father: {fileID: 687329221}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
