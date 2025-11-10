@@ -8,7 +8,12 @@ public class DrinkVerifier : ObserverMonoBehaviour
     public OrderManager OrderManager;
 
     public int lastRating { get; private set; }
-    
+
+    // Delete Awake later!! only here for testing to change the rating
+    void Awake()
+    {
+        lastRating = 5;
+    }
     
     protected override void Subscribe()
     {
@@ -78,5 +83,6 @@ public class DrinkVerifier : ObserverMonoBehaviour
         }
 
     }
+    
     
 }
