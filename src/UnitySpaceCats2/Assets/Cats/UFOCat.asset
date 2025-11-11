@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918631ef3eef84abfa4f2e5714cd080f, type: 3}
   m_Name: UFOCat
   m_EditorClassIdentifier: Assembly-CSharp::CatDefinition
-  counter: 0
+  counter: 1
   catName: UFO Cat
   catSprite: {fileID: 2725065422117036886, guid: 6e669351f5652440482cd1bc42d60dd8, type: 3}
+  dialoguePath: 4

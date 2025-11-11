@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: DialoguePath4Data
+  m_EditorClassIdentifier: Assembly-CSharp::DialoguePathData
+  noStarDialogue:
+    customerLine: This isn't quite what I was expecting.
+    playerResponseOption1: I can remake it for you
+    customerFollowUp1: 
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 1
+  oneStarGoodDialogue:
+    customerLine: Delicious! You made it perfect.
+    playerResponseOption1: Nice seeing you again! I'm happy you enjoyed it.
+    customerFollowUp1: Have a good day.
+    playerResponseOption2: Of course- everything I make is perfect.
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  oneStarBadDialogue:
+    customerLine: Can I speak to your manager?
+    playerResponseOption1: "No sorry\u2026 they're busy right now."
+    customerFollowUp1: 
+    playerResponseOption2: No. If you have a problem with your drink you can tell
+      me.
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  threeStarGoodDialogue:
+    customerLine: Ever since this cafe opened I've been spending like half my paycheck
+      on the drinks you make.
+    playerResponseOption1: Am I going to have to limit your caffeine from now on?
+    customerFollowUp1: NO please! I can't live without your drinks.
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  threeStarBadDialogue:
+    customerLine: ...
+    playerResponseOption1: "Oh no. It tastes bad doesn't it\u2026"
+    customerFollowUp1: Well, it's definitely not what I was expecting, but it's not
+      terrible! You still did great and I know you're busy so don't worry about it!
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  fiveStarGoodDialogue:
+    customerLine: Delicious. I know I'm having an amazing day when I see you're making
+      my drink!
+    playerResponseOption1: Stop it, you always say these things.
+    customerFollowUp1: Well it's hard not to when you make me the most scrumptious
+      drinks I've ever had.
+    playerResponseOption2: Woah at least buy me dinner before making a move.
+    customerFollowUp2: Yeah? How about we head to get purritos down the next planet.
+      It's on me.
+    hasRemakeOption: 0
+  fiveStarBadDialogue:
+    customerLine: To be honest I'm not a fan of the drink you just made me. It tastes
+      off somehow.
+    playerResponseOption1: Sorry to hear that, in what way does it taste off?
+    customerFollowUp1: I can't really explain it but it tastes different. Did you
+      change the recipe?
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0
