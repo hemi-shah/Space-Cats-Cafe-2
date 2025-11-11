@@ -38,6 +38,11 @@ public class GameStateManager : MonoBehaviour
     {
         // Subscribe to state changes for logging/debugging
         CurrentState.ChangeEvent += OnStateChanged;
+        DialogueDataSetup setup = GetComponent<DialogueDataSetup>();
+        if (setup != null)
+        {
+            setup.SetupAllDialogue();
+        }
     }
 
     void OnDestroy()

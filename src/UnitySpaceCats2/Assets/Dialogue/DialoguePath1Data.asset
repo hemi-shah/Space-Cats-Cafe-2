@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: DialoguePath1Data
+  m_EditorClassIdentifier: Assembly-CSharp::DialoguePathData
+  noStarDialogue:
+    customerLine: ...
+    playerResponseOption1: Have a good day.
+    customerFollowUp1: 
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  oneStarGoodDialogue:
+    customerLine: I guess this is acceptable.
+    playerResponseOption1: I'm glad you enjoyed it!
+    customerFollowUp1: 
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  oneStarBadDialogue:
+    customerLine: "You seem a bit distracted today\u2026 This drink tastes different"
+    playerResponseOption1: My apologies!
+    customerFollowUp1: 
+    playerResponseOption2: Maybe your tastebuds are a little off today?
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  threeStarGoodDialogue:
+    customerLine: Thanks for the drink! You did great.
+    playerResponseOption1: It's always such an honor to hear that from you.
+    customerFollowUp1: It's hard to hold back on the compliments when you make such
+      great things. I'll be back for another!
+    playerResponseOption2: You're welcome!
+    customerFollowUp2: Will you be here tomorrow?
+    hasRemakeOption: 0
+  threeStarBadDialogue:
+    customerLine: I'm disappointed in you. Your standards are usually higher than
+      this.
+    playerResponseOption1: What seems to be the matter?
+    customerFollowUp1: This tastes so incredibly wrong it's basically undrinkable.
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 1
+  fiveStarGoodDialogue:
+    customerLine: You remembered my favorite! You're the best.
+    playerResponseOption1: Of course! I couldn't forget one of my regulars!
+    customerFollowUp1: Aw thank you. I've been meaning to ask, would you want to
+      grab something after your shift today? There's a new tuna melt place on Jupurrtur
+      if you're interested!
+    playerResponseOption2: Maybe next time
+    customerFollowUp2: Okay! Another time!
+    hasRemakeOption: 0
+  fiveStarBadDialogue:
+    customerLine: Woah you look tired! Maybe I should get you a drink!
+    playerResponseOption1: Yeah it's been a rough few days.
+    customerFollowUp1: Are you sure you're okay working a shift?
+    playerResponseOption2: Yeah I spent the last few nights on this new game.
+    customerFollowUp2: What game?
+    hasRemakeOption: 0

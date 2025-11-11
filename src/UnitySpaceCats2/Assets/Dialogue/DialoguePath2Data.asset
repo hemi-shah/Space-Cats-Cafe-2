@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: DialoguePath2Data
+  m_EditorClassIdentifier: Assembly-CSharp::DialoguePathData
+  noStarDialogue:
+    customerLine: Thank you.
+    playerResponseOption1: You're welcome.
+    customerFollowUp1: 
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  oneStarGoodDialogue:
+    customerLine: I might have to come here more often!
+    playerResponseOption1: Hope to see you around!
+    customerFollowUp1: 
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  oneStarBadDialogue:
+    customerLine: This tastes weird, maybe check your {wrong customizations} stock?
+    playerResponseOption1: "I'll do better next time\u2026"
+    customerFollowUp1: 
+    playerResponseOption2: Well it can't be perfect all the time.
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  threeStarGoodDialogue:
+    customerLine: Somehow I still get surprised at how amazing it tastes every time
+      you make me a drink.
+    playerResponseOption1: Really? I feel like I make it like every other barista
+      here.
+    customerFollowUp1: No no no, they don't make it with the same love and care as
+      you do.
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  threeStarBadDialogue:
+    customerLine: Could you tell me how you made this drink? I think you might've
+      gotten a customization wrong.
+    playerResponseOption1: I followed what was on your order ticket. Not sure what
+      could've happened.
+    customerFollowUp1: Oh, alright it's fine then don't worry about it.
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  fiveStarGoodDialogue:
+    customerLine: This is pretty good. How long have you been working here for?
+    playerResponseOption1: Glad to hear you like it! We've only been open a couple
+      of days.
+    customerFollowUp1: You've done well for only working a few days. Have you been
+      a barista before?
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  fiveStarBadDialogue:
+    customerLine: You didn't quite make this right. Could you remake it?
+    playerResponseOption1: Yes, I apologize, what was wrong with the order?
+    customerFollowUp1: The {wrong customization}. I asked for {right customization}
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 1
