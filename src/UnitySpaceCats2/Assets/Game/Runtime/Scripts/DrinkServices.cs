@@ -48,20 +48,4 @@ public class DrinkServices
     {
         CurrentDrink.IsComplete = true;
     }
-
-    // don't need to use in case someone else implements, but keeping it here for now
-    public int ReviewDrink(IDrink order)
-    {
-        int score = 5;
-
-        if (CurrentDrink.Temp != order.Temp) score--;
-        if (CurrentDrink.Type != order.Type) score--;
-        if (CurrentDrink.Milk != order.Milk) score--;
-        if (CurrentDrink.IceLevel != order.IceLevel) score--;
-
-        foreach (var topping in order.Toppings)
-            if (!CurrentDrink.Toppings.Contains(topping)) score--;
-
-        return score < 0 ? 0 : score;
-    }
 }
