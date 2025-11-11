@@ -38,41 +38,36 @@ public class RatingStationScreen : ScreenController
         }
         else
         {
-            Debug.LogWarning("OrderingScreen: no selected cat found in OrderManager!");
+            Debug.LogWarning("RatingStation: no selected cat found in OrderManager!");
         }
 
         int rating = drinkVerifier.lastRating;
         Debug.Log("Rating: " + rating);
 
-        if (rating <= 3)
+        // Increment cat counter for good drinks (4-5 stars)
+        if (rating >= 4 && cat != null)
+        {
+            cat.counter++;
+            Debug.Log($"Cat {cat.catName} counter increased to: {cat.counter}");
+        }
+
+        // Updated feedback to match 1-5 star rating system
+        if (rating <= 2)
         {
             feedbackText.text = "Keep practicing! The cat wants better.";
         }
-        else if (rating > 3 && rating < 6)
+        else if (rating == 3)
+        {
+            feedbackText.text = "Not bad, but the cat expects more.";
+        }
+        else if (rating == 4)
         {
             feedbackText.text = "Good job! The cat enjoyed it.";
         }
-        else if (rating == 7)
+        else if (rating == 5)
         {
             feedbackText.text = "Perfect! The cat is very happy!";
         }
-
-        /*
-        int score = Random.Range(60, 100);
-
-        if (scoreText != null)
-            scoreText.text = $"Score: {score}%";
-
-        if (feedbackText != null)
-        {
-            if (score >= 90)
-                feedbackText.text = "Perfect! The cat is very happy!";
-            else if (score >= 70)
-                feedbackText.text = "Good job! The cat enjoyed it.";
-            else
-                feedbackText.text = "Keep practicing! The cat wants better.";
-        }
-        */
     }
 
     private void OnNextOrder()
