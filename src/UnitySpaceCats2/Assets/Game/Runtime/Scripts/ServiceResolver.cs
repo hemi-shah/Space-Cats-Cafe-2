@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Game399.Shared;
 using Game399.Shared.DependencyInjection;
 using Game399.Shared.DependencyInjection.Implementation;
@@ -18,12 +19,15 @@ namespace Game.Runtime
             var logger = new UnityGameLogger();
             container.RegisterSingletonInstance<IGameLog>(logger);
 
-            var drinkService = new DrinkService(logger);
-            container.RegisterSingletonInstance<IDrinkService>(drinkService);
+            var stations = new List<IDrinkStation>
+            {
+                new IceStation(),
+                // add more as we go
+            };
 
-            var drinkState = new DrinkState();
-            container.RegisterSingletonInstance(drinkState);
-            
+            var drinkServices = new DrinkServices(stations);
+            container.RegisterSingletonInstance(drinkServices);
+
             return container;
         });
     }
