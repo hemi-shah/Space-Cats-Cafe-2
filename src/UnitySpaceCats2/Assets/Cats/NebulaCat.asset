@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918631ef3eef84abfa4f2e5714cd080f, type: 3}
   m_Name: NebulaCat
   m_EditorClassIdentifier: Assembly-CSharp::CatDefinition
-  counter: 0
+  counter: 3
   catName: Nebula Cat
   catSprite: {fileID: -6789941085784416436, guid: 66e26bd3b08514a69be4625e2a29cc37, type: 3}
+  dialoguePath: 1
