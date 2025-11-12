@@ -1,6 +1,7 @@
 using UnityEngine;
 using Game399.Shared;
 using System.Collections.Generic;
+using Game.Runtime;
 
 /// <summary>
 /// Manages game state transitions and notifies subscribers of changes
@@ -55,6 +56,7 @@ public class GameStateManager : MonoBehaviour
     /// </summary>
     public void ChangeState(GameStateType newState)
     {
+        
         if (CurrentState.Value == newState)
         {
             Debug.LogWarning($"Already in state: {newState}");

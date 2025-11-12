@@ -10,7 +10,6 @@ public class Drink : IDrink
     public List<string> Toppings { get; private set; } = new();
     public int CurrentStationIndex { get; set; } = 0;
     public bool IsComplete { get; set; } = false;
-
     public void AddSyrup(string syrup)
     {
         if (!Syrups.Contains(syrup))
