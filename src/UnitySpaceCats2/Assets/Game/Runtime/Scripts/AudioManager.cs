@@ -5,14 +5,40 @@ public class AudioManager : MonoBehaviour, IAudioService
     public static AudioManager Instance { get; private set; }
 
     [Header("Background Music")]
-    [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip backgroundMusic;
 
     [Header("SFX")]
-    [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioClip[] iceSFX;
     [SerializeField] private AudioClip espressoSFX;
     [SerializeField] private AudioClip milkSFX;
+
+    private AudioSource _musicSource;
+    private AudioSource _sfxSource;
+
+    private AudioSource MusicSource
+    {
+        get
+        {
+            if (_musicSource == null)
+            {
+                _musicSource = gameObject.AddComponent<AudioSource>();
+                _musicSource.loop = true;
+            }
+            return _musicSource;
+        }
+    }
+
+    private AudioSource SfxSource
+    {
+        get
+        {
+            if (_sfxSource == null)
+            {
+                _sfxSource = gameObject.AddComponent<AudioSource>();
+            }
+            return _sfxSource;
+        }
+    }
 
     private void Awake()
     {
@@ -24,17 +50,6 @@ public class AudioManager : MonoBehaviour, IAudioService
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        if (!audioSource)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.loop = true;
-        }
-
-        if (!sfxSource)
-        {
-            sfxSource = gameObject.AddComponent<AudioSource>();
-        }
     }
 
     private void Start()
@@ -44,41 +59,36 @@ public class AudioManager : MonoBehaviour, IAudioService
 
     public void PlayBackgroundMusic()
     {
-        if (!backgroundMusic)
+        if (backgroundMusic == null)
         {
             Debug.LogWarning("No background music assigned");
             return;
         }
 
-        if (!audioSource.isPlaying)
+        if (!MusicSource.isPlaying)
         {
-            audioSource.clip = backgroundMusic;
-            audioSource.Play();
+            MusicSource.clip = backgroundMusic;
+            MusicSource.Play();
             Debug.Log("Background music started playing");
         }
     }
-    
+
     public void PlayEspressoSfx()
     {
-        if (!espressoSFX) return;
-        sfxSource.PlayOneShot(espressoSFX);
-        Debug.Log("Espresso SFX played");
+        if (espressoSFX == null) return;
+        SfxSource.PlayOneShot(espressoSFX);
     }
 
     public void PlayMilkSfx()
     {
-        if (!milkSFX) return;
-        sfxSource.PlayOneShot(milkSFX);
-        Debug.Log("Milk SFX played");
+        if (milkSFX == null) return;
+        SfxSource.PlayOneShot(milkSFX);
     }
 
     public void PlayIceSfx()
     {
         if (iceSFX == null || iceSFX.Length == 0) return;
-
-        // pick a random ice clip
         int index = Random.Range(0, iceSFX.Length);
-        sfxSource.PlayOneShot(iceSFX[index]);
-        Debug.Log("Ice SFX played");
+        SfxSource.PlayOneShot(iceSFX[index]);
     }
 }
