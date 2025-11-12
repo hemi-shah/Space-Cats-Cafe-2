@@ -7,8 +7,8 @@ public class TemperatureSelectionScreen : ScreenController
     [SerializeField] private Button hotButton;
     [SerializeField] private Button coldButton;
     [SerializeField] private CupAnimator cupAnimator;
-    [SerializeField] private GameObject holdCupPrefab;
-    [SerializeField] private GameObject coldCupPrefab;
+    [SerializeField] private GameObject hotDrinkPrefab;
+    [SerializeField] private GameObject coldDrinkPrefab;
     [SerializeField] private Transform hotDrinkSpawnPoint;
     [SerializeField] private Transform coldDrinkSpawnPoint;
 
@@ -31,13 +31,11 @@ public class TemperatureSelectionScreen : ScreenController
 
     private void OnHotSelected()
     {
-        Debug.Log("Hot drink selected!");
-
         var drinkServices = ServiceResolver.Resolve<DrinkServices>();
         var drink = drinkServices.CreateNewDrink();
         drink.Temp = Temperature.Hot;
 
-        cupAnimator.SelectHot(hotDrinkSpawnPoint);
+        cupAnimator.SelectHot(hotDrinkSpawnPoint, hotDrinkPrefab);
 
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.ChoosingTemperature);
         GameStateManager.Instance.ChangeState(GameStateType.ChoosingMilk);
@@ -45,13 +43,11 @@ public class TemperatureSelectionScreen : ScreenController
 
     private void OnColdSelected()
     {
-        Debug.Log("Iced drink selected!");
-
         var drinkServices = ServiceResolver.Resolve<DrinkServices>();
         var drink = drinkServices.CreateNewDrink();
         drink.Temp = Temperature.Iced;
 
-        cupAnimator.SelectCold(coldDrinkSpawnPoint);
+        cupAnimator.SelectCold(coldDrinkSpawnPoint, coldDrinkPrefab);
 
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.ChoosingTemperature);
         GameStateManager.Instance.ChangeState(GameStateType.PlayingIceGame);

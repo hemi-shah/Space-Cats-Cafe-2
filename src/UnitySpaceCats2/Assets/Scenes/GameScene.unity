@@ -949,8 +949,8 @@ MonoBehaviour:
   hotButton: {fileID: 181309400}
   coldButton: {fileID: 1010387077}
   cupAnimator: {fileID: 2109312153}
-  holdCupPrefab: {fileID: 0}
-  coldCupPrefab: {fileID: 0}
+  hotDrinkPrefab: {fileID: 6285827500436923658, guid: 9bfad3796c3b64b32a77f343a830b2de, type: 3}
+  coldDrinkPrefab: {fileID: 779145031088727785, guid: 7c91f645536514a9294e8bfb10cf2b2d, type: 3}
   hotDrinkSpawnPoint: {fileID: 618976412}
   coldDrinkSpawnPoint: {fileID: 2116457220}
 --- !u!1 &358434773
