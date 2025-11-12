@@ -56,7 +56,6 @@ public class GameStateManager : MonoBehaviour
     /// </summary>
     public void ChangeState(GameStateType newState)
     {
-        
         if (CurrentState.Value == newState)
         {
             Debug.LogWarning($"Already in state: {newState}");
