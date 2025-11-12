@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: 25bf7c4d94a7b49998850e712fa4cffb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - audioSource: {instanceID: 0}
+  - backgroundMusic: {fileID: 8300000, guid: 948af114e80494a91987afc19c6f5a9d, type: 3}
+  - sfxSource: {instanceID: 0}
+  - espressoSFX: {fileID: 8300000, guid: 8a50876f4d9f24cf68835e3b2d438002, type: 3}
+  - milkSFX: {fileID: 8300000, guid: efb418f72abcb41d284fe5ea43bf42bf, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
