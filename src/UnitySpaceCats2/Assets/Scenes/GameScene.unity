@@ -1279,7 +1279,14 @@ MonoBehaviour:
   iceButton: {fileID: 1377711791}
   spawnPoint: {fileID: 201809605}
   iceCubePrefab: {fileID: 7310103392105641532, guid: 50a0097e362364ddaa679694a0551cc7, type: 3}
+  drinkSprite: {fileID: -4885195157983416276, guid: 7c91f645536514a9294e8bfb10cf2b2d, type: 3}
   drinkRenderer: {fileID: 475746077905841067, guid: 7c91f645536514a9294e8bfb10cf2b2d, type: 3}
+  iceLevelSprites:
+  - {fileID: -3862730073882051230, guid: 521ff2e237dca46e191e05bb870392a7, type: 3}
+  - {fileID: -5223811505792339381, guid: ff9ea03cf5f764c6989caa82f0e61f41, type: 3}
+  - {fileID: 2611769222328282376, guid: 9a76cd53632ec49779378091ad492553, type: 3}
+  - {fileID: 8474456805468874509, guid: 3570b27eca8e046eb8f448286fb20d28, type: 3}
+  - {fileID: -764507348543769840, guid: 35b475e96720f43edbd89ea7f83377b8, type: 3}
 --- !u!1 &579951753
 GameObject:
   m_ObjectHideFlags: 0

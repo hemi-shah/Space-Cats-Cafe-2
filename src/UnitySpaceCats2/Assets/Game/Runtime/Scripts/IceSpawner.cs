@@ -1,87 +1,120 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Game.Runtime;
+using System.Collections.Generic;
 
 public class IceSpawner : MonoBehaviour
 {
     public Button iceButton;
     public RectTransform spawnPoint;
     public GameObject iceCubePrefab;
-    public SpriteRenderer drinkRenderer;
-    
-    private IDrink drink;
+
+    [Header("Drink References")]
+    public IDrink drink; // current drink instance
+    public Image drinkSprite; // assign the Image on the drink prefab
+    public SpriteRenderer drinkRenderer; // keeps existing renderer reference if needed
+
+    [Header("Ice Sprites")]
+    public Sprite[] iceLevelSprites; // assign 0 = empty, 1..4 = ice
+
     private List<GameObject> activeIceCubes = new List<GameObject>();
+    private bool drinkInitialized = false;
 
     void Start()
     {
-        drink = ServiceResolver.Resolve<DrinkServices>().CurrentDrink;
         iceButton.onClick.AddListener(SpawnCube);
     }
 
     void Update()
     {
-        // Check each ice cube if it's hit the drink
+        if (!drinkInitialized)
+            TryInitializeDrink();
+
+        if (drink == null || drinkSprite == null) return;
+
         for (int i = activeIceCubes.Count - 1; i >= 0; i--)
         {
-            if (activeIceCubes[i] == null)
+            GameObject cube = activeIceCubes[i];
+            if (cube == null)
             {
                 activeIceCubes.RemoveAt(i);
                 continue;
             }
 
-            if (CheckIceHitDrink(activeIceCubes[i]))
+            if (CheckIceHitDrink(cube))
             {
-                Destroy(activeIceCubes[i]);
+                Destroy(cube);
                 activeIceCubes.RemoveAt(i);
-                
+
                 if (drink.IceLevel < 4)
+                {
                     drink.IceLevel++;
-                    
-                UpdateDrinkSprite();
+                    UpdateDrinkImage();
+                }
             }
+        }
+    }
+
+    void TryInitializeDrink()
+    {
+        var drinkServices = ServiceResolver.Resolve<DrinkServices>();
+        if (drinkServices != null && drinkServices.CurrentDrink != null)
+        {
+            drink = drinkServices.CurrentDrink;
+            drinkInitialized = true;
+
+            Debug.Log($"✓ IceSpawner: Drink initialized! IceLevel={drink.IceLevel}");
+            Debug.Log($"✓ DrinkSprite assigned: {(drinkSprite != null ? drinkSprite.name : "NULL")}");
+        }
+    }
+
+    void UpdateDrinkImage()
+    {
+        if (drinkSprite == null)
+        {
+            Debug.LogError("Cannot update drink image — drinkSprite is null!");
+            return;
+        }
+
+        int level = Mathf.Clamp(drink.IceLevel, 0, iceLevelSprites.Length - 1);
+        Sprite newSprite = iceLevelSprites[level];
+
+        if (newSprite != null)
+        {
+            drinkSprite.sprite = newSprite;
+            Debug.Log($"✓ Updated drink image to ice level {level}");
+        }
+        else
+        {
+            Debug.LogError($"No sprite assigned for ice level {level}");
         }
     }
 
     bool CheckIceHitDrink(GameObject iceCube)
     {
-        // Convert ice cube UI position to world position
+        if (drinkRenderer == null) return false;
+
         Camera cam = Camera.main;
-        Vector3 iceScreenPos = iceCube.transform.position;
-        Vector3 iceWorldPos = cam.ScreenToWorldPoint(iceScreenPos);
-        
-        // Get drink world position
+        Vector3 iceWorldPos = cam.ScreenToWorldPoint(iceCube.transform.position);
+        iceWorldPos.z = 0f;
+
         Vector3 drinkPos = drinkRenderer.transform.position;
-        
-        // Check distance (adjust the threshold as needed)
-        float distance = Vector2.Distance(new Vector2(iceWorldPos.x, iceWorldPos.y), 
+
+        float distance = Vector2.Distance(new Vector2(iceWorldPos.x, iceWorldPos.y),
                                          new Vector2(drinkPos.x, drinkPos.y));
-        
-        return distance < 0.15f; // Adjust this threshold based on your drink size
+
+        return distance < 0.5f;
     }
 
     void SpawnCube()
     {
-        Debug.Log("Spawning UI cube!");
-
         Canvas canvas = spawnPoint.GetComponentInParent<Canvas>();
         GameObject cubeObj = Instantiate(iceCubePrefab, canvas.transform);
-        
+
         RectTransform cubeRect = cubeObj.GetComponent<RectTransform>();
         cubeRect.position = spawnPoint.position;
-        
+
         cubeObj.transform.SetAsLastSibling();
-        
-        // Add to tracking list
         activeIceCubes.Add(cubeObj);
-
-        Debug.Log("UI Cube spawned at: " + spawnPoint.position);
-    }
-
-    void UpdateDrinkSprite()
-    {
-        string spriteName = drink.GetSpriteName();
-        Sprite sprite = Resources.Load<Sprite>("DrinkSprites/IcedDrinkSprites/Empty/" + spriteName);
-        drinkRenderer.sprite = sprite;
     }
 }
