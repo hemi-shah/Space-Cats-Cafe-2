@@ -1,3 +1,4 @@
+using Game.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,29 @@ public class IceGameStationScreen : ScreenController
     protected override void OnScreenShow()
     {
         base.OnScreenShow();
+
+        var drinkServices = ServiceResolver.Resolve<DrinkServices>();
+        var drink = drinkServices.CurrentDrink;
+
+        if (drink == null)
+        {
+            Debug.LogError("No current drink found!");
+            return;
+        }
+
+        if (drink.Temp == Temperature.Hot)
+        {
+            Debug.Log("Hot drink — skipping IceGameStation!");
+
+            // Hide this screen immediately
+            gameObject.SetActive(false);
+
+            // Mark complete and go to next station
+            NavigationBar.Instance?.MarkStationCompleted(GameStateType.PlayingIceGame);
+            GameStateManager.Instance.ChangeState(GameStateType.ChoosingMilk);
+            return;
+        }
+
         if (instructionText != null)
         {
             instructionText.text = "Add ice to the cup!";

@@ -11,9 +11,10 @@ public class DrinkServices
         stations = stationPipeline;
     }
 
-    public void CreateNewDrink()
+    public IDrink CreateNewDrink()
     {
         CurrentDrink = new Drink();
+        return CurrentDrink;
     }
 
     public IDrinkStation GetCurrentStation()
