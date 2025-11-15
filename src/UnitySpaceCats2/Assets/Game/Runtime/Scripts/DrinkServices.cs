@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using Game.Runtime;
+using UnityEngine;
 
 public class DrinkServices
 {
     private readonly List<IDrinkStation> stations = new();
     public IDrink CurrentDrink { get; private set; }
+    
+    public GameObject CurrentDrinkObject { get; private set; }
 
     public DrinkServices(List<IDrinkStation> stationPipeline)
     {
@@ -15,6 +18,11 @@ public class DrinkServices
     {
         CurrentDrink = new Drink();
         return CurrentDrink;
+    }
+
+    public void SetCurrentDrink(GameObject drinkObject)
+    {
+        CurrentDrinkObject = drinkObject;
     }
 
     public IDrinkStation GetCurrentStation()
