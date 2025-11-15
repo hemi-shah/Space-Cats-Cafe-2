@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Game.Runtime;
 using UnityEngine;
 
 public class OrderManager : MonoBehaviour
 {
     public static OrderManager Instance { get; private set; }
+    
+    public GameObject CurrentDrink { get; private set; }
 
     [Header("Random Order Weights")] 
     [Range(0f, 1f)] [SerializeField] private float hotChance = 0.5f;
@@ -67,6 +70,39 @@ public class OrderManager : MonoBehaviour
 
     public void ClearSelectedCat()
         => selectedCat = null;
+
+    public void SetCurrentDrinkObject(GameObject drinkObject)
+    {
+        CurrentDrink = drinkObject;
+    }
+
+    public void FinishCurrentDrink()
+    {
+        Drink finishedDrink = null;
+        DrinkServices drinkServices = ServiceResolver.Resolve<DrinkServices>();
+
+        if (drinkServices != null && drinkServices.CurrentDrink != null)
+        {
+            finishedDrink = drinkServices.CurrentDrink as Drink;
+        }
+
+        if (finishedDrink != null)
+        {
+            CompleteOrder(finishedDrink);
+        }
+        else
+        {
+            Debug.LogWarning("No drink found (OrderManager FinishCurrentDrink())");
+        }
+
+        if (CurrentDrink != null)
+        {
+            GameObject.Destroy(CurrentDrink);
+            CurrentDrink = null;
+        }
+        
+        ClearSelectedCat();
+    }
 
     // TODO: Call this when they click the drink is done
     public void CompleteOrder(Drink finishedDrink)
