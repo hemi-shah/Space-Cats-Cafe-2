@@ -7,17 +7,17 @@ public class CupAnimator : MonoBehaviour
     [SerializeField] private float slideDistance = 1000f;
     [SerializeField] private float slideDuration = 0.4f;
 
-    public GameObject SelectHot(Transform spawnPoint, GameObject prefabToSpawn)
+    public void SelectHot(Transform spawnPoint, GameObject drinkObject)
     {
-        return AnimateSelection(hotCup, coldCup, true, spawnPoint, prefabToSpawn);
+        AnimateSelection(hotCup, coldCup, true, spawnPoint, drinkObject);
     }
 
-    public GameObject SelectCold(Transform spawnPoint, GameObject prefabToSpawn)
+    public void SelectCold(Transform spawnPoint, GameObject drinkObject)
     {
-        return AnimateSelection(coldCup, hotCup, false, spawnPoint, prefabToSpawn);
+        AnimateSelection(coldCup, hotCup, false, spawnPoint, drinkObject);
     }
 
-    private GameObject AnimateSelection(RectTransform chosen, RectTransform other, bool isHot, Transform spawnPoint, GameObject prefabToSpawn)
+    private void AnimateSelection(RectTransform chosen, RectTransform other, bool isHot, Transform spawnPoint, GameObject drinkObject)
     {
         Vector3 otherTarget = other.position + new Vector3(isHot ? slideDistance : -slideDistance, 0, 0);
         other.position = otherTarget;
@@ -25,25 +25,18 @@ public class CupAnimator : MonoBehaviour
         chosen.gameObject.SetActive(false);
         other.gameObject.SetActive(false);
 
-        if (prefabToSpawn != null)
+        if (drinkObject != null)
         {
-            Canvas canvas = FindObjectOfType<Canvas>();
-            if (canvas == null)
-            {
-                Debug.LogError("CupAnimator: No Canvas found!");
-                return null;
-            }
-
-            GameObject spawnedDrink = Instantiate(prefabToSpawn, canvas.transform);
-            spawnedDrink.transform.position = spawnPoint.position;
-            spawnedDrink.transform.localScale = Vector3.one;
+            // Enable the existing drink object instead of instantiating
+            drinkObject.SetActive(true);
+            drinkObject.transform.position = spawnPoint.position;
+            drinkObject.transform.localScale = Vector3.one;
             
-            return spawnedDrink;
+            Debug.Log($"CupAnimator: Enabled drink at {spawnPoint.position}");
         }
         else
         {
-            Debug.LogError("CupAnimator: prefabToSpawn is null!");
-            return null;
+            Debug.LogError("CupAnimator: drinkObject is null!");
         }
     }
 }
