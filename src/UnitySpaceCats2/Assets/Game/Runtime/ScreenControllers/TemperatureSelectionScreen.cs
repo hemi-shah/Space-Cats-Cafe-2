@@ -35,7 +35,18 @@ public class TemperatureSelectionScreen : ScreenController
         var drink = drinkServices.CreateNewDrink();
         drink.Temp = Temperature.Hot;
 
-        cupAnimator.SelectHot(hotDrinkSpawnPoint, hotDrinkPrefab);
+        //cupAnimator.SelectHot(hotDrinkSpawnPoint, hotDrinkPrefab);
+        
+        GameObject drinkVisual = null;
+        if (cupAnimator != null)
+            drinkVisual = cupAnimator.SelectHot(hotDrinkSpawnPoint, hotDrinkPrefab);
+        else
+            drinkVisual = Instantiate(hotDrinkPrefab, hotDrinkSpawnPoint.position, hotDrinkSpawnPoint.rotation, hotDrinkSpawnPoint);
+
+        if (drinkServices != null)
+            drinkServices.SetCurrentDrink(drinkVisual);
+        
+        OrderManager.Instance.SetCurrentDrinkObject(drinkVisual);
 
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.ChoosingTemperature);
         GameStateManager.Instance.ChangeState(GameStateType.ChoosingMilk);
@@ -47,7 +58,18 @@ public class TemperatureSelectionScreen : ScreenController
         var drink = drinkServices.CreateNewDrink();
         drink.Temp = Temperature.Iced;
 
-        cupAnimator.SelectCold(coldDrinkSpawnPoint, coldDrinkPrefab);
+       // cupAnimator.SelectCold(coldDrinkSpawnPoint, coldDrinkPrefab);
+        
+        GameObject drinkVisual = null;
+        if (cupAnimator != null)
+            drinkVisual = cupAnimator.SelectCold(coldDrinkSpawnPoint, coldDrinkPrefab);
+        else
+            drinkVisual = Instantiate(coldDrinkPrefab, coldDrinkSpawnPoint.position, coldDrinkSpawnPoint.rotation, coldDrinkSpawnPoint);
+
+        if (drinkServices != null)
+            drinkServices.SetCurrentDrink(drinkVisual);
+        
+        OrderManager.Instance.SetCurrentDrinkObject(drinkVisual);
 
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.ChoosingTemperature);
         GameStateManager.Instance.ChangeState(GameStateType.PlayingIceGame);

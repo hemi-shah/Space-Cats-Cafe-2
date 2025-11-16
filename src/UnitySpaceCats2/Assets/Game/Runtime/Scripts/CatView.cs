@@ -37,8 +37,10 @@ public class CatView : MonoBehaviour
         if (OrderManager.Instance != null)
         {
             OrderManager.Instance.SetSelectedCat(catDefinition);
-        }
 
+            OrderManager.Instance.GenerateRandomOrderData();
+        }
+        
         if (GameStateManager.Instance != null)
         {
             GameStateManager.Instance.ChangeState(GameStateType.ChoosingTemperature);
