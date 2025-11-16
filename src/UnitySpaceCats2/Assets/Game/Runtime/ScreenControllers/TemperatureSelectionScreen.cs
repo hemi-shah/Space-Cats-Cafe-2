@@ -39,18 +39,14 @@ public class TemperatureSelectionScreen : ScreenController
         var drink = drinkServices.CreateNewDrink();
         drink.Temp = Temperature.Hot;
 
-        //cupAnimator.SelectHot(hotDrinkSpawnPoint, hotDrinkPrefab);
-        
-        GameObject drinkVisual = null;
-        if (cupAnimator != null)
-            drinkVisual = cupAnimator.SelectHot(hotDrinkSpawnPoint, hotDrinkPrefab);
-        else
-            drinkVisual = Instantiate(hotDrinkPrefab, hotDrinkSpawnPoint.position, hotDrinkSpawnPoint.rotation, hotDrinkSpawnPoint);
+        // Enable the hot drink object instead of instantiating
+        if (hotDrinkObject != null)
+        {
+            hotDrinkObject.SetActive(true);
+            hotDrinkObject.transform.position = hotDrinkSpawnPoint.position;
+        }
 
-        if (drinkServices != null)
-            drinkServices.SetCurrentDrink(drinkVisual);
-        
-        OrderManager.Instance.SetCurrentDrinkObject(drinkVisual);
+        cupAnimator.SelectHot(hotDrinkSpawnPoint, hotDrinkObject);
 
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.ChoosingTemperature);
         GameStateManager.Instance.ChangeState(GameStateType.ChoosingMilk);
@@ -62,18 +58,14 @@ public class TemperatureSelectionScreen : ScreenController
         var drink = drinkServices.CreateNewDrink();
         drink.Temp = Temperature.Iced;
 
-       // cupAnimator.SelectCold(coldDrinkSpawnPoint, coldDrinkPrefab);
-        
-        GameObject drinkVisual = null;
-        if (cupAnimator != null)
-            drinkVisual = cupAnimator.SelectCold(coldDrinkSpawnPoint, coldDrinkPrefab);
-        else
-            drinkVisual = Instantiate(coldDrinkPrefab, coldDrinkSpawnPoint.position, coldDrinkSpawnPoint.rotation, coldDrinkSpawnPoint);
+        // Enable the cold drink object instead of instantiating
+        if (coldDrinkObject != null)
+        {
+            coldDrinkObject.SetActive(true);
+            coldDrinkObject.transform.position = coldDrinkSpawnPoint.position;
+        }
 
-        if (drinkServices != null)
-            drinkServices.SetCurrentDrink(drinkVisual);
-        
-        OrderManager.Instance.SetCurrentDrinkObject(drinkVisual);
+        cupAnimator.SelectCold(coldDrinkSpawnPoint, coldDrinkObject);
 
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.ChoosingTemperature);
         GameStateManager.Instance.ChangeState(GameStateType.PlayingIceGame);
