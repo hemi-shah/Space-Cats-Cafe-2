@@ -7,14 +7,18 @@ public class TemperatureSelectionScreen : ScreenController
     [SerializeField] private Button hotButton;
     [SerializeField] private Button coldButton;
     [SerializeField] private CupAnimator cupAnimator;
-    [SerializeField] private GameObject hotDrinkPrefab;
-    [SerializeField] private GameObject coldDrinkPrefab;
+    [SerializeField] private GameObject hotDrinkObject; // Changed from Prefab - assign the drink in scene
+    [SerializeField] private GameObject coldDrinkObject; // Changed from Prefab - assign the drink in scene
     [SerializeField] private Transform hotDrinkSpawnPoint;
     [SerializeField] private Transform coldDrinkSpawnPoint;
 
     protected override void SetupButtons()
     {
         associatedState = GameStateType.ChoosingTemperature;
+        
+        // Make sure drink objects start disabled
+        if (hotDrinkObject != null) hotDrinkObject.SetActive(false);
+        if (coldDrinkObject != null) coldDrinkObject.SetActive(false);
         
         if (hotButton != null)
         {

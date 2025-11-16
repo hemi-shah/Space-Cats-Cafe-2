@@ -25,7 +25,7 @@ public class CupAnimator : MonoBehaviour
         chosen.gameObject.SetActive(false);
         other.gameObject.SetActive(false);
 
-        if (prefabToSpawn != null)
+        if (drinkObject != null)
         {
             Canvas canvas = FindObjectOfType<Canvas>();
             if (canvas == null)

@@ -10,12 +10,12 @@ public class IceSpawner : MonoBehaviour
     public GameObject iceCubePrefab;
 
     [Header("Drink References")]
-    public IDrink drink; // current drink instance
-    public Image drinkSprite; // assign the Image on the drink prefab
-    public SpriteRenderer drinkRenderer; // keeps existing renderer reference if needed
+    public IDrink drink;
+    public Image drinkSprite; 
+    public SpriteRenderer drinkRenderer; 
 
     [Header("Ice Sprites")]
-    public Sprite[] iceLevelSprites; // assign 0 = empty, 1..4 = ice
+    public Sprite[] iceLevelSprites; 
 
     private List<GameObject> activeIceCubes = new List<GameObject>();
     private bool drinkInitialized = false;
@@ -49,6 +49,7 @@ public class IceSpawner : MonoBehaviour
                 if (drink.IceLevel < 4)
                 {
                     drink.IceLevel++;
+                    Debug.Log($"Ice level: {drink.IceLevel}");
                     UpdateDrinkImage();
                 }
             }
@@ -62,9 +63,7 @@ public class IceSpawner : MonoBehaviour
         {
             drink = drinkServices.CurrentDrink;
             drinkInitialized = true;
-
-            Debug.Log($"✓ IceSpawner: Drink initialized! IceLevel={drink.IceLevel}");
-            Debug.Log($"✓ DrinkSprite assigned: {(drinkSprite != null ? drinkSprite.name : "NULL")}");
+            Debug.Log($"Ice level: {drink.IceLevel}");
         }
     }
 
@@ -72,7 +71,7 @@ public class IceSpawner : MonoBehaviour
     {
         if (drinkSprite == null)
         {
-            Debug.LogError("Cannot update drink image — drinkSprite is null!");
+            Debug.LogError("Cannot update drink image: drinkSprite is null!");
             return;
         }
 
@@ -82,7 +81,6 @@ public class IceSpawner : MonoBehaviour
         if (newSprite != null)
         {
             drinkSprite.sprite = newSprite;
-            Debug.Log($"✓ Updated drink image to ice level {level}");
         }
         else
         {
