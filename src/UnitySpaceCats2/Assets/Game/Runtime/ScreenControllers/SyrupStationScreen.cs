@@ -29,7 +29,8 @@ public class SyrupStationScreen : ScreenController
 
     private void OnSyrupSelected(string syrup)
     {
-        Debug.Log($"{syrup} syrup added");
+        var station = FindObjectOfType<SyrupStation>();
+        station?.PumpSyrup(syrup);
     }
 
     private void OnContinue()
