@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Game.Runtime;
@@ -27,7 +28,6 @@ public class SyrupStation : MonoBehaviour
 
     private void OnEnable()
     {
-        // Assign currentDrink from DrinkServices when the station is activated
         if (currentDrink == null)
         {
             var drinkServices = ServiceResolver.Resolve<DrinkServices>();
@@ -63,7 +63,9 @@ public class SyrupStation : MonoBehaviour
         }
 
         currentDrink.AddSyrup(syrup);
-        Debug.Log($"[SyrupStation] Added {syrup} to drink. Current syrups: {string.Join(", ", currentDrink.Syrups)}");
+
+        var countsLog = string.Join(", ", currentDrink.SyrupCounts.Select(kvp => $"{kvp.Key}={kvp.Value}"));
+        Debug.Log($"[SyrupStation] Pumped {syrup}. Syrup counts: {countsLog}");
 
         StartCoroutine(PumpRoutine(syrup));
     }
@@ -101,28 +103,26 @@ public class SyrupStation : MonoBehaviour
 
         Debug.Log($"[SyrupStation] Pumping {syrup}...");
 
-        // Hide bottle and disable button
+        // Hide bottle + disable button
         if (bottleImage != null) bottleImage.enabled = false;
         if (bottleButton != null) bottleButton.interactable = false;
 
-        // Spawn pumped sprite over the cup
+        // Spawn pumped sprite
         if (pumpedPrefab != null && pumpedSpawnPoint != null)
         {
             GameObject pumped = Instantiate(pumpedPrefab, pumpedSpawnPoint.position, pumpedSpawnPoint.rotation);
             pumped.transform.SetParent(pumpedSpawnPoint.parent, worldPositionStays: true);
             Debug.Log($"[SyrupStation] Spawned pumped sprite for {syrup}");
 
-            // Wait 1 second
             yield return new WaitForSeconds(1f);
 
             Destroy(pumped);
             Debug.Log($"[SyrupStation] Destroyed pumped sprite for {syrup}");
         }
 
-        // Restore bottle and button
+        // Restore bottle + button
         if (bottleImage != null) bottleImage.enabled = true;
         if (bottleButton != null) bottleButton.interactable = true;
-
         Debug.Log($"[SyrupStation] {syrup} bottle restored and button re-enabled");
     }
 }

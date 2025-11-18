@@ -1,212 +1,122 @@
 using Game.Runtime;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class DrinkVerifier : ObserverMonoBehaviour
 {
-
     public OrderManager OrderManager;
-
     public int lastRating { get; private set; }
 
-    // Delete Awake later!! only here for testing to change the rating
-    /*
-    void Awake()
-    {
-        lastRating = 5;
-    }
-    */
-    
     protected override void Subscribe()
     {
-        // subscribe to the drink thing that knows when the drink is done and add OnDrinkCompleted
         OrderManager.AddListener(OnDrinkCompleted);
     }
 
     protected override void Unsubscribe()
     {
-        // nothing to see here
+        // no-op
     }
 
-    // TODO: we need to get the information about the drink and also about the order
     private void OnDrinkCompleted(OrderTicketData orderTicket, Drink drink)
     {
-        // compare the drink and the order
         if (orderTicket.Equals(default(OrderTicketData)) || drink == null)
         {
-            Debug.LogWarning("Missing order or drink");
+            Debug.LogWarning("[DrinkVerifier] Missing order or drink");
             lastRating = 1;
             return;
         }
 
         int points = 0;
 
-        // temperature
+        // Temperature
         bool drinkIsHot = (drink.Temp == Temperature.Hot);
         if (drinkIsHot == orderTicket.isHot)
+        {
             points++;
+            Debug.Log("[DrinkVerifier] Correct temperature");
+        }
 
-        // ice
+        // Ice
         if (!orderTicket.isHot)
         {
             if (drink.IceLevel == orderTicket.numberOfIceCubes)
             {
                 points++;
-                Debug.Log("Correct temperature");
+                Debug.Log("[DrinkVerifier] Correct ice count");
             }
         }
-        else
+        else if (drink.IceLevel == 0)
         {
-            if (drink.IceLevel == 0)
+            points++;
+            Debug.Log("[DrinkVerifier] Correct ice for hot drink");
+        }
+
+        // Syrup
+        if (drink.SyrupCounts != null)
+        {
+            foreach (var kvp in drink.SyrupCounts)
             {
-                points++;
-                Debug.Log("Correct ice");
+                Debug.Log($"[DrinkVerifier] Syrup {kvp.Key}: {kvp.Value} pumps");
             }
         }
-        
-        // syrup
+
         if (orderTicket.syrup != SyrupType.None)
         {
-            // syrup is not a type? look back at this later
             string syrupName = orderTicket.syrup.ToString();
-            if (drink.Syrups != null &&
-                drink.Syrups.Exists(s => string.Equals(s, syrupName, System.StringComparison.OrdinalIgnoreCase)))
+            if (drink.SyrupCounts != null &&
+                drink.SyrupCounts.TryGetValue(syrupName, out int count) &&
+                count > 0)
             {
                 points++;
-                Debug.Log("Correct syrup");
+                Debug.Log($"[DrinkVerifier] Correct syrup: {syrupName}, pumps: {count}");
             }
-                
         }
         else
         {
             // no syrup
-            if (drink.Syrups == null || drink.Syrups.Count == 0)
+            bool anySyrup = drink.SyrupCounts != null && drink.SyrupCounts.Count > 0;
+            if (!anySyrup)
             {
                 points++;
-                Debug.Log("Correct syrup (none)");
+                Debug.Log("[DrinkVerifier] Correct syrup (none)");
             }
         }
 
-        // milk
-        if (orderTicket.milk == MilkType.None)
-        {
-            if (drink.Milk == MilkType.None)
-            {
-                points++;
-                Debug.Log("Correct milk (none)");
-            }
-        }
-        else
-        {
-            if (drink.Milk == orderTicket.milk)
-            {
-                points++;
-                Debug.Log("Correct milk");
-            }
-        }
-        
-        // whipped cream
-        bool drinkHasWhipped = false;
-        foreach (string topping in drink.Toppings)
-        {
-            if (string.Equals(topping, "WhippedCream", System.StringComparison.OrdinalIgnoreCase))
-            {
-                drinkHasWhipped = true;
-                break;
-            }
-        }
-        if (drinkHasWhipped == orderTicket.hasWhippedCream)
+        // Milk
+        if (drink.Milk == orderTicket.milk)
         {
             points++;
-            Debug.Log("Correct whipped cream");
+            Debug.Log("[DrinkVerifier] Correct milk");
         }
 
-// chocolate drizzle
-        bool drinkHasChoco = false;
-        foreach (string topping in drink.Toppings)
-        {
-            if (string.Equals(topping, "ChocolateDrizzle", System.StringComparison.OrdinalIgnoreCase))
-            {
-                drinkHasChoco = true;
-                break;
-            }
-        }
-        if (drinkHasChoco == orderTicket.hasChocolateSyrup)
-        {
-            points++;
-            Debug.Log("Correct chocolate drizzle");
-        }
+        // Toppings
+        points += CheckTopping(drink, orderTicket.hasWhippedCream, "WhippedCream", "[DrinkVerifier] Correct whipped cream");
+        points += CheckTopping(drink, orderTicket.hasChocolateSyrup, "ChocolateDrizzle", "[DrinkVerifier] Correct chocolate drizzle");
+        points += CheckTopping(drink, orderTicket.hasCaramelSyrup, "CaramelDrizzle", "[DrinkVerifier] Correct caramel drizzle");
 
-// caramel drizzle
-        bool drinkHasCaramel = false;
-        foreach (string topping in drink.Toppings)
+        // Assign rating based on points (0-7)
+        lastRating = points switch
         {
-            if (string.Equals(topping, "CaramelDrizzle", System.StringComparison.OrdinalIgnoreCase))
-            {
-                drinkHasCaramel = true;
-                break;
-            }
-        }
-        if (drinkHasCaramel == orderTicket.hasCaramelSyrup)
-        {
-            points++;
-            Debug.Log("Correct caramel drizzle");
-        }
-        
-        
-        // call some method to provide a rating
-        // changes lastRating based on accuracy of drink
-        
-        
-        
-        // 7 total points
-        // optional: 0 points: remake drink (?)
-        // 0 - 1 points: 1 star
-        // 2 - 3 points: 2 stars
-        // 4 - 5 points: 3 stars
-        // 6 points: 4 stars
-        // 7 points: 5 stars
-        
-        
-        // if drink isHot matches orderTicket isHot, +1
-        // if iceCubes is correct, +1
-        // if syrupType is correct, +1
-        // if milkType is correct, +1
-        // if whipped cream is correct, +1
-        // if chocolate drizzle is correct, +1
-        // if caramel drizzle is correct, +1
-        
-        //points = 7; // placeholder point value
+            0 or 1 => 1,
+            2 or 3 => 2,
+            4 or 5 => 3,
+            6 => 4,
+            7 => 5,
+            _ => throw new InvalidOperationException($"Invalid points: {points}")
+        };
 
-        // set rating
-        if (points == 0 || points == 1)
-        {
-            lastRating = 1;
-        }
-        else if (points == 2 || points == 3)
-        {
-            lastRating = 2;
-        }
-        else if (points == 4 || points == 5)
-        {
-            lastRating = 3;
-        }
-        else if (points == 6)
-        {
-            lastRating = 4;
-        }
-        else if (points == 7)
-        {
-            lastRating = 5;
-        }
-        else
-        {
-            Debug.LogError("points not 0-7");
-        }
-        
-        Debug.Log("Points: " + points);
-
+        Debug.Log($"[DrinkVerifier] Total points: {points}, Rating: {lastRating}");
     }
-    
-    
+
+    private int CheckTopping(Drink drink, bool orderHas, string toppingName, string logMessage)
+    {
+        bool drinkHas = drink.Toppings.Exists(t => string.Equals(t, toppingName, StringComparison.OrdinalIgnoreCase));
+        if (drinkHas == orderHas)
+        {
+            Debug.Log(logMessage);
+            return 1;
+        }
+        return 0;
+    }
 }
