@@ -10,7 +10,7 @@ public abstract class ScreenController : MonoBehaviour
     [Header("Screen Settings")]
     [SerializeField] protected GameStateType associatedState;
 
-    private IGameLogger logger;
+    protected IGameLogger logger;
 
     private void Awake()
     {

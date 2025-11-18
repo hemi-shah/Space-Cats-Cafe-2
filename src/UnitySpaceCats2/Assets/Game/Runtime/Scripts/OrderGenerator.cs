@@ -1,3 +1,5 @@
+using Game.Runtime;
+
 public class OrderGenerator
 {
     private readonly IRandomProvider _random;
@@ -8,8 +10,11 @@ public class OrderGenerator
     public float whippedCreamChance = 0.75f;
     public float drizzleChance = 0.35f;
 
+    private IGameLogger logger;
+
     public OrderGenerator(IRandomProvider random)
     {
+        logger = ServiceResolver.Resolve<IGameLogger>();
         _random = random;
     }
 

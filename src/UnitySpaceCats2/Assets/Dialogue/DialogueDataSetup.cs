@@ -1,3 +1,4 @@
+using Game.Runtime;
 using UnityEngine;
 
 /// <summary>
@@ -13,6 +14,13 @@ public class DialogueDataSetup : MonoBehaviour
     public DialoguePathData path3Data;
     public DialoguePathData path4Data;
     
+    private IGameLogger logger;
+
+    private void Awake()
+    {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+    }
+    
     [ContextMenu("Setup All Dialogue")]
     public void SetupAllDialogue()
     {
@@ -20,7 +28,7 @@ public class DialogueDataSetup : MonoBehaviour
         SetupPath2Dialogue();
         SetupPath3Dialogue();
         SetupPath4Dialogue();
-        Debug.Log("All dialogue setup complete!");
+        logger.Log("All dialogue setup complete!");
     }
 
     [ContextMenu("Setup Path 1 Dialogue")]
@@ -28,7 +36,7 @@ public class DialogueDataSetup : MonoBehaviour
     {
         if (path1Data == null)
         {
-            Debug.LogError("Path 1 Data not assigned!");
+            logger.LogError("Path 1 Data not assigned!");
             return;
         }
 
@@ -109,7 +117,7 @@ public class DialogueDataSetup : MonoBehaviour
             hasRemakeOption = false
         };
 
-        Debug.Log("Path 1 dialogue setup complete!");
+        logger.Log("Path 1 dialogue setup complete!");
     }
 
     [ContextMenu("Setup Path 2 Dialogue")]
@@ -117,7 +125,7 @@ public class DialogueDataSetup : MonoBehaviour
     {
         if (path2Data == null)
         {
-            Debug.LogError("Path 2 Data not assigned!");
+            logger.LogError("Path 2 Data not assigned!");
             return;
         }
 
@@ -196,7 +204,7 @@ public class DialogueDataSetup : MonoBehaviour
             hasRemakeOption = true
         };
 
-        Debug.Log("Path 2 dialogue setup complete!");
+        logger.Log("Path 2 dialogue setup complete!");
     }
 
     [ContextMenu("Setup Path 3 Dialogue")]
@@ -204,7 +212,7 @@ public class DialogueDataSetup : MonoBehaviour
     {
         if (path3Data == null)
         {
-            Debug.LogError("Path 3 Data not assigned!");
+            logger.LogError("Path 3 Data not assigned!");
             return;
         }
 
@@ -282,7 +290,7 @@ public class DialogueDataSetup : MonoBehaviour
             hasRemakeOption = false
         };
 
-        Debug.Log("Path 3 dialogue setup complete!");
+        logger.Log("Path 3 dialogue setup complete!");
     }
 
     [ContextMenu("Setup Path 4 Dialogue")]
@@ -290,7 +298,7 @@ public class DialogueDataSetup : MonoBehaviour
     {
         if (path4Data == null)
         {
-            Debug.LogError("Path 4 Data not assigned!");
+            logger.LogError("Path 4 Data not assigned!");
             return;
         }
 
@@ -368,6 +376,6 @@ public class DialogueDataSetup : MonoBehaviour
             hasRemakeOption = false
         };
 
-        Debug.Log("Path 4 dialogue setup complete!");
+        logger.Log("Path 4 dialogue setup complete!");
     }
 }

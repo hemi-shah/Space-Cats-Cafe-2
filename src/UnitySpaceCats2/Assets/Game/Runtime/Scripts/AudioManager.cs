@@ -1,3 +1,4 @@
+using Game.Runtime;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour, IAudioService
@@ -14,6 +15,8 @@ public class AudioManager : MonoBehaviour, IAudioService
 
     private AudioSource _musicSource;
     private AudioSource _sfxSource;
+
+    private IGameLogger logger;
 
     private AudioSource MusicSource
     {
@@ -42,6 +45,8 @@ public class AudioManager : MonoBehaviour, IAudioService
 
     private void Awake()
     {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+        
         if (Instance && Instance != this)
         {
             Destroy(gameObject);
@@ -61,7 +66,7 @@ public class AudioManager : MonoBehaviour, IAudioService
     {
         if (backgroundMusic == null)
         {
-            Debug.LogWarning("No background music assigned");
+            logger.LogWarning("No background music assigned");
             return;
         }
 
@@ -69,7 +74,7 @@ public class AudioManager : MonoBehaviour, IAudioService
         {
             MusicSource.clip = backgroundMusic;
             MusicSource.Play();
-            Debug.Log("Background music started playing");
+            logger.Log("Background music started playing");
         }
     }
 

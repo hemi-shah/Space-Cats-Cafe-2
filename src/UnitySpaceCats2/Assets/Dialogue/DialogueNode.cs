@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Game.Runtime;
 
 [Serializable]
 public class DialogueNode

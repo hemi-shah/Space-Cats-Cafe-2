@@ -19,13 +19,13 @@ public class TemperatureSelectionScreen : ScreenController
         if (hotButton != null)
         {
             hotButton.onClick.AddListener(OnHotSelected);
-            Debug.Log("HotOrIcedStation: Hot button ready");
+            logger.Log("HotOrIcedStation: Hot button ready");
         }
         
         if (coldButton != null)
         {
             coldButton.onClick.AddListener(OnColdSelected);
-            Debug.Log("HotOrIcedStation: Cold button ready");
+            logger.Log("HotOrIcedStation: Cold button ready");
         }
     }
 

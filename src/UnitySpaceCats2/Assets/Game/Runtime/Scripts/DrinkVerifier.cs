@@ -34,7 +34,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
         // compare the drink and the order
         if (orderTicket.Equals(default(OrderTicketData)) || drink == null)
         {
-            Debug.LogWarning("Missing order or drink");
+            logger.LogWarning("Missing order or drink");
             lastRating = 1;
             return;
         }
@@ -52,7 +52,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
             if (drink.IceLevel == orderTicket.numberOfIceCubes)
             {
                 points++;
-                Debug.Log("Correct temperature");
+                logger.Log("Correct temperature");
             }
         }
         else
@@ -60,7 +60,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
             if (drink.IceLevel == 0)
             {
                 points++;
-                Debug.Log("Correct ice");
+                logger.Log("Correct ice");
             }
         }
         
@@ -73,7 +73,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
                 drink.Syrups.Exists(s => string.Equals(s, syrupName, System.StringComparison.OrdinalIgnoreCase)))
             {
                 points++;
-                Debug.Log("Correct syrup");
+                logger.Log("Correct syrup");
             }
                 
         }
@@ -83,7 +83,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
             if (drink.Syrups == null || drink.Syrups.Count == 0)
             {
                 points++;
-                Debug.Log("Correct syrup (none)");
+                logger.Log("Correct syrup (none)");
             }
         }
 
@@ -93,7 +93,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
             if (drink.Milk == MilkType.None)
             {
                 points++;
-                Debug.Log("Correct milk (none)");
+                logger.Log("Correct milk (none)");
             }
         }
         else
@@ -101,7 +101,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
             if (drink.Milk == orderTicket.milk)
             {
                 points++;
-                Debug.Log("Correct milk");
+                logger.Log("Correct milk");
             }
         }
         
@@ -118,7 +118,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
         if (drinkHasWhipped == orderTicket.hasWhippedCream)
         {
             points++;
-            Debug.Log("Correct whipped cream");
+            logger.Log("Correct whipped cream");
         }
 
 // chocolate drizzle
@@ -134,7 +134,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
         if (drinkHasChoco == orderTicket.hasChocolateSyrup)
         {
             points++;
-            Debug.Log("Correct chocolate drizzle");
+            logger.Log("Correct chocolate drizzle");
         }
 
 // caramel drizzle
@@ -150,7 +150,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
         if (drinkHasCaramel == orderTicket.hasCaramelSyrup)
         {
             points++;
-            Debug.Log("Correct caramel drizzle");
+            logger.Log("Correct caramel drizzle");
         }
         
         
@@ -201,10 +201,10 @@ public class DrinkVerifier : ObserverMonoBehaviour
         }
         else
         {
-            Debug.LogError("points not 0-7");
+            logger.LogError("points not 0-7");
         }
         
-        Debug.Log("Points: " + points);
+        logger.Log("Points: " + points);
 
     }
     

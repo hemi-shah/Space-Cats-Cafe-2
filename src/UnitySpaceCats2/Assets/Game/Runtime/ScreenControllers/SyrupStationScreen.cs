@@ -29,12 +29,12 @@ public class SyrupStationScreen : ScreenController
 
     private void OnSyrupSelected(string syrup)
     {
-        Debug.Log($"{syrup} syrup added");
+        logger.Log($"{syrup} syrup added");
     }
 
     private void OnContinue()
     {
-        Debug.Log("Syrup done!");
+        logger.Log("Syrup done!");
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.PumpingSyrup);
         GameStateManager.Instance.ChangeState(GameStateType.PouringEspresso);
     }

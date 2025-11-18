@@ -13,19 +13,19 @@ public class ChooseCatScreen : ScreenController
         if (cat1Button != null)
         {
             cat1Button.onClick.AddListener(() => OnCatSelected(1));
-            Debug.Log("ChooseCatScreen: Cat1 button ready");
+            logger.Log("ChooseCatScreen: Cat1 button ready");
         }
         
         if (cat2Button != null)
         {
             cat2Button.onClick.AddListener(() => OnCatSelected(2));
-            Debug.Log("ChooseCatScreen: Cat2 button ready");
+            logger.Log("ChooseCatScreen: Cat2 button ready");
         }
     }
 
     private void OnCatSelected(int catNumber)
     {
-        Debug.Log($"Cat {catNumber} selected!");
+        logger.Log($"Cat {catNumber} selected!");
         GameStateManager.Instance.ChangeState(GameStateType.WaitingforCustomers);
     }
 }
