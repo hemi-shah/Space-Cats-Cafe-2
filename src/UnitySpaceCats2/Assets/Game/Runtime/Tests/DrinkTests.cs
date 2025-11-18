@@ -23,17 +23,19 @@ public class DrinkTests
     }
 
     [Test]
-    public void AddSyrup_AddsUniqueValues()
+    public void AddSyrup_IncrementsCount()
     {
         var drink = new Drink();
 
-        drink.AddSyrup("Vanilla");
-        drink.AddSyrup("Vanilla"); // duplicate should not be added
+        drink.AddSyrup("Chocolate");
+        drink.AddSyrup("Chocolate"); // same syrup should increment count
         drink.AddSyrup("Caramel");
 
-        Assert.AreEqual(2, drink.Syrups.Count);
-        Assert.Contains("Vanilla", drink.Syrups);
-        Assert.Contains("Caramel", drink.Syrups);
+        Assert.AreEqual(2, drink.SyrupCounts.Count); // 2 types
+        Assert.IsTrue(drink.SyrupCounts.ContainsKey("Chocolate"));
+        Assert.IsTrue(drink.SyrupCounts.ContainsKey("Caramel"));
+        Assert.AreEqual(2, drink.SyrupCounts["Chocolate"]); // 2 pumps of vanilla
+        Assert.AreEqual(1, drink.SyrupCounts["Caramel"]);
     }
 
     [Test]
@@ -116,7 +118,6 @@ public class DrinkTests
 
         string sprite = drink.GetSpriteName();
 
-        // GetSpriteName defaults to using the empty ice state
         Assert.AreEqual("IcedDrinkEmptyMilkSprite", sprite);
     }
 }

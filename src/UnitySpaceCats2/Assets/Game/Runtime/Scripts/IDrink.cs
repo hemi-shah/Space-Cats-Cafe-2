@@ -6,11 +6,10 @@ public interface IDrink
     CoffeeType Type { get; set; }
     MilkType Milk { get; set; }
     int IceLevel { get; set; }
-    List<string> Syrups { get; }
+    Dictionary<string, int> SyrupCounts { get; }
     List<string> Toppings { get; }
     int CurrentStationIndex { get; set; }
     bool IsComplete { get; set; }
-
     string GetSpriteName();
     void AddSyrup(string syrup);
     void AddMilk(MilkType milk);
