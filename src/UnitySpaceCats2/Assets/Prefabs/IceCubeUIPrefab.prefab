@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1667780874510031999}
   - component: {fileID: 2466261575070894028}
   m_Layer: 5
-  m_Name: IceCubeUI
+  m_Name: IceCubeUIPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
