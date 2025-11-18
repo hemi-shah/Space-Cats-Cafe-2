@@ -1,4 +1,5 @@
 using UnityEngine;
+using Game.Runtime;
 
 /// <summary>
 /// Simple base class for all screens
@@ -8,6 +9,13 @@ public abstract class ScreenController : MonoBehaviour
 {
     [Header("Screen Settings")]
     [SerializeField] protected GameStateType associatedState;
+
+    private IGameLogger logger;
+
+    private void Awake()
+    {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+    }
 
     void Start()
     {
@@ -65,7 +73,7 @@ public abstract class ScreenController : MonoBehaviour
     /// </summary>
     protected virtual void OnScreenShow()
     {
-        Debug.Log($"{GetType().Name} is now visible");
+        logger.Log($"{GetType().Name} is now visible");
     }
 
     /// <summary>
@@ -73,6 +81,6 @@ public abstract class ScreenController : MonoBehaviour
     /// </summary>
     protected virtual void OnScreenHide()
     {
-        Debug.Log($"{GetType().Name} is now hidden");
+        logger.Log($"{GetType().Name} is now hidden");
     }
 }

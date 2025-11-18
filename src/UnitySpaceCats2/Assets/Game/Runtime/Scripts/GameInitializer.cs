@@ -1,4 +1,5 @@
 using UnityEngine;
+using Game.Runtime;
 
 /// <summary>
 /// Handles game initialization tasks like assigning dialogue paths to cats
@@ -7,6 +8,13 @@ using UnityEngine;
 public class GameInitializer : MonoBehaviour
 {
     [SerializeField] private bool initializeOnStart = true;
+    
+    private IGameLogger logger;
+
+    private void Awake()
+    {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+    }
 
     void Start()
     {
@@ -18,17 +26,17 @@ public class GameInitializer : MonoBehaviour
 
     public void InitializeGame()
     {
-        Debug.Log("Initializing game...");
+        logger.Log("Initializing game...");
         
         // Initialize dialogue paths for all cats
         if (DialogueManager.Instance != null)
         {
             DialogueManager.Instance.InitializeCatDialoguePaths();
-            Debug.Log("Cat dialogue paths initialized!");
+            logger.Log("Cat dialogue paths initialized!");
         }
         else
         {
-            Debug.LogWarning("DialogueManager not found!");
+            logger.LogWarning("DialogueManager not found!");
         }
     }
 
@@ -37,7 +45,7 @@ public class GameInitializer : MonoBehaviour
     /// </summary>
     public void ResetGame()
     {
-        Debug.Log("Resetting game...");
+        logger.Log("Resetting game...");
         
         if (DialogueManager.Instance != null)
         {

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Game.Runtime;
 
 /// <summary>
 /// Navigation bar controller - handles button clicks to navigate between screens
@@ -30,6 +31,8 @@ public class NavigationBar : MonoBehaviour
     // Track if we chose hot or cold
     private bool isHotDrink = false;
     private bool isColdDrink = false;
+
+    private IGameLogger logger;
 
     void Start()
     {
@@ -75,7 +78,7 @@ public class NavigationBar : MonoBehaviour
     {
         if (lockedStations.Contains(targetState))
         {
-            Debug.LogWarning($"Cannot navigate to {targetState} - station is locked");
+            logger.LogWarning($"Cannot navigate to {targetState} - station is locked");
             return;
         }
 
@@ -259,6 +262,7 @@ public class NavigationBar : MonoBehaviour
 
     void Awake()
     {
+        logger = ServiceResolver.Resolve<IGameLogger>();
         if (Instance == null)
         {
             Instance = this;

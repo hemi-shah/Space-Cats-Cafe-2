@@ -24,10 +24,14 @@ public class OrderManager : MonoBehaviour
     
     private List<Action<OrderTicketData, Drink>> listeners = new();
     
+    private IGameLogger logger;
+    
     // list of stuff to notify
     
     private void Awake()
     {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+        
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -92,7 +96,7 @@ public class OrderManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No drink found (OrderManager FinishCurrentDrink())");
+            logger.LogWarning("No drink found (OrderManager FinishCurrentDrink())");
         }
 
         if (CurrentDrink != null)
