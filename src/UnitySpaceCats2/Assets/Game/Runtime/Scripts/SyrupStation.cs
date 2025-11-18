@@ -45,13 +45,22 @@ public class SyrupStation : MonoBehaviour
     private void SetupButtons()
     {
         if (chocolateButton != null)
+        {
+            chocolateButton.onClick.RemoveAllListeners();
             chocolateButton.onClick.AddListener(() => PumpSyrup("Chocolate"));
+        }
 
         if (caramelButton != null)
+        {
+            caramelButton.onClick.RemoveAllListeners();
             caramelButton.onClick.AddListener(() => PumpSyrup("Caramel"));
+        }
 
         if (mochaButton != null)
+        {
+            mochaButton.onClick.RemoveAllListeners();
             mochaButton.onClick.AddListener(() => PumpSyrup("Mocha"));
+        }
     }
 
     public void PumpSyrup(string syrup)
