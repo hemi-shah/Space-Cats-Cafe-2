@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7367d7447cfea4ab08e48af0a0f9da1c, type: 3}
+  m_Name: CatCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::CatCatalog
+  playerCats: []
+  customerCats:
+  - {fileID: 11400000, guid: 95e88f908892a497ba955e84fb210fc9, type: 2}
+  - {fileID: 11400000, guid: dff05f6b1b31a436eb09b54e80bfd456, type: 2}
+  - {fileID: 11400000, guid: cfc59673edf6e481aa5613a9c4ef9296, type: 2}
+  - {fileID: 11400000, guid: b763ffe13841c4b0093dcb65ed149ce9, type: 2}
+  - {fileID: 11400000, guid: c638211337bec47cd8b695ede71dbfca, type: 2}

@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: DialoguePath3Data
+  m_EditorClassIdentifier: Assembly-CSharp::DialoguePathData
+  noStarDialogue:
+    customerLine: This drink is wrong.
+    playerResponseOption1: "Sorry about that\u2026"
+    customerFollowUp1: 
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  oneStarGoodDialogue:
+    customerLine: Wow! This drink was great!
+    playerResponseOption1: Glad you liked it!
+    customerFollowUp1: 
+    playerResponseOption2: Okay.
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  oneStarBadDialogue:
+    customerLine: Is everything ok? This isn't your usual standard for drinks.
+    playerResponseOption1: Yeah I guess I'm feeling a bit under the weather, I can
+      remake it for you!
+    customerFollowUp1: 
+    playerResponseOption2: Even artists have off days
+    customerFollowUp2: 
+    hasRemakeOption: 1
+  threeStarGoodDialogue:
+    customerLine: I feel like I'm ascending - this tastes heavenly.
+    playerResponseOption1: It's always so nice to see you appreciate my creations.
+    customerFollowUp1: I don't know how anyone couldn't appreciate this.
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  threeStarBadDialogue:
+    customerLine: Hi there, it seems like you made my drink incorrectly.
+    playerResponseOption1: I'm sorry about that, what seems to be wrong about it?
+    customerFollowUp1: You seem to have gotten the {customization} wrong, but it
+      doesn't taste bad. I think it actually improved the recipe!
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  fiveStarGoodDialogue:
+    customerLine: It's nice to see my favorite barista again!
+    playerResponseOption1: You flatter me, I'm just doing my job!
+    customerFollowUp1: Yeah but no one else makes my drink as perfect as you do!
+      I haven't been able to go to any other coffee shop besides this one.
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0
+  fiveStarBadDialogue:
+    customerLine: "Hey, my drink doesn't really taste right\u2026 I might be just
+      making things up but it seems to be the {customization}"
+    playerResponseOption1: Are you sure? I'm positive I made the drink correctly.
+    customerFollowUp1: Maybe I'm wrong.. Have a good day.
+    playerResponseOption2: 
+    customerFollowUp2: 
+    hasRemakeOption: 0

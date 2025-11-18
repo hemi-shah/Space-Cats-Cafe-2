@@ -1,0 +1,14 @@
+OrderManager
+    Keeps track of the current order and the cat for that order
+    List of methods to call when the order is ready (methods are just called Actions in C# because why not)
+    Has method that gets called when the complete order button get clicked
+        In this method, it calls every method in the list of subscribers (aka listeners), giving them the order and the drink
+        
+
+DrinkVerifier
+    Has a method "subscribe" that tells ordermanager to add us to the list of methods to call when an order is complete
+        We want to know when the order is complete!
+        The method that it wants to be called when the order is complete is OnDrinkCompleted
+    OnDrinkCompleted method gets called automatically by OrderManager when the order is complete
+        It checks the order against the drink
+s

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918631ef3eef84abfa4f2e5714cd080f, type: 3}
   m_Name: JupiterCat
   m_EditorClassIdentifier: Assembly-CSharp::CatDefinition
-  counter: 0
+  counter: 2
   catName: Jupiter Cat
   catSprite: {fileID: 2602850807078058853, guid: 2f654be53a77a49eb8cd7064b040908a, type: 3}
+  dialoguePath: 2

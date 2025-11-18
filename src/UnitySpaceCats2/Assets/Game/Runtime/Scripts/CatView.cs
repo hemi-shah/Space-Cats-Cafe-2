@@ -4,20 +4,24 @@ using UnityEngine.UI;
 public class CatView : MonoBehaviour
 {
     [SerializeField] private Image catImage;
-    [SerializeField] private Text catNameText; 
+    [SerializeField] private Text catNameText;
     [SerializeField] private Button takeOrderButton;
-    
+
     private CatDefinition catDefinition;
-    
-    public void Initialize(CatDefinition definiiton)
+
+    public void Initialize(CatDefinition definition)
     {
-        catDefinition = definiiton;
+        catDefinition = definition;
 
         if (catImage != null)
-            catImage.sprite = catDefinition.catSprite;
-        
+        {
+            catImage.sprite = definition.catSprite;
+        }
+
         if (catNameText != null)
-            catNameText.text = catDefinition.catName;
+        {
+            catNameText.text = definition.catName;
+        }
 
         if (takeOrderButton != null)
         {
@@ -28,24 +32,24 @@ public class CatView : MonoBehaviour
 
     private void OnTakeOrderClicked()
     {
-        if (catDefinition == null)
-        {
-            Debug.LogWarning("CatView.OnTakeOrderClicked: CatDefinition is null");
-            return;
-        }
+        Debug.Log($"Taking order from: {catDefinition.catName}");
         
         if (OrderManager.Instance != null)
+        {
             OrderManager.Instance.SetSelectedCat(catDefinition);
+
+            OrderManager.Instance.GenerateRandomOrderData();
+        }
         
         if (GameStateManager.Instance != null)
-            GameStateManager.Instance.ChangeState(GameStateType.TakingOrder);
+        {
+            GameStateManager.Instance.ChangeState(GameStateType.ChoosingTemperature);
+        }
     }
 
-    private void OnDestroy()
+    // New method to get the cat definition
+    public CatDefinition GetCatDefinition()
     {
-        if (takeOrderButton != null)
-        {
-            takeOrderButton.onClick.RemoveListener(OnTakeOrderClicked);
-        }
+        return catDefinition;
     }
 }

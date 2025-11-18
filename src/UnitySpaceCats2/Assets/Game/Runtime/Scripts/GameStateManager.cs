@@ -1,6 +1,7 @@
 using UnityEngine;
 using Game399.Shared;
 using System.Collections.Generic;
+using Game.Runtime;
 
 /// <summary>
 /// Manages game state transitions and notifies subscribers of changes
@@ -38,6 +39,11 @@ public class GameStateManager : MonoBehaviour
     {
         // Subscribe to state changes for logging/debugging
         CurrentState.ChangeEvent += OnStateChanged;
+        DialogueDataSetup setup = GetComponent<DialogueDataSetup>();
+        if (setup != null)
+        {
+            setup.SetupAllDialogue();
+        }
     }
 
     void OnDestroy()
@@ -50,19 +56,36 @@ public class GameStateManager : MonoBehaviour
     /// </summary>
     public void ChangeState(GameStateType newState)
     {
+        if (newState == GameStateType.PlayingIceGame)
+        {
+            var drink = ServiceResolver.Resolve<DrinkServices>()?.CurrentDrink;
+
+            if (drink == null)
+            {
+                Debug.LogError("[StateGuard] CurrentDrink is null when trying to enter Ice Game.");
+            }
+            else if (drink.Temp == Temperature.Hot)
+            {
+                Debug.Log("[StateGuard] Hot drink — skipping IceGame state.");
+
+                NavigationBar.Instance?.MarkStationCompleted(GameStateType.PlayingIceGame);
+                ChangeState(GameStateType.ChoosingMilk);
+                return;
+            }
+        }
+
+        // Existing logic
         if (CurrentState.Value == newState)
         {
             Debug.LogWarning($"Already in state: {newState}");
             return;
         }
 
-        // Store previous state
         PreviousState = CurrentState.Value;
         stateHistory.Push(PreviousState);
-
-        // Change state (this will trigger ChangeEvent)
         CurrentState.Value = newState;
     }
+
 
     /// <summary>
     /// Go back to the previous state (if history exists)

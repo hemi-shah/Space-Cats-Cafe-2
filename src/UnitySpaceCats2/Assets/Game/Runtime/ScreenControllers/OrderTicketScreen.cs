@@ -26,7 +26,7 @@ public class OrderTicketScreen : ScreenController
 
     private void OnGameStateChanged(GameStateType newState)
     {
-        if (newState == GameStateType.TakingOrder)
+        if (newState == GameStateType.OrderTicketReceived || newState == GameStateType.ChoosingTemperature)
         {
             panel.SetActive(true);
 
@@ -40,7 +40,7 @@ public class OrderTicketScreen : ScreenController
             }
         }
         
-        if (newState != GameStateType.Title || newState != GameStateType.Pause || newState != GameStateType.ChoosingCat || newState != GameStateType.ViewingCollectedCats || newState != GameStateType.WaitingforCustomers)
+        if (newState != GameStateType.Title && newState != GameStateType.Pause && newState != GameStateType.ChoosingCat && newState != GameStateType.ViewingCollectedCats && newState != GameStateType.WaitingforCustomers)
         {
             panel.SetActive(true);
             orderTicket.SetContentVisible(true);

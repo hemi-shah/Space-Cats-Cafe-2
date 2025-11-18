@@ -3,17 +3,17 @@ using UnityEngine.UI;
 
 public class SyrupStationScreen : ScreenController
 {
-    [SerializeField] private Button vanillaButton;
+    [SerializeField] private Button mochaButton;
     [SerializeField] private Button caramelButton;
-    [SerializeField] private Button hazelnutButton;
+    [SerializeField] private Button chocolateButton;
 
     protected override void SetupButtons()
     {
         associatedState = GameStateType.PumpingSyrup;
         
-        if (vanillaButton != null)
+        if (mochaButton != null)
         {
-            vanillaButton.onClick.AddListener(() => OnSyrupSelected("Vanilla"));
+            mochaButton.onClick.AddListener(() => OnSyrupSelected("Mocha"));
         }
         
         if (caramelButton != null)
@@ -21,15 +21,16 @@ public class SyrupStationScreen : ScreenController
             caramelButton.onClick.AddListener(() => OnSyrupSelected("Caramel"));
         }
         
-        if (hazelnutButton != null)
+        if (chocolateButton != null)
         {
-            hazelnutButton.onClick.AddListener(() => OnSyrupSelected("Hazelnut"));
+            chocolateButton.onClick.AddListener(() => OnSyrupSelected("Chocolate"));
         }
     }
 
     private void OnSyrupSelected(string syrup)
     {
-        Debug.Log($"{syrup} syrup added");
+        var station = FindObjectOfType<SyrupStation>();
+        station?.PumpSyrup(syrup);
     }
 
     private void OnContinue()

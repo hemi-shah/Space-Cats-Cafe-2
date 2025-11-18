@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918631ef3eef84abfa4f2e5714cd080f, type: 3}
   m_Name: GalaxyCat
   m_EditorClassIdentifier: Assembly-CSharp::CatDefinition
-  counter: 0
+  counter: 5
   catName: Galaxy Cat
   catSprite: {fileID: -2864238428318202666, guid: 61b07a69399f2428aa6e531faeaf4cf7, type: 3}
+  dialoguePath: 3
