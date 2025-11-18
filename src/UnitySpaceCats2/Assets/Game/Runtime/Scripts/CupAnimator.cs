@@ -1,4 +1,5 @@
 using UnityEngine;
+using Game.Runtime;
 
 public class CupAnimator : MonoBehaviour
 {
@@ -6,6 +7,13 @@ public class CupAnimator : MonoBehaviour
     [SerializeField] private RectTransform coldCup;
     [SerializeField] private float slideDistance = 1000f;
     [SerializeField] private float slideDuration = 0.4f;
+
+    private IGameLogger logger;
+
+    private void Awake()
+    {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+    }
 
     public GameObject SelectHot(Transform spawnPoint, GameObject prefabToSpawn)
     {
@@ -30,7 +38,7 @@ public class CupAnimator : MonoBehaviour
             Canvas canvas = FindObjectOfType<Canvas>();
             if (canvas == null)
             {
-                Debug.LogError("CupAnimator: No Canvas found!");
+                logger.LogError("CupAnimator: No Canvas found!");
                 return null;
             }
 
@@ -42,7 +50,7 @@ public class CupAnimator : MonoBehaviour
         }
         else
         {
-            Debug.LogError("CupAnimator: prefabToSpawn is null!");
+            logger.LogError("CupAnimator: prefabToSpawn is null!");
             return null;
         }
     }

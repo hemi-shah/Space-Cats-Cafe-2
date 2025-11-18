@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Game.Runtime;
+using System;
 using Game399.Shared; // adjust if your GameStateType lives elsewhere
 
 public class CatSpawner : MonoBehaviour
@@ -20,6 +22,13 @@ public class CatSpawner : MonoBehaviour
     };
 
     private List<GameObject> spawnedCats = new List<GameObject>();
+    
+    private IGameLogger logger;
+
+    private void Awake()
+    {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+    }
 
     private void OnEnable()
     {
@@ -56,7 +65,7 @@ public class CatSpawner : MonoBehaviour
 
         if (catPrefab == null || parentPanel == null || catDefinitions.Count == 0)
         {
-            Debug.LogWarning("CatSpawner: missing references or definitions.");
+            logger.LogWarning("CatSpawner: missing references or definitions.");
             return;
         }
 
