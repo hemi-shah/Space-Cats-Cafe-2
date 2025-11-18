@@ -1,22 +1,21 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using Game.Runtime;
 
 public class SyrupStation : MonoBehaviour
 {
-    [SerializeField] private Drink currentDrink;
-
-    [Header("Bottle Buttons (UI)")]
+    [Header("UI Buttons")]
     public Button chocolateButton;
     public Button caramelButton;
     public Button mochaButton;
 
-    [Header("Bottle Images (UI)")]
+    [Header("Bottle Images")]
     public Image chocolateImage;
     public Image caramelImage;
     public Image mochaImage;
 
-    [Header("Pump Sprites (Tilted Prefabs)")]
+    [Header("Pump Sprites (Tilted)")]
     public GameObject chocolatePumpedPrefab;
     public GameObject caramelPumpedPrefab;
     public GameObject mochaPumpedPrefab;
@@ -24,16 +23,48 @@ public class SyrupStation : MonoBehaviour
     [Header("Spawn Point Over Cup")]
     public Transform pumpedSpawnPoint;
 
-    private void Start()
+    private IDrink currentDrink;
+
+    private void OnEnable()
     {
-        chocolateButton.onClick.AddListener(() => PumpSyrup("Chocolate"));
-        caramelButton.onClick.AddListener(() => PumpSyrup("Caramel"));
-        mochaButton.onClick.AddListener(() => PumpSyrup("Mocha"));
+        // Assign currentDrink from DrinkServices when the station is activated
+        if (currentDrink == null)
+        {
+            var drinkServices = ServiceResolver.Resolve<DrinkServices>();
+            currentDrink = drinkServices.CurrentDrink;
+
+            if (currentDrink != null)
+                Debug.Log("[SyrupStation] Assigned currentDrink on enable.");
+            else
+                Debug.LogError("[SyrupStation] CurrentDrink is null! Did Temperature Station create it?");
+        }
+
+        SetupButtons();
+    }
+
+    private void SetupButtons()
+    {
+        if (chocolateButton != null)
+            chocolateButton.onClick.AddListener(() => PumpSyrup("Chocolate"));
+
+        if (caramelButton != null)
+            caramelButton.onClick.AddListener(() => PumpSyrup("Caramel"));
+
+        if (mochaButton != null)
+            mochaButton.onClick.AddListener(() => PumpSyrup("Mocha"));
     }
 
     public void PumpSyrup(string syrup)
     {
-        currentDrink?.AddSyrup(syrup);
+        if (currentDrink == null)
+        {
+            Debug.LogError("[SyrupStation] Cannot pump syrup. currentDrink is null.");
+            return;
+        }
+
+        currentDrink.AddSyrup(syrup);
+        Debug.Log($"[SyrupStation] Added {syrup} to drink. Current syrups: {string.Join(", ", currentDrink.Syrups)}");
+
         StartCoroutine(PumpRoutine(syrup));
     }
 
@@ -62,27 +93,36 @@ public class SyrupStation : MonoBehaviour
                 bottleButton = mochaButton;
                 pumpedPrefab = mochaPumpedPrefab;
                 break;
+
+            default:
+                Debug.LogError($"[SyrupStation] Unknown syrup: {syrup}");
+                yield break;
         }
 
-        // Hide bottle and button
-        bottleImage.enabled = false;
-        bottleButton.interactable = false;
+        Debug.Log($"[SyrupStation] Pumping {syrup}...");
 
-        // Spawn the pumped sprite
-        GameObject pumped = Instantiate(
-            pumpedPrefab, 
-            pumpedSpawnPoint.position, 
-            pumpedSpawnPoint.rotation
-        );
-        pumped.transform.SetParent(pumpedSpawnPoint.parent, worldPositionStays: true);
+        // Hide bottle and disable button
+        if (bottleImage != null) bottleImage.enabled = false;
+        if (bottleButton != null) bottleButton.interactable = false;
 
-        // Wait 1 second
-        yield return new WaitForSeconds(1f);
+        // Spawn pumped sprite over the cup
+        if (pumpedPrefab != null && pumpedSpawnPoint != null)
+        {
+            GameObject pumped = Instantiate(pumpedPrefab, pumpedSpawnPoint.position, pumpedSpawnPoint.rotation);
+            pumped.transform.SetParent(pumpedSpawnPoint.parent, worldPositionStays: true);
+            Debug.Log($"[SyrupStation] Spawned pumped sprite for {syrup}");
 
-        Destroy(pumped);
+            // Wait 1 second
+            yield return new WaitForSeconds(1f);
+
+            Destroy(pumped);
+            Debug.Log($"[SyrupStation] Destroyed pumped sprite for {syrup}");
+        }
 
         // Restore bottle and button
-        bottleImage.enabled = true;
-        bottleButton.interactable = true;
+        if (bottleImage != null) bottleImage.enabled = true;
+        if (bottleButton != null) bottleButton.interactable = true;
+
+        Debug.Log($"[SyrupStation] {syrup} bottle restored and button re-enabled");
     }
 }
