@@ -20,6 +20,8 @@ public class CatSpawner : MonoBehaviour
     };
 
     private List<GameObject> spawnedCats = new List<GameObject>();
+    
+    private bool hasSpawnedInitialCats = false;
 
     private void OnEnable()
     {
@@ -41,12 +43,25 @@ public class CatSpawner : MonoBehaviour
     {
         if (newState == GameStateType.WaitingforCustomers)
         {
-            SpawnThreeCats();
+            if (!hasSpawnedInitialCats)
+            {
+                SpawnThreeCats();
+                hasSpawnedInitialCats = true;
+            }
+            
         }
         else
         {
             // optional: clear when leaving the state
-            ClearSpawnedCats();
+            //ClearSpawnedCats();
+        }
+    }
+
+    public void RemoveCat(GameObject cat)
+    {
+        if (spawnedCats.Contains(cat))
+        {
+            spawnedCats.Remove(cat);
         }
     }
 
