@@ -24,6 +24,12 @@ public class MilkStation : MonoBehaviour
     public GameObject almondMilkPouredPrefab;
     public GameObject oatMilkPouredPrefab;
 
+    [Header("Drink References")]
+    public Image hotDrinkSprite;
+    public Image icedDrinkSprite;
+    public Sprite hotMilkSprite;
+    public Sprite[] icedMilkSprites; 
+
     private IDrink currentDrink;
 
     private void OnEnable()
@@ -54,7 +60,7 @@ public class MilkStation : MonoBehaviour
         {
             almondMilkButton.onClick.RemoveAllListeners();
             almondMilkButton.onClick.AddListener(() => PourMilk("Almond Milk"));
-        }   // ← FIXED: this bracket was missing!
+        }
 
         if (oatMilkButton != null)
         {
@@ -136,9 +142,56 @@ public class MilkStation : MonoBehaviour
             Debug.Log($"[MilkStation] Destroyed pour sprite for {milk}");
         }
 
+        // Update the drink sprite after pouring
+        UpdateDrinkSprite();
+
         if (bottleImage != null) bottleImage.enabled = true;
         if (bottleButton != null) bottleButton.interactable = true;
 
         Debug.Log($"[MilkStation] {milk} bottle restored and button re-enabled");
+    }
+
+    private void UpdateDrinkSprite()
+    {
+        if (currentDrink == null)
+        {
+            Debug.LogError("[MilkStation] Cannot update sprite - currentDrink is null");
+            return;
+        }
+
+        if (currentDrink.Temp == Temperature.Hot)
+        {
+            if (hotDrinkSprite != null && hotMilkSprite != null)
+            {
+                hotDrinkSprite.sprite = hotMilkSprite;
+                Debug.Log("[MilkStation] Updated hot drink sprite to milk");
+            }
+            else
+            {
+                Debug.LogError("[MilkStation] Hot drink sprite or hot milk sprite not assigned!");
+            }
+        }
+        else if (currentDrink.Temp == Temperature.Iced)
+        {
+            if (icedDrinkSprite != null && icedMilkSprites != null && icedMilkSprites.Length > 0)
+            {
+                int iceLevel = Mathf.Clamp(currentDrink.IceLevel, 0, icedMilkSprites.Length - 1);
+                Sprite milkSprite = icedMilkSprites[iceLevel];
+                
+                if (milkSprite != null)
+                {
+                    icedDrinkSprite.sprite = milkSprite;
+                    Debug.Log($"[MilkStation] Updated iced drink sprite to milk with ice level {iceLevel}");
+                }
+                else
+                {
+                    Debug.LogError($"[MilkStation] No sprite assigned for ice level {iceLevel}");
+                }
+            }
+            else
+            {
+                Debug.LogError("[MilkStation] Iced drink sprite or iced milk sprites array not assigned!");
+            }
+        }
     }
 }

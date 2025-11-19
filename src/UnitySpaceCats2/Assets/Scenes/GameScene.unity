@@ -1489,6 +1489,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358434773}
   m_CullTransparentMesh: 1
+--- !u!114 &468564546 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4969117417596586579, guid: 9bfad3796c3b64b32a77f343a830b2de, type: 3}
+  m_PrefabInstance: {fileID: 21043488}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &521900217
 GameObject:
   m_ObjectHideFlags: 0
@@ -4514,6 +4525,15 @@ MonoBehaviour:
   wholeMilkPouredPrefab: {fileID: 1988904866250433028, guid: b0606d2b9e1484c9c8c73794dcd5658d, type: 3}
   almondMilkPouredPrefab: {fileID: 7610232738871345662, guid: 6b9e064e41a5a44018f8e934dff4e5ec, type: 3}
   oatMilkPouredPrefab: {fileID: 2740947866108797587, guid: c026aea8e21ec4c9783248f55ffac07d, type: 3}
+  hotDrinkSprite: {fileID: 468564546}
+  icedDrinkSprite: {fileID: 219877130}
+  hotMilkSprite: {fileID: 2204967468720684831, guid: 85f6eeca18d18450bbf3a3214af2de39, type: 3}
+  icedMilkSprites:
+  - {fileID: 6082008492514789638, guid: 693119bd11bab4bc4a1a56bd837ad3a4, type: 3}
+  - {fileID: -2284334938911817635, guid: eec34f20fce424bdea91bbf4d54fc055, type: 3}
+  - {fileID: -2331126609127397774, guid: 01b6e5eaf4d084c00a22f237a58f6ca4, type: 3}
+  - {fileID: -6835272977473938284, guid: 3ff6d913ee1f642b3b0b60542695795a, type: 3}
+  - {fileID: 3320774137971325352, guid: d4d62e0717b8140eebeb32d9a94f8ac0, type: 3}
 --- !u!1 &1140166438
 GameObject:
   m_ObjectHideFlags: 0

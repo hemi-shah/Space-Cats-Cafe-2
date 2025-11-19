@@ -11,11 +11,25 @@ public class DrinkObjectUI : MonoBehaviour
         Drink = ServiceResolver.Resolve<DrinkServices>().CurrentDrink;
         UpdateDrinkSprite();
     }
-
+    
     public void UpdateDrinkSprite()
     {
         string spriteName = Drink.GetSpriteName();
-        Sprite sprite = Resources.Load<Sprite>("DrinkSprites/IcedDrinkSprites/Empty/" + spriteName);
+        string path = Drink.Temp == Temperature.Hot 
+            ? $"Art/DrinkSprites/HotDrinkSprites/{spriteName}"
+            : GetIcedDrinkPath(spriteName);
+    
+        Sprite sprite = Resources.Load<Sprite>(path);
         renderer.sprite = sprite;
+    }
+
+    private string GetIcedDrinkPath(string spriteName)
+    {
+        if (spriteName.Contains("Milk"))
+            return $"Art/DrinkSprites/IcedDrinkSprites/Milk/{spriteName}";
+        else if (spriteName.Contains("Coffee"))
+            return $"Art/DrinkSprites/IcedDrinkSprites/Coffee/{spriteName}";
+        else
+            return $"Art/DrinkSprites/IcedDrinkSprites/Empty/{spriteName}";
     }
 }
