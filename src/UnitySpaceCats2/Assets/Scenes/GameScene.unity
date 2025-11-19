@@ -257,7 +257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &16506300
 RectTransform:
   m_ObjectHideFlags: 0
@@ -466,7 +466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &72398864
 RectTransform:
   m_ObjectHideFlags: 0
@@ -524,7 +524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &139847603
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1003,7 +1003,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &220589678
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1299,7 +1299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &329272021
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1662,7 +1662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &543441425
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1854,7 +1854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &579951754
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3611,7 +3611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &881463977
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4080,6 +4080,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935854099}
   m_CullTransparentMesh: 1
+--- !u!1 &941157765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 941157766}
+  m_Layer: 5
+  m_Name: PourMilkSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &941157766
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941157765}
+  m_LocalRotation: {x: -0.38268343, y: 0.92387956, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1089364788}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: -45}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 450, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1010387075
 GameObject:
   m_ObjectHideFlags: 0
@@ -4370,6 +4405,7 @@ GameObject:
   - component: {fileID: 1089364790}
   - component: {fileID: 1089364789}
   - component: {fileID: 1089364791}
+  - component: {fileID: 1089364792}
   m_Layer: 5
   m_Name: MilkStationScreen
   m_TagString: Untagged
@@ -4393,6 +4429,7 @@ RectTransform:
   - {fileID: 935854100}
   - {fileID: 559793316}
   - {fileID: 764727831}
+  - {fileID: 941157766}
   m_Father: {fileID: 687329221}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4451,10 +4488,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MilkStationScreen
   associatedState: 10
-  oatMilkButton: {fileID: 0}
-  almondMilkButton: {fileID: 0}
-  wholeMilkButton: {fileID: 0}
+  oatMilkButton: {fileID: 1841873983}
+  almondMilkButton: {fileID: 610587188}
+  wholeMilkButton: {fileID: 1698434641}
   skipButton: {fileID: 0}
+--- !u!114 &1089364792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089364787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829a073e1ab084d9ca57c2e6585684c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MilkStation
+  wholeMilkButton: {fileID: 1698434641}
+  almondMilkButton: {fileID: 610587188}
+  oatMilkButton: {fileID: 1841873983}
+  wholeMilkImage: {fileID: 935854101}
+  almondMilkImage: {fileID: 559793317}
+  oatMilkImage: {fileID: 764727832}
+  pourSpawnPoint: {fileID: 941157766}
+  wholeMilkPouredPrefab: {fileID: 1988904866250433028, guid: b0606d2b9e1484c9c8c73794dcd5658d, type: 3}
+  almondMilkPouredPrefab: {fileID: 7610232738871345662, guid: 6b9e064e41a5a44018f8e934dff4e5ec, type: 3}
+  oatMilkPouredPrefab: {fileID: 2740947866108797587, guid: c026aea8e21ec4c9783248f55ffac07d, type: 3}
 --- !u!1 &1140166438
 GameObject:
   m_ObjectHideFlags: 0
@@ -4473,7 +4532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1140166439
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4566,7 +4625,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1169377721
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4732,7 +4791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1194013423
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5167,7 +5226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1277654510
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5257,7 +5316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1299458180
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5520,7 +5579,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1328455925
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5571,7 +5630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1348740485
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5938,7 +5997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1385543071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6084,7 +6143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1435332490
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6135,7 +6194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1450255657
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8749,7 +8808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2125221500
 RectTransform:
   m_ObjectHideFlags: 0
