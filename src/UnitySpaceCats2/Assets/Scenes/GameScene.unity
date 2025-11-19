@@ -2890,8 +2890,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -950, y: -80}
-  m_SizeDelta: {x: 300, y: 1000}
+  m_AnchoredPosition: {x: -550, y: -80}
+  m_SizeDelta: {x: 115, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &749878518
 MonoBehaviour:
@@ -4108,6 +4108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 941157766}
+  - component: {fileID: 941157767}
   m_Layer: 5
   m_Name: PourMilkSpawnPoint
   m_TagString: Untagged
@@ -4131,9 +4132,17 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: -45}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 450, y: 0}
+  m_AnchoredPosition: {x: 200, y: 100}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &941157767
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941157765}
+  m_CullTransparentMesh: 1
 --- !u!1 &1010387075
 GameObject:
   m_ObjectHideFlags: 0
@@ -4431,7 +4440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1089364788
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5056,8 +5065,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1650, y: -75}
-  m_SizeDelta: {x: 300, y: 1000}
+  m_AnchoredPosition: {x: -825, y: -78}
+  m_SizeDelta: {x: 117, y: 453}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1256678044
 MonoBehaviour:
@@ -5414,8 +5423,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1300, y: -80}
-  m_SizeDelta: {x: 300, y: 1000}
+  m_AnchoredPosition: {x: -685, y: -80}
+  m_SizeDelta: {x: 115, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1320171435
 MonoBehaviour:
@@ -8836,7 +8845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2125221500
 RectTransform:
   m_ObjectHideFlags: 0
