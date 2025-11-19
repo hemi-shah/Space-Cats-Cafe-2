@@ -25,11 +25,15 @@ public class OrderManager : MonoBehaviour
     private List<Action<OrderTicketData, Drink>> listeners = new();
     
     private IGameLogger logger;
+
+    public bool isDrinkCompleted { get; private set; }
     
     // list of stuff to notify
     
     private void Awake()
     {
+        isDrinkCompleted = false;
+        
         logger = ServiceResolver.Resolve<IGameLogger>();
         
         if (Instance != null && Instance != this)
@@ -49,6 +53,43 @@ public class OrderManager : MonoBehaviour
         generator.whippedCreamChance = whippedCreamChance;
         generator.drizzleChance = drizzleChance;
     }
+
+    public void MarkDrinkCompleted(bool completed)
+    {
+        isDrinkCompleted = completed;
+    }
+
+    /*
+    private void OnEnable()
+    {
+        if (GameStateManager.Instance != null)
+        {
+            GameStateManager.Instance.CurrentState.ChangeEvent += OnStateChanged;
+        }
+    }
+    
+    private void OnDiable()
+    {
+        if (GameStateManager.Instance != null)
+        {
+            GameStateManager.Instance.CurrentState.ChangeEvent -= OnStateChanged;
+        }
+    }
+
+    private void OnStateChanged(GameStateType newState)
+    {
+        if (newState != GameStateType.OrderCompleted)
+        {
+            if (CurrentDrink != null)
+            {
+                Destroy(CurrentDrink);
+                CurrentDrink = null;
+            }
+
+            ClearSelectedCat();
+        }
+    }
+    */
 
     public void SetSelectedCat(CatDefinition cat)
         => selectedCat = cat;
@@ -92,13 +133,19 @@ public class OrderManager : MonoBehaviour
 
         if (finishedDrink != null)
         {
+            isDrinkCompleted = true;
+            
             CompleteOrder(finishedDrink);
+            
+            //GameStateManager.Instance?.ChangeState(GameStateType.OrderCompleted);
+            NavigationBar.Instance?.MarkStationCompleted(GameStateType.ServingDrinks);
         }
         else
         {
             logger.LogWarning("No drink found (OrderManager FinishCurrentDrink())");
         }
 
+        /*
         if (CurrentDrink != null)
         {
             GameObject.Destroy(CurrentDrink);
@@ -106,6 +153,7 @@ public class OrderManager : MonoBehaviour
         }
         
         ClearSelectedCat();
+        */
     }
 
     // TODO: Call this when they click the drink is done
@@ -135,7 +183,7 @@ public class OrderManager : MonoBehaviour
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Listener failed: {ex}");
+                logger.LogError($"Listener failed: {ex}");
             }
         }
     }

@@ -42,6 +42,33 @@ public class RatingStationScreen : ScreenController
         }
     }
 
+    protected override void OnScreenHide()
+    {
+        base.OnScreenHide();
+
+        if (OrderManager.Instance != null && OrderManager.Instance.isDrinkCompleted)
+        {
+            if (OrderManager.Instance.CurrentDrink != null)
+            {
+                Destroy(OrderManager.Instance.CurrentDrink);
+                OrderManager.Instance.SetCurrentDrinkObject(null);
+            }
+
+            logger.Log($"Current cat in RatingStationScreen: {currentCat?.catName}");
+            if (currentCat != null)
+            {
+                logger.Log($"Cat {currentCat.name} is being deleted.");
+                RemoveCurrentCat();
+            }
+
+            OrderManager.Instance.MarkDrinkCompleted(false);
+            
+            //NavigationBar.Instance?.MarkStationCompleted(GameStateType.ServingDrinks);
+            GameStateManager.Instance.ClearHistory();
+            //GameStateManager.Instance.ChangeState(GameStateType.WaitingforCustomers);
+        }
+    }
+
     protected override void OnScreenShow()
     {
         base.OnScreenShow();
@@ -275,8 +302,16 @@ public class RatingStationScreen : ScreenController
 
     private void RemoveCurrentCat()
     {
-        // Find and destroy the cat GameObject in the scene
-        CatView[] allCatViews = FindObjectsOfType<CatView>();
+        if (catImage != null)
+        {
+            catImage.sprite = null;
+            catImage.enabled = false;
+        }
+
+        if (currentCat == null)
+            return;
+
+        CatView[] allCatViews = FindObjectsOfType<CatView>(true);
         foreach (CatView catView in allCatViews)
         {
             if (catView.GetCatDefinition() == currentCat)
@@ -286,5 +321,7 @@ public class RatingStationScreen : ScreenController
                 break;
             }
         }
+
+        
     }
 }

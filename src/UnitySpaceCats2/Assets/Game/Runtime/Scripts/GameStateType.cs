@@ -18,5 +18,6 @@ public enum GameStateType
     ChoosingMilk,
     PlacingToppings,
     ServingDrinks,
-    OrderTicketReceived,           
+    OrderTicketReceived,
+    OrderCompleted
 }
