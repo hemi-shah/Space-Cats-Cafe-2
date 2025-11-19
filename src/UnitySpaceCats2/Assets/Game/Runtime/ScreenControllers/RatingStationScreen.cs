@@ -268,6 +268,8 @@ public class RatingStationScreen : ScreenController
             RemoveCurrentCat();
         }
         
+        OrderManager.Instance.MarkDrinkCompleted(true);
+        
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.ServingDrinks);
         GameStateManager.Instance.ClearHistory();
         GameStateManager.Instance.ChangeState(GameStateType.WaitingforCustomers);
@@ -275,16 +277,32 @@ public class RatingStationScreen : ScreenController
 
     private void RemoveCurrentCat()
     {
+        if (catImage != null)
+        {
+            catImage.overrideSprite = null;
+            catImage.sprite = null;
+            Debug.Log("Removing cat image");
+            catImage.enabled = false;
+        }
+
+        if (currentCat == null)
+            return;
+        
         // Find and destroy the cat GameObject in the scene
-        CatView[] allCatViews = FindObjectsOfType<CatView>();
+        CatView[] allCatViews = FindObjectsOfType<CatView>(true);
         foreach (CatView catView in allCatViews)
         {
             if (catView.GetCatDefinition() == currentCat)
             {
                 Debug.Log($"Removing cat: {currentCat.catName}");
+                //currentCat = null;
+                //Debug.Log($"Current cat: {currentCat.catName}");
                 Destroy(catView.gameObject);
                 break;
             }
         }
+        
+        currentCat = null;
+        OrderManager.Instance.ClearSelectedCat();
     }
 }

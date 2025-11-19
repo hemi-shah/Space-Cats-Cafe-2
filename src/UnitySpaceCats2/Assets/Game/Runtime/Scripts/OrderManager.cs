@@ -24,6 +24,8 @@ public class OrderManager : MonoBehaviour
     
     private List<Action<OrderTicketData, Drink>> listeners = new();
     
+    public bool isDrinkCompleted { get; private set; }
+    
     // list of stuff to notify
     
     private void Awake()
@@ -44,6 +46,11 @@ public class OrderManager : MonoBehaviour
         generator.milkChance = milkChance;
         generator.whippedCreamChance = whippedCreamChance;
         generator.drizzleChance = drizzleChance;
+    }
+
+    public void MarkDrinkCompleted(bool completed)
+    {
+        isDrinkCompleted = completed;
     }
 
     public void SetSelectedCat(CatDefinition cat)
@@ -88,13 +95,16 @@ public class OrderManager : MonoBehaviour
 
         if (finishedDrink != null)
         {
+            isDrinkCompleted = true;
             CompleteOrder(finishedDrink);
+            //navigation bar thing maybe if no next order button but probably ignore
         }
         else
         {
             Debug.LogWarning("No drink found (OrderManager FinishCurrentDrink())");
         }
 
+        /*
         if (CurrentDrink != null)
         {
             GameObject.Destroy(CurrentDrink);
@@ -102,6 +112,7 @@ public class OrderManager : MonoBehaviour
         }
         
         ClearSelectedCat();
+        */
     }
 
     // TODO: Call this when they click the drink is done
