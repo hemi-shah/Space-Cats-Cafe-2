@@ -78,6 +78,7 @@ public class MilkStation : MonoBehaviour
 
     public void PourMilk(string milk)
     {
+        
         if (currentDrink == null)
         {
             logger.LogError("[MilkStation] Cannot pour milk. currentDrink is null.");
@@ -132,6 +133,12 @@ public class MilkStation : MonoBehaviour
         }
 
         logger.Log($"[MilkStation] Pouring {milk}...");
+        
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopSfx();
+            AudioManager.Instance.PlayMilkSfx();
+        }
 
         if (bottleImage != null) bottleImage.enabled = false;
         if (bottleButton != null) bottleButton.interactable = false;

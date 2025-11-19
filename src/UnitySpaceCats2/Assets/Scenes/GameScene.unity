@@ -4882,7 +4882,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d642067208c344dadb56232d73ce0d50, type: 3}
   - {fileID: 8300000, guid: 7b71d46500a1b4d98aab6f9b314067c5, type: 3}
   espressoSFX: {fileID: 8300000, guid: 8a50876f4d9f24cf68835e3b2d438002, type: 3}
-  milkSFX: {fileID: 8300000, guid: efb418f72abcb41d284fe5ea43bf42bf, type: 3}
+  milkSFX: {fileID: 8300000, guid: 234edfad1b34341eb95c554ebb1651ea, type: 3}
 --- !u!1 &1320171433
 GameObject:
   m_ObjectHideFlags: 0

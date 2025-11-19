@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour, IAudioService
             {
                 _musicSource = gameObject.AddComponent<AudioSource>();
                 _musicSource.loop = true;
+                _musicSource.volume = 0.6f;
             }
             return _musicSource;
         }
@@ -35,6 +36,7 @@ public class AudioManager : MonoBehaviour, IAudioService
             if (_sfxSource == null)
             {
                 _sfxSource = gameObject.AddComponent<AudioSource>();
+                _sfxSource.volume = 1f; // full volume for SFX
             }
             return _sfxSource;
         }
@@ -90,5 +92,11 @@ public class AudioManager : MonoBehaviour, IAudioService
         if (iceSFX == null || iceSFX.Length == 0) return;
         int index = Random.Range(0, iceSFX.Length);
         SfxSource.PlayOneShot(iceSFX[index]);
+    }
+    
+    public void StopSfx()
+    {
+        if (_sfxSource != null)
+            _sfxSource.Stop();
     }
 }
