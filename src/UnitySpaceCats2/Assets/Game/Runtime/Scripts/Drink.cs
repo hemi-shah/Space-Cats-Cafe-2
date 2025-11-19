@@ -43,16 +43,6 @@ public class Drink : IDrink
         }
         else
         {
-            string iceWord = IceLevel switch
-            {
-                0 => "Empty",
-                1 => "OneIce",
-                2 => "TwoIce",
-                3 => "ThreeIce",
-                4 => "FourIce",
-                _ => "Empty"
-            };
-
             string content = Type switch
             {
                 CoffeeType.Black => "Coffee",
@@ -60,7 +50,16 @@ public class Drink : IDrink
                 _ => "Empty"
             };
 
-            return $"IcedDrink{iceWord}{content}Sprite";
+            string spriteName = IceLevel switch
+            {
+                1 => $"IcedDrinkOneIce{content}Sprite",
+                2 => $"IcedDrinkTwoIce{content}Sprite",
+                3 => $"IcedDrinkThreeIce{content}Sprite",
+                4 => $"IcedDrinkFourIce{content}Sprite",
+                _ => content == "Empty" ? "IcedDrinkEmptySprite" : $"IcedDrink{content}Sprite"
+            };
+
+            return spriteName;
         }
     }
 }
