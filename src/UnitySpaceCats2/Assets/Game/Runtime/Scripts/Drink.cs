@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Game.Runtime;
 
 public class Drink : IDrink
 {
@@ -12,6 +13,13 @@ public class Drink : IDrink
     public int CurrentStationIndex { get; set; } = 0;
     public bool IsComplete { get; set; } = false;
 
+    private IGameLogger logger;
+
+    private void Awake()
+    {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+    }
+
     public void AddSyrup(string syrup)
     {
         if (SyrupCounts.ContainsKey(syrup))
@@ -19,7 +27,7 @@ public class Drink : IDrink
         else
             SyrupCounts[syrup] = 1;
 
-        UnityEngine.Debug.Log($"[Drink] Syrup counts: {string.Join(", ", SyrupCounts.Select(kvp => $"{kvp.Key}={kvp.Value}"))}");
+        logger.Log($"[Drink] Syrup counts: {string.Join(", ", SyrupCounts.Select(kvp => $"{kvp.Key}={kvp.Value}"))}");
     }
 
     public void AddMilk(MilkType milk) => Milk = milk;

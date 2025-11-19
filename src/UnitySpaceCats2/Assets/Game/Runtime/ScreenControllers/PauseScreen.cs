@@ -13,25 +13,25 @@ public class PauseScreen : ScreenController
         if (resumeButton != null)
         {
             resumeButton.onClick.AddListener(OnResume);
-            Debug.Log("PauseScreen: Resume button ready");
+            logger.Log("PauseScreen: Resume button ready");
         }
         
         if (mainMenuButton != null)
         {
             mainMenuButton.onClick.AddListener(OnMainMenu);
-            Debug.Log("PauseScreen: Main Menu button ready");
+            logger.Log("PauseScreen: Main Menu button ready");
         }
     }
 
     private void OnResume()
     {
-        Debug.Log("Resuming game");
+        logger.Log("Resuming game");
         GameStateManager.Instance.GoToPreviousState();
     }
 
     private void OnMainMenu()
     {
-        Debug.Log("Returning to main menu");
+        logger.Log("Returning to main menu");
         GameStateManager.Instance.ClearHistory();
         GameStateManager.Instance.ChangeState(GameStateType.Title);
     }

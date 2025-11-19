@@ -9,6 +9,13 @@ public class DrinkServices
     
     public GameObject CurrentDrinkObject { get; private set; }
 
+    private IGameLogger logger;
+
+    private void Awake()
+    {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+    }
+
     public DrinkServices(List<IDrinkStation> stationPipeline)
     {
         stations = stationPipeline;

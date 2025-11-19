@@ -32,7 +32,7 @@ public class TemperatureSelectionScreen : ScreenController
 
     private void OnHotSelected()
     {
-        Debug.Log("TempScreen: HOT drink selected");
+        logger.Log("TempScreen: HOT drink selected");
 
         var drinkServices = ServiceResolver.Resolve<DrinkServices>();
         var drink = drinkServices.CreateNewDrink();
@@ -42,7 +42,7 @@ public class TemperatureSelectionScreen : ScreenController
         {
             hotDrinkObject.SetActive(true);
             hotDrinkObject.transform.position = hotDrinkSpawnPoint.position;
-            Debug.Log($"TempScreen: Hot drink activated at {hotDrinkSpawnPoint.position}");
+            logger.Log($"TempScreen: Hot drink activated at {hotDrinkSpawnPoint.position}");
         }
         
         cupAnimator.SelectHot(hotDrinkSpawnPoint, hotDrinkObject);
@@ -53,7 +53,7 @@ public class TemperatureSelectionScreen : ScreenController
 
     private void OnColdSelected()
     {
-        Debug.Log("TempScreen: COLD drink selected");
+        logger.Log("TempScreen: COLD drink selected");
         var drinkServices = ServiceResolver.Resolve<DrinkServices>();
         var drink = drinkServices.CreateNewDrink();
         drink.Temp = Temperature.Iced;
@@ -62,13 +62,13 @@ public class TemperatureSelectionScreen : ScreenController
         {
             coldDrinkObject.SetActive(true);
             coldDrinkObject.transform.position = coldDrinkSpawnPoint.position;
-            Debug.Log($"TempScreen: Cold drink activated at {coldDrinkSpawnPoint.position}");
+            logger.Log($"TempScreen: Cold drink activated at {coldDrinkSpawnPoint.position}");
         }
         
-        Debug.Log("TempScreen: Calling cupAnimator.SelectCold()");
+        logger.Log("TempScreen: Calling cupAnimator.SelectCold()");
         cupAnimator.SelectCold(coldDrinkSpawnPoint, coldDrinkObject);
         
-        Debug.Log("TempScreen: Marking station completed & switching to PlayingIceGame");
+        logger.Log("TempScreen: Marking station completed & switching to PlayingIceGame");
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.ChoosingTemperature);
         GameStateManager.Instance.ChangeState(GameStateType.PlayingIceGame);
     }

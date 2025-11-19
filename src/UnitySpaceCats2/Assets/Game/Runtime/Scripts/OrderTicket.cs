@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Game.Runtime;
 
 [System.Serializable]
 public struct OrderTicketData
@@ -66,6 +67,13 @@ public class OrderTicket : MonoBehaviour
     public RectTransform contentRoot;
     
     public int OrderNumber { get; private set; }
+
+    private IGameLogger logger;
+
+    private void Awake()
+    {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+    }
 
     public void Setup(int orderNumber, OrderTicketData data)
     {

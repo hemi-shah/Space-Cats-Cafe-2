@@ -17,25 +17,25 @@ public class MilkStationScreen : ScreenController
         if (oatMilkButton != null)
         {
             oatMilkButton.onClick.AddListener(() => OnMilkSelected("Oat Milk"));
-            Debug.Log("MilkScreen: Oat Milk button ready");
+            logger.Log("MilkScreen: Oat Milk button ready");
         }
         
         if (almondMilkButton != null)
         {
             almondMilkButton.onClick.AddListener(() => OnMilkSelected("Almond Milk"));
-            Debug.Log("MilkScreen: Almond Milk button ready");
+            logger.Log("MilkScreen: Almond Milk button ready");
         }
         
         if (wholeMilkButton != null)
         {
             wholeMilkButton.onClick.AddListener(() => OnMilkSelected("Whole Milk"));
-            Debug.Log("MilkScreen: Whole Milk button ready");
+            logger.Log("MilkScreen: Whole Milk button ready");
         }
         
         if (skipButton != null)
         {
             skipButton.onClick.AddListener(OnSkip);
-            Debug.Log("MilkScreen: Skip button ready");
+            logger.Log("MilkScreen: Skip button ready");
         }
     }
 
@@ -48,14 +48,14 @@ public class MilkStationScreen : ScreenController
     private void OnMilkSelected(string milkType)
     {
         selectedMilk = milkType;
-        Debug.Log($"{milkType} selected!");
+        logger.Log($"{milkType} selected!");
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.ChoosingMilk);
         GameStateManager.Instance.ChangeState(GameStateType.PumpingSyrup);
     }
 
     private void OnSkip()
     {
-        Debug.Log("Milk skipped");
+        logger.Log("Milk skipped");
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.ChoosingMilk);
         GameStateManager.Instance.ChangeState(GameStateType.PumpingSyrup);
     }

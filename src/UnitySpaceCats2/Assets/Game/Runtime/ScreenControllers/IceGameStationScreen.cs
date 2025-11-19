@@ -14,7 +14,7 @@ public class IceGameStationScreen : ScreenController
         if (completeButton != null)
         {
             completeButton.onClick.AddListener(OnIceGameComplete);
-            Debug.Log("IceGameStation: Complete button ready");
+            logger.Log("IceGameStation: Complete button ready");
         }
     }
 
@@ -27,13 +27,13 @@ public class IceGameStationScreen : ScreenController
 
         if (drink == null)
         {
-            Debug.LogError("No current drink found!");
+            logger.LogError("No current drink found!");
             return;
         }
 
         if (drink.Temp == Temperature.Hot)
         {
-            Debug.Log("Hot drink — skipping IceGameStation!");
+            logger.Log("Hot drink — skipping IceGameStation!");
 
             // Hide this screen immediately
             gameObject.SetActive(false);
@@ -52,7 +52,7 @@ public class IceGameStationScreen : ScreenController
 
     private void OnIceGameComplete()
     {
-        Debug.Log("Ice game completed!");
+        logger.Log("Ice game completed!");
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.PlayingIceGame);
         GameStateManager.Instance.ChangeState(GameStateType.ChoosingMilk);
     }

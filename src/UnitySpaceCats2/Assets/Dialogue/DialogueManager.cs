@@ -1,4 +1,5 @@
 using UnityEngine;
+using Game.Runtime;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -11,8 +12,12 @@ public class DialogueManager : MonoBehaviour
     
     [SerializeField] private CatCatalog catCatalog;
 
+    private IGameLogger logger;
+
     private void Awake()
     {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+        
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -31,7 +36,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (catCatalog == null)
         {
-            Debug.LogError("DialogueManager: CatCatalog is not assigned!");
+            logger.LogError("DialogueManager: CatCatalog is not assigned!");
             return;
         }
 
@@ -40,7 +45,7 @@ public class DialogueManager : MonoBehaviour
         {
             cat.dialoguePath = GetRandomDialoguePath();
             cat.counter = 0; // Reset counter
-            Debug.Log($"Assigned dialogue path {cat.dialoguePath} to {cat.catName}");
+            logger.Log($"Assigned dialogue path {cat.dialoguePath} to {cat.catName}");
         }
 
         // Assign dialogue paths to customer cats and reset counters
@@ -48,7 +53,7 @@ public class DialogueManager : MonoBehaviour
         {
             cat.dialoguePath = GetRandomDialoguePath();
             cat.counter = 0; // Reset counter
-            Debug.Log($"Assigned dialogue path {cat.dialoguePath} to {cat.catName}");
+            logger.Log($"Assigned dialogue path {cat.dialoguePath} to {cat.catName}");
         }
     }
 
@@ -67,7 +72,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (cat == null)
         {
-            Debug.LogError("DialogueManager: Cat is null!");
+            logger.LogError("DialogueManager: Cat is null!");
             return null;
         }
 
@@ -83,7 +88,7 @@ public class DialogueManager : MonoBehaviour
 
         if (dialogueData == null)
         {
-            Debug.LogError($"DialogueManager: No dialogue data for path {cat.dialoguePath}");
+            logger.LogError($"DialogueManager: No dialogue data for path {cat.dialoguePath}");
             return null;
         }
 
@@ -116,7 +121,7 @@ public class DialogueManager : MonoBehaviour
 
         if (dialogue == null)
         {
-            Debug.LogError("DialogueManager: No dialogue found!");
+            logger.LogError("DialogueManager: No dialogue found!");
         }
 
         return dialogue;
@@ -141,6 +146,6 @@ public class DialogueManager : MonoBehaviour
             cat.counter = 0;
         }
         
-        Debug.Log("All cat dialogue paths and counters have been reset!");
+        logger.Log("All cat dialogue paths and counters have been reset!");
     }
 }

@@ -20,6 +20,13 @@ public class IceSpawner : MonoBehaviour
     private List<GameObject> activeIceCubes = new List<GameObject>();
     private bool drinkInitialized = false;
 
+    private IGameLogger logger;
+
+    private void Awake()
+    {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+    }
+
     void Start()
     {
         iceButton.onClick.AddListener(SpawnCube);
@@ -49,7 +56,7 @@ public class IceSpawner : MonoBehaviour
                 if (drink.IceLevel < 4)
                 {
                     drink.IceLevel++;
-                    Debug.Log($"Ice level: {drink.IceLevel}");
+                    logger.Log($"Ice level: {drink.IceLevel}");
                     UpdateDrinkImage();
                 }
             }
@@ -63,7 +70,7 @@ public class IceSpawner : MonoBehaviour
         {
             drink = drinkServices.CurrentDrink;
             drinkInitialized = true;
-            Debug.Log($"Ice level: {drink.IceLevel}");
+            logger.Log($"Ice level: {drink.IceLevel}");
         }
     }
 
@@ -71,7 +78,7 @@ public class IceSpawner : MonoBehaviour
     {
         if (drinkSprite == null)
         {
-            Debug.LogError("Cannot update drink image: drinkSprite is null!");
+            logger.LogError("Cannot update drink image: drinkSprite is null!");
             return;
         }
 
@@ -84,7 +91,7 @@ public class IceSpawner : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"No sprite assigned for ice level {level}");
+            logger.LogError($"No sprite assigned for ice level {level}");
         }
     }
 

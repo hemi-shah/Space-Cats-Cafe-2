@@ -26,6 +26,13 @@ public class SyrupStation : MonoBehaviour
 
     private IDrink currentDrink;
 
+    private IGameLogger logger;
+
+    private void Awake()
+    {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+    }
+
     private void OnEnable()
     {
         if (currentDrink == null)
@@ -34,9 +41,9 @@ public class SyrupStation : MonoBehaviour
             currentDrink = drinkServices.CurrentDrink;
 
             if (currentDrink != null)
-                Debug.Log("[SyrupStation] Assigned currentDrink on enable.");
+                logger.Log("[SyrupStation] Assigned currentDrink on enable.");
             else
-                Debug.LogError("[SyrupStation] CurrentDrink is null! Did Temperature Station create it?");
+                logger.LogError("[SyrupStation] CurrentDrink is null! Did Temperature Station create it?");
         }
 
         SetupButtons();
@@ -67,14 +74,14 @@ public class SyrupStation : MonoBehaviour
     {
         if (currentDrink == null)
         {
-            Debug.LogError("[SyrupStation] Cannot pump syrup. currentDrink is null.");
+            logger.LogError("[SyrupStation] Cannot pump syrup. currentDrink is null.");
             return;
         }
 
         currentDrink.AddSyrup(syrup);
 
         var countsLog = string.Join(", ", currentDrink.SyrupCounts.Select(kvp => $"{kvp.Key}={kvp.Value}"));
-        Debug.Log($"[SyrupStation] Pumped {syrup}. Syrup counts: {countsLog}");
+        logger.Log($"[SyrupStation] Pumped {syrup}. Syrup counts: {countsLog}");
 
         StartCoroutine(PumpRoutine(syrup));
     }
@@ -106,11 +113,11 @@ public class SyrupStation : MonoBehaviour
                 break;
 
             default:
-                Debug.LogError($"[SyrupStation] Unknown syrup: {syrup}");
+                logger.LogError($"[SyrupStation] Unknown syrup: {syrup}");
                 yield break;
         }
 
-        Debug.Log($"[SyrupStation] Pumping {syrup}...");
+        logger.Log($"[SyrupStation] Pumping {syrup}...");
 
         // Hide bottle + disable button
         if (bottleImage != null) bottleImage.enabled = false;
@@ -121,17 +128,17 @@ public class SyrupStation : MonoBehaviour
         {
             GameObject pumped = Instantiate(pumpedPrefab, pumpedSpawnPoint.position, pumpedSpawnPoint.rotation);
             pumped.transform.SetParent(pumpedSpawnPoint.parent, worldPositionStays: true);
-            Debug.Log($"[SyrupStation] Spawned pumped sprite for {syrup}");
+            logger.Log($"[SyrupStation] Spawned pumped sprite for {syrup}");
 
             yield return new WaitForSeconds(1f);
 
             Destroy(pumped);
-            Debug.Log($"[SyrupStation] Destroyed pumped sprite for {syrup}");
+            logger.Log($"[SyrupStation] Destroyed pumped sprite for {syrup}");
         }
 
         // Restore bottle + button
         if (bottleImage != null) bottleImage.enabled = true;
         if (bottleButton != null) bottleButton.interactable = true;
-        Debug.Log($"[SyrupStation] {syrup} bottle restored and button re-enabled");
+        logger.Log($"[SyrupStation] {syrup} bottle restored and button re-enabled");
     }
 }

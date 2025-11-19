@@ -17,7 +17,7 @@ namespace Game.Runtime
             var container = new MiniContainer();
 
             var logger = new UnityGameLogger();
-            container.RegisterSingletonInstance<IGameLog>(logger);
+            container.RegisterSingletonInstance<IGameLogger>(logger);
 
             var stations = new List<IDrinkStation>
             {

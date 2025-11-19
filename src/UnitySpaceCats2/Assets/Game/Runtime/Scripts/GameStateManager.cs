@@ -19,8 +19,12 @@ public class GameStateManager : MonoBehaviour
     // Optional: track previous state
     public GameStateType PreviousState { get; private set; }
 
+    private IGameLogger logger;
+
     void Awake()
     {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+        
         // Singleton pattern
         if (Instance != null && Instance != this)
         {
@@ -62,11 +66,11 @@ public class GameStateManager : MonoBehaviour
 
             if (drink == null)
             {
-                Debug.LogError("[StateGuard] CurrentDrink is null when trying to enter Ice Game.");
+                logger.LogError("[StateGuard] CurrentDrink is null when trying to enter Ice Game.");
             }
             else if (drink.Temp == Temperature.Hot)
             {
-                Debug.Log("[StateGuard] Hot drink — skipping IceGame state.");
+                logger.Log("[StateGuard] Hot drink — skipping IceGame state.");
 
                 NavigationBar.Instance?.MarkStationCompleted(GameStateType.PlayingIceGame);
                 ChangeState(GameStateType.ChoosingMilk);
@@ -77,7 +81,7 @@ public class GameStateManager : MonoBehaviour
         // Existing logic
         if (CurrentState.Value == newState)
         {
-            Debug.LogWarning($"Already in state: {newState}");
+            logger.LogWarning($"Already in state: {newState}");
             return;
         }
 
@@ -100,7 +104,7 @@ public class GameStateManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No previous state in history");
+            logger.LogWarning("No previous state in history");
         }
     }
 
@@ -117,7 +121,7 @@ public class GameStateManager : MonoBehaviour
     /// </summary>
     private void OnStateChanged(GameStateType newState)
     {
-        Debug.Log($"State Changed: {PreviousState} -> {newState}");
+        logger.Log($"State Changed: {PreviousState} -> {newState}");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ public class OrderingScreen : ScreenController
         if (takeOrderButton != null)
         {
             takeOrderButton.onClick.AddListener(OnTakeOrder);
-            Debug.Log("OrderingScreen: Button ready");
+            logger.Log("OrderingScreen: Button ready");
         }
         */
     }
@@ -36,7 +36,7 @@ public class OrderingScreen : ScreenController
             if (orderDetailsText != null)
             {
                 orderDetailsText.text = "A cute cat approaches!\n\nReady to take their order?";
-                Debug.Log("Order for cat: " + cat.catName + ".");
+                logger.Log("Order for cat: " + cat.catName + ".");
                 
             }
 
@@ -49,7 +49,7 @@ public class OrderingScreen : ScreenController
         }
         else
         {
-            Debug.LogWarning("OrderingScreen: no selected cat found in OrderManager!");
+            logger.LogWarning("OrderingScreen: no selected cat found in OrderManager!");
             if (orderDetailsText != null)
                 orderDetailsText.text = "No cat selected";
             
@@ -59,7 +59,7 @@ public class OrderingScreen : ScreenController
 
     private void OnTakeOrder()
     {
-        Debug.Log("Order taken from cat!");
+        logger.Log("Order taken from cat!");
         GameStateManager.Instance.ChangeState(GameStateType.OrderTicketReceived);
     }
 }

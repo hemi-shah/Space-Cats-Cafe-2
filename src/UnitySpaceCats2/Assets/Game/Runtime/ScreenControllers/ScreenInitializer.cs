@@ -1,4 +1,5 @@
 using UnityEngine;
+using Game.Runtime;
 
 /// <summary>
 /// Ensures all screen content is set up properly before the game starts
@@ -9,14 +10,18 @@ public class ScreenInitializer : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private bool logInitialization = true;
+
+    private IGameLogger logger;
     
     void Awake()
     {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+        
         if (logInitialization)
         {
-            Debug.Log("═══════════════════════════════════════");
-            Debug.Log("<color=cyan>[ScreenInitializer] Setting up screens...</color>");
-            Debug.Log("═══════════════════════════════════════");
+            logger.Log("═══════════════════════════════════════");
+            logger.Log("<color=cyan>[ScreenInitializer] Setting up screens...</color>");
+            logger.Log("═══════════════════════════════════════");
         }
         
         // Find all ScreenControllers
@@ -24,7 +29,7 @@ public class ScreenInitializer : MonoBehaviour
         
         if (allScreens.Length == 0)
         {
-            Debug.LogWarning("[ScreenInitializer] No ScreenControllers found!");
+            logger.LogWarning("[ScreenInitializer] No ScreenControllers found!");
             return;
         }
         
@@ -36,7 +41,7 @@ public class ScreenInitializer : MonoBehaviour
                 screen.gameObject.SetActive(true);
                 if (logInitialization)
                 {
-                    Debug.Log($"  • Enabled {screen.gameObject.name} GameObject");
+                    logger.Log($"  • Enabled {screen.gameObject.name} GameObject");
                 }
             }
             
@@ -55,7 +60,7 @@ public class ScreenInitializer : MonoBehaviour
                     root.SetActive(true);
                     if (logInitialization)
                     {
-                        Debug.Log($"  • Enabled {root.name} content (will be hidden by ScreenController if needed)");
+                        logger.Log($"  • Enabled {root.name} content (will be hidden by ScreenController if needed)");
                     }
                 }
             }
@@ -63,8 +68,8 @@ public class ScreenInitializer : MonoBehaviour
         
         if (logInitialization)
         {
-            Debug.Log($"<color=green>[ScreenInitializer] Prepared {allScreens.Length} screens</color>");
-            Debug.Log("═══════════════════════════════════════");
+            logger.Log($"<color=green>[ScreenInitializer] Prepared {allScreens.Length} screens</color>");
+            logger.Log("═══════════════════════════════════════");
         }
     }
 }
