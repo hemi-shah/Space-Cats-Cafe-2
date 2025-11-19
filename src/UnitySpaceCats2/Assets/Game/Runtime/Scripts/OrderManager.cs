@@ -24,10 +24,16 @@ public class OrderManager : MonoBehaviour
     
     private List<Action<OrderTicketData, Drink>> listeners = new();
     
+    public bool isDrinkCompleted { get; private set; }
+
+    private IGameLogger logger;
+    
     // list of stuff to notify
     
     private void Awake()
     {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+        
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -44,6 +50,11 @@ public class OrderManager : MonoBehaviour
         generator.milkChance = milkChance;
         generator.whippedCreamChance = whippedCreamChance;
         generator.drizzleChance = drizzleChance;
+    }
+
+    public void MarkDrinkCompleted(bool completed)
+    {
+        isDrinkCompleted = completed;
     }
 
     public void SetSelectedCat(CatDefinition cat)
@@ -88,13 +99,16 @@ public class OrderManager : MonoBehaviour
 
         if (finishedDrink != null)
         {
+            isDrinkCompleted = true;
             CompleteOrder(finishedDrink);
+            //navigation bar thing maybe if no next order button but probably ignore
         }
         else
         {
-            Debug.LogWarning("No drink found (OrderManager FinishCurrentDrink())");
+            logger.LogWarning("No drink found (OrderManager FinishCurrentDrink())");
         }
 
+        /*
         if (CurrentDrink != null)
         {
             GameObject.Destroy(CurrentDrink);
@@ -102,6 +116,7 @@ public class OrderManager : MonoBehaviour
         }
         
         ClearSelectedCat();
+        */
     }
 
     // TODO: Call this when they click the drink is done
@@ -131,7 +146,7 @@ public class OrderManager : MonoBehaviour
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Listener failed: {ex}");
+                logger.LogError($"Listener failed: {ex}");
             }
         }
     }

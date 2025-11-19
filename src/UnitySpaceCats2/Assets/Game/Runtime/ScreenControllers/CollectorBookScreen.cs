@@ -13,7 +13,7 @@ public class CollectorBookScreen : ScreenController
         if (closeButton != null)
         {
             closeButton.onClick.AddListener(OnClose);
-            Debug.Log("CollectorBookScreen: Close button ready");
+            logger.Log("CollectorBookScreen: Close button ready");
         }
     }
 
@@ -28,7 +28,7 @@ public class CollectorBookScreen : ScreenController
 
     private void OnClose()
     {
-        Debug.Log("Closing collector book");
+        logger.Log("Closing collector book");
         GameStateManager.Instance.ChangeState(GameStateType.WaitingforCustomers);
     }
 }

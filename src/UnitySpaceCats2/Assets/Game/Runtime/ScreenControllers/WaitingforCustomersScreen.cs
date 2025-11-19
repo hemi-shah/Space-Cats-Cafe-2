@@ -14,37 +14,37 @@ public class WaitingForCustomersScreen : ScreenController
         if (pauseButton != null)
         {
             pauseButton.onClick.AddListener(OnPauseClicked);
-            Debug.Log("WaitingScreen: Pause button ready");
+            logger.Log("WaitingScreen: Pause button ready");
         }
         
         if (catsEncounteredButton != null)
         {
             catsEncounteredButton.onClick.AddListener(OnCatsClicked);
-            Debug.Log("WaitingScreen: Cats Encountered button ready");
+            logger.Log("WaitingScreen: Cats Encountered button ready");
         }
         
         if (takeOrderButton != null)
         {
             takeOrderButton.onClick.AddListener(OnTakeOrder);
-            Debug.Log("WaitingScreen: Take Order button ready");
+            logger.Log("WaitingScreen: Take Order button ready");
         }
     }
 
     private void OnPauseClicked()
     {
-        Debug.Log("Pause clicked!");
+        logger.Log("Pause clicked!");
         GameStateManager.Instance.ChangeState(GameStateType.Pause);
     }
 
     private void OnCatsClicked()
     {
-        Debug.Log("Cats Encountered clicked!");
+        logger.Log("Cats Encountered clicked!");
         GameStateManager.Instance.ChangeState(GameStateType.ViewingCollectedCats);
     }
 
     private void OnTakeOrder()
     {
-        Debug.Log("Taking order from cat!");
+        logger.Log("Taking order from cat!");
         GameStateManager.Instance.ChangeState(GameStateType.TakingOrder);
     }
 }

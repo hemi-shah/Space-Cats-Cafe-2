@@ -6,6 +6,13 @@ public class DrinkObjectUI : MonoBehaviour
     public IDrink Drink { get; private set; }
     [SerializeField] private SpriteRenderer renderer;
 
+    private IGameLogger logger;
+
+    private void Awake()
+    {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+    }
+
     private void Start()
     {
         Drink = ServiceResolver.Resolve<DrinkServices>().CurrentDrink;

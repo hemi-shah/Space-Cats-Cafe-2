@@ -12,13 +12,13 @@ public class TitleScreen : ScreenController
         if (startButton != null)
         {
             startButton.onClick.AddListener(OnStartClicked);
-            Debug.Log("TitleScreen: Start button ready");
+            logger.Log("TitleScreen: Start button ready");
         }
     }
 
     private void OnStartClicked()
     {
-        Debug.Log("Start clicked!");
+        logger.Log("Start clicked!");
         GameStateManager.Instance.ChangeState(GameStateType.ChoosingCat);
     }
 }

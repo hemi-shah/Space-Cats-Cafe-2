@@ -1,22 +1,34 @@
 using Game399.Shared.Diagnostics;
+using System;
+using UnityEngine;
 
 namespace Game.Runtime
 {
-    public class UnityGameLogger : IGameLog
+    public class UnityGameLogger : IGameLogger
     {
-        public void Info(string message)
+        public void Log(string message)
         {
-            UnityEngine.Debug.Log(message);
+            Debug.Log(message);
         }
 
-        public void Warn(string message)
+        public void LogWarning(string message)
         {
-            UnityEngine.Debug.LogWarning(message);
+            Debug.LogWarning(message);
         }
 
-        public void Error(string message)
+        public void LogError(string message)
         {
-            UnityEngine.Debug.LogError(message);
+            Debug.LogError(message);
+        }
+
+        public void LogException(Exception exception)
+        {
+            Debug.LogException(exception);
+        }
+
+        public void LogFormat(string format, params object[] args)
+        {
+            Debug.LogFormat(format, args);
         }
     }
 }

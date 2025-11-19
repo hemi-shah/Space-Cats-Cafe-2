@@ -1,3 +1,4 @@
+using Game.Runtime;
 using UnityEngine;
 
 public class CupAnimator : MonoBehaviour
@@ -6,6 +7,13 @@ public class CupAnimator : MonoBehaviour
     [SerializeField] private RectTransform coldCup;
     [SerializeField] private float slideDistance = 1000f;
     [SerializeField] private float slideDuration = 0.4f;
+
+    private IGameLogger logger;
+
+    private void Awake()
+    {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+    }
 
     public void SelectHot(Transform spawnPoint, GameObject drinkObject)
     {
@@ -32,11 +40,11 @@ public class CupAnimator : MonoBehaviour
             drinkObject.transform.position = spawnPoint.position;
             drinkObject.transform.localScale = Vector3.one;
             
-            Debug.Log($"CupAnimator: Enabled drink at {spawnPoint.position}");
+            logger.Log($"CupAnimator: Enabled drink at {spawnPoint.position}");
         }
         else
         {
-            Debug.LogError("CupAnimator: drinkObject is null!");
+            logger.LogError("CupAnimator: drinkObject is null!");
         }
     }
 }

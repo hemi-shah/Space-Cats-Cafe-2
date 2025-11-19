@@ -61,17 +61,17 @@ public class RatingStationScreen : ScreenController
         }
         else
         {
-            Debug.LogWarning("RatingStation: no selected cat found in OrderManager!");
+            logger.LogWarning("RatingStation: no selected cat found in OrderManager!");
         }
 
         currentRating = drinkVerifier.lastRating;
-        Debug.Log("Rating: " + currentRating);
+        logger.Log("Rating: " + currentRating);
 
         // Increment cat counter for good drinks (4-5 stars)
         if (currentRating >= 4 && currentCat != null)
         {
             currentCat.counter++;
-            Debug.Log($"Cat {currentCat.catName} counter increased to: {currentCat.counter}");
+            logger.Log($"Cat {currentCat.catName} counter increased to: {currentCat.counter}");
         }
 
         // Get and display dialogue
@@ -222,7 +222,7 @@ public class RatingStationScreen : ScreenController
 
     private void TriggerRemake()
     {
-        Debug.Log("Triggering drink remake...");
+        logger.Log("Triggering drink remake...");
         // Go back to drink making state
         GameStateManager.Instance.ChangeState(GameStateType.ChoosingTemperature);
     }
@@ -260,13 +260,15 @@ public class RatingStationScreen : ScreenController
 
     private void OnNextOrder()
     {
-        Debug.Log("Next order!");
+        logger.Log("Next order!");
         
         // Remove the current cat unless there's a remake option
         if (currentDialogue != null && !currentDialogue.hasRemakeOption && currentCat != null)
         {
             RemoveCurrentCat();
         }
+        
+        OrderManager.Instance.MarkDrinkCompleted(true);
         
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.ServingDrinks);
         GameStateManager.Instance.ClearHistory();
@@ -275,16 +277,32 @@ public class RatingStationScreen : ScreenController
 
     private void RemoveCurrentCat()
     {
+        if (catImage != null)
+        {
+            catImage.overrideSprite = null;
+            catImage.sprite = null;
+            logger.Log("Removing cat image");
+            catImage.enabled = false;
+        }
+
+        if (currentCat == null)
+            return;
+        
         // Find and destroy the cat GameObject in the scene
-        CatView[] allCatViews = FindObjectsOfType<CatView>();
+        CatView[] allCatViews = FindObjectsOfType<CatView>(true);
         foreach (CatView catView in allCatViews)
         {
             if (catView.GetCatDefinition() == currentCat)
             {
-                Debug.Log($"Removing cat: {currentCat.catName}");
+                logger.Log($"Removing cat: {currentCat.catName}");
+                //currentCat = null;
+                //logger.Log($"Current cat: {currentCat.catName}");
                 Destroy(catView.gameObject);
                 break;
             }
         }
+        
+        currentCat = null;
+        OrderManager.Instance.ClearSelectedCat();
     }
 }
