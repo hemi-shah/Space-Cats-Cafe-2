@@ -32,6 +32,13 @@ public class MilkStation : MonoBehaviour
 
     private IDrink currentDrink;
 
+    private IGameLogger logger;
+
+    private void Awake()
+    {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+    }
+
     private void OnEnable()
     {
         if (currentDrink == null)
@@ -40,9 +47,9 @@ public class MilkStation : MonoBehaviour
             currentDrink = drinkServices.CurrentDrink;
 
             if (currentDrink != null)
-                Debug.Log("[MilkStation] Assigned currentDrink on enable.");
+                logger.Log("[MilkStation] Assigned currentDrink on enable.");
             else
-                Debug.LogError("[MilkStation] CurrentDrink is null! Did Temperature Station create it?");
+                logger.LogError("[MilkStation] CurrentDrink is null! Did Temperature Station create it?");
         }
 
         SetupButtons();
@@ -73,7 +80,7 @@ public class MilkStation : MonoBehaviour
     {
         if (currentDrink == null)
         {
-            Debug.LogError("[MilkStation] Cannot pour milk. currentDrink is null.");
+            logger.LogError("[MilkStation] Cannot pour milk. currentDrink is null.");
             return;
         }
 
@@ -88,7 +95,7 @@ public class MilkStation : MonoBehaviour
 
         currentDrink.AddMilk(milkType);
 
-        Debug.Log($"[MilkStation] Poured {milk}. Enum set to: {milkType}");
+        logger.Log($"[MilkStation] Poured {milk}. Enum set to: {milkType}");
 
         StartCoroutine(PourRoutine(milk));
     }
@@ -120,11 +127,11 @@ public class MilkStation : MonoBehaviour
                 break;
 
             default:
-                Debug.LogError($"[MilkStation] Unknown milk type: {milk}");
+                logger.LogError($"[MilkStation] Unknown milk type: {milk}");
                 yield break;
         }
 
-        Debug.Log($"[MilkStation] Pouring {milk}...");
+        logger.Log($"[MilkStation] Pouring {milk}...");
 
         if (bottleImage != null) bottleImage.enabled = false;
         if (bottleButton != null) bottleButton.interactable = false;
@@ -134,12 +141,12 @@ public class MilkStation : MonoBehaviour
             GameObject pourFx = Instantiate(pourPrefab, pourSpawnPoint.position, pourSpawnPoint.rotation);
             pourFx.transform.SetParent(pourSpawnPoint.parent, worldPositionStays: true);
 
-            Debug.Log($"[MilkStation] Spawned pour sprite for {milk}");
+            logger.Log($"[MilkStation] Spawned pour sprite for {milk}");
 
             yield return new WaitForSeconds(1f);
 
             Destroy(pourFx);
-            Debug.Log($"[MilkStation] Destroyed pour sprite for {milk}");
+            logger.Log($"[MilkStation] Destroyed pour sprite for {milk}");
         }
 
         // Update the drink sprite after pouring
@@ -148,14 +155,14 @@ public class MilkStation : MonoBehaviour
         if (bottleImage != null) bottleImage.enabled = true;
         if (bottleButton != null) bottleButton.interactable = true;
 
-        Debug.Log($"[MilkStation] {milk} bottle restored and button re-enabled");
+        logger.Log($"[MilkStation] {milk} bottle restored and button re-enabled");
     }
 
     private void UpdateDrinkSprite()
     {
         if (currentDrink == null)
         {
-            Debug.LogError("[MilkStation] Cannot update sprite - currentDrink is null");
+            logger.LogError("[MilkStation] Cannot update sprite - currentDrink is null");
             return;
         }
 
@@ -164,11 +171,11 @@ public class MilkStation : MonoBehaviour
             if (hotDrinkSprite != null && hotMilkSprite != null)
             {
                 hotDrinkSprite.sprite = hotMilkSprite;
-                Debug.Log("[MilkStation] Updated hot drink sprite to milk");
+                logger.Log("[MilkStation] Updated hot drink sprite to milk");
             }
             else
             {
-                Debug.LogError("[MilkStation] Hot drink sprite or hot milk sprite not assigned!");
+                logger.LogError("[MilkStation] Hot drink sprite or hot milk sprite not assigned!");
             }
         }
         else if (currentDrink.Temp == Temperature.Iced)
@@ -181,16 +188,16 @@ public class MilkStation : MonoBehaviour
                 if (milkSprite != null)
                 {
                     icedDrinkSprite.sprite = milkSprite;
-                    Debug.Log($"[MilkStation] Updated iced drink sprite to milk with ice level {iceLevel}");
+                    logger.Log($"[MilkStation] Updated iced drink sprite to milk with ice level {iceLevel}");
                 }
                 else
                 {
-                    Debug.LogError($"[MilkStation] No sprite assigned for ice level {iceLevel}");
+                    logger.LogError($"[MilkStation] No sprite assigned for ice level {iceLevel}");
                 }
             }
             else
             {
-                Debug.LogError("[MilkStation] Iced drink sprite or iced milk sprites array not assigned!");
+                logger.LogError("[MilkStation] Iced drink sprite or iced milk sprites array not assigned!");
             }
         }
     }

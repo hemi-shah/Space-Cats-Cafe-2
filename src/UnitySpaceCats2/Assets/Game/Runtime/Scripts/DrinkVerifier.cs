@@ -22,7 +22,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
     {
         if (orderTicket.Equals(default(OrderTicketData)) || drink == null)
         {
-            Debug.LogWarning("[DrinkVerifier] Missing order or drink");
+            logger.LogWarning("[DrinkVerifier] Missing order or drink");
             lastRating = 1;
             return;
         }
@@ -34,7 +34,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
         if (drinkIsHot == orderTicket.isHot)
         {
             points++;
-            Debug.Log("[DrinkVerifier] Correct temperature");
+            logger.Log("[DrinkVerifier] Correct temperature");
         }
 
         // Ice
@@ -43,13 +43,13 @@ public class DrinkVerifier : ObserverMonoBehaviour
             if (drink.IceLevel == orderTicket.numberOfIceCubes)
             {
                 points++;
-                Debug.Log("[DrinkVerifier] Correct ice count");
+                logger.Log("[DrinkVerifier] Correct ice count");
             }
         }
         else if (drink.IceLevel == 0)
         {
             points++;
-            Debug.Log("[DrinkVerifier] Correct ice for hot drink");
+            logger.Log("[DrinkVerifier] Correct ice for hot drink");
         }
 
         // Syrup
@@ -57,7 +57,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
         {
             foreach (var kvp in drink.SyrupCounts)
             {
-                Debug.Log($"[DrinkVerifier] Syrup {kvp.Key}: {kvp.Value} pumps");
+                logger.Log($"[DrinkVerifier] Syrup {kvp.Key}: {kvp.Value} pumps");
             }
         }
 
@@ -69,7 +69,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
                 count > 0)
             {
                 points++;
-                Debug.Log($"[DrinkVerifier] Correct syrup: {syrupName}, pumps: {count}");
+                logger.Log($"[DrinkVerifier] Correct syrup: {syrupName}, pumps: {count}");
             }
         }
         else
@@ -79,7 +79,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
             if (!anySyrup)
             {
                 points++;
-                Debug.Log("[DrinkVerifier] Correct syrup (none)");
+                logger.Log("[DrinkVerifier] Correct syrup (none)");
             }
         }
 
@@ -87,7 +87,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
         if (drink.Milk == orderTicket.milk)
         {
             points++;
-            Debug.Log("[DrinkVerifier] Correct milk");
+            logger.Log("[DrinkVerifier] Correct milk");
         }
 
         // Toppings
@@ -106,7 +106,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
             _ => throw new InvalidOperationException($"Invalid points: {points}")
         };
 
-        Debug.Log($"[DrinkVerifier] Total points: {points}, Rating: {lastRating}");
+        logger.Log($"[DrinkVerifier] Total points: {points}, Rating: {lastRating}");
     }
 
     private int CheckTopping(Drink drink, bool orderHas, string toppingName, string logMessage)
@@ -114,7 +114,7 @@ public class DrinkVerifier : ObserverMonoBehaviour
         bool drinkHas = drink.Toppings.Exists(t => string.Equals(t, toppingName, StringComparison.OrdinalIgnoreCase));
         if (drinkHas == orderHas)
         {
-            Debug.Log(logMessage);
+            logger.Log(logMessage);
             return 1;
         }
         return 0;

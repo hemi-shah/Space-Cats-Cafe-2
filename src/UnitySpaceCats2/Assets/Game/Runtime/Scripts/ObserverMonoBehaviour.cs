@@ -5,7 +5,7 @@ namespace Game.Runtime
 {
     public abstract class ObserverMonoBehaviour : MonoBehaviour
     {
-        private static IGameLog Log => ServiceResolver.Resolve<IGameLog>();
+        protected static IGameLogger logger => ServiceResolver.Resolve<IGameLogger>();
         
         private bool _didCallStart;
         private bool _didSubscribe;
@@ -37,7 +37,7 @@ namespace Game.Runtime
             if (!_didSubscribe && _didCallStart)
             {
                 _didSubscribe = true;
-                Log.Info(GetType().Name + "." + nameof(TrySubscribe));
+                logger.Log(GetType().Name + "." + nameof(TrySubscribe));
                 Subscribe();
             }
         }
@@ -47,7 +47,7 @@ namespace Game.Runtime
             if (_didSubscribe)
             {
                 _didSubscribe = false;
-                Log.Info(GetType().Name + "." + nameof(TryUnsubscribe));
+                logger.Log(GetType().Name + "." + nameof(TryUnsubscribe));
                 Unsubscribe();
             }
         }

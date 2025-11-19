@@ -35,7 +35,7 @@ public class SyrupStationScreen : ScreenController
 
     private void OnContinue()
     {
-        Debug.Log("Syrup done!");
+        logger.Log("Syrup done!");
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.PumpingSyrup);
         GameStateManager.Instance.ChangeState(GameStateType.PouringEspresso);
     }

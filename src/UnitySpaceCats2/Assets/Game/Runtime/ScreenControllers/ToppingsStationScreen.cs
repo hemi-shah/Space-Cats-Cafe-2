@@ -30,18 +30,18 @@ public class ToppingsStationScreen : ScreenController
         if (continueButton != null)
         {
             continueButton.onClick.AddListener(OnContinue);
-            Debug.Log("ToppingsStation: Continue button ready");
+            logger.Log("ToppingsStation: Continue button ready");
         }
     }
 
     private void OnToppingSelected(string topping)
     {
-        Debug.Log($"{topping} added");
+        logger.Log($"{topping} added");
     }
 
     private void OnContinue()
     {
-        Debug.Log("Toppings complete!");
+        logger.Log("Toppings complete!");
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.PlacingToppings);
         GameStateManager.Instance.ChangeState(GameStateType.ServingDrinks);
     }

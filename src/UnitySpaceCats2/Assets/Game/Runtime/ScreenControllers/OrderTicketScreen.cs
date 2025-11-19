@@ -61,7 +61,7 @@ public class OrderTicketScreen : ScreenController
         if (startMakingButton != null)
         {
             startMakingButton.onClick.AddListener(OnStartMaking);
-            Debug.Log("OrderTicketScreen: Start Making button ready");
+            logger.Log("OrderTicketScreen: Start Making button ready");
         }
     }
 
@@ -78,7 +78,7 @@ public class OrderTicketScreen : ScreenController
         if (OrderManager.Instance != null)
             ticketData = OrderManager.Instance.GetCurrentOrder();
         else 
-            Debug.LogWarning("OrderTicketScreen: OrderManager.Instance is null");
+            logger.LogWarning("OrderTicketScreen: OrderManager.Instance is null");
 
         if (orderTicket != null)
         {
@@ -96,7 +96,7 @@ public class OrderTicketScreen : ScreenController
 
     private void OnStartMaking()
     {
-        Debug.Log("Starting to make drink!");
+        logger.Log("Starting to make drink!");
         GameStateManager.Instance.ChangeState(GameStateType.ChoosingTemperature);
     }
 }

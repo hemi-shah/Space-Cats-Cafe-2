@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Game.Runtime;
 
 public class CatView : MonoBehaviour
 {
@@ -8,6 +9,13 @@ public class CatView : MonoBehaviour
     [SerializeField] private Button takeOrderButton;
 
     private CatDefinition catDefinition;
+    
+    private IGameLogger logger;
+
+    private void Awake()
+    {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+    }
 
     public void Initialize(CatDefinition definition)
     {
@@ -32,7 +40,7 @@ public class CatView : MonoBehaviour
 
     private void OnTakeOrderClicked()
     {
-        Debug.Log($"Taking order from: {catDefinition.catName}");
+        logger.Log($"Taking order from: {catDefinition.catName}");
         
         if (OrderManager.Instance != null)
         {

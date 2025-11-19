@@ -16,13 +16,13 @@ public class EspressoStationScreen : ScreenController
         if (pourButton != null)
         {
             pourButton.onClick.AddListener(OnPourEspresso);
-            Debug.Log("EspressoStation: Pour button ready");
+            logger.Log("EspressoStation: Pour button ready");
         }
         
         if (continueButton != null)
         {
             continueButton.onClick.AddListener(OnContinue);
-            Debug.Log("EspressoStation: Continue button ready");
+            logger.Log("EspressoStation: Continue button ready");
         }
     }
 
@@ -39,7 +39,7 @@ public class EspressoStationScreen : ScreenController
     private void OnPourEspresso()
     {
         espressoPoured = true;
-        Debug.Log("Espresso poured!");
+        logger.Log("Espresso poured!");
         if (statusText != null)
         {
             statusText.text = "Espresso ready!";
@@ -48,7 +48,7 @@ public class EspressoStationScreen : ScreenController
 
     private void OnContinue()
     {
-        Debug.Log("Moving to toppings");
+        logger.Log("Moving to toppings");
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.PouringEspresso);
         GameStateManager.Instance.ChangeState(GameStateType.PlacingToppings);
     }

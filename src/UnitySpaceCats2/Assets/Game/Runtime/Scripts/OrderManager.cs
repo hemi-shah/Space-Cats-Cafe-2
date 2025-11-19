@@ -25,11 +25,15 @@ public class OrderManager : MonoBehaviour
     private List<Action<OrderTicketData, Drink>> listeners = new();
     
     public bool isDrinkCompleted { get; private set; }
+
+    private IGameLogger logger;
     
     // list of stuff to notify
     
     private void Awake()
     {
+        logger = ServiceResolver.Resolve<IGameLogger>();
+        
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -101,7 +105,7 @@ public class OrderManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No drink found (OrderManager FinishCurrentDrink())");
+            logger.LogWarning("No drink found (OrderManager FinishCurrentDrink())");
         }
 
         /*
@@ -142,7 +146,7 @@ public class OrderManager : MonoBehaviour
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Listener failed: {ex}");
+                logger.LogError($"Listener failed: {ex}");
             }
         }
     }
