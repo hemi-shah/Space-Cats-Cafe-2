@@ -1,21 +1,17 @@
-using NUnit.Framework;
-using System.Collections.Generic;
-using Game399.Shared.Enums;
-
 [TestFixture]
 public class DrinkTests
 {
     [Test]
     public void IceLevel_StartsAtZero()
     {
-        var drink = new Drink();
+        var drink = new MockDrink();
         Assert.AreEqual(0, drink.IceLevel);
     }
 
     [Test]
     public void AddIce_IncrementsIceLevel()
     {
-        var drink = new Drink();
+        var drink = new MockDrink();
         drink.IceLevel++;
         drink.IceLevel++;
         Assert.AreEqual(2, drink.IceLevel);
@@ -24,7 +20,7 @@ public class DrinkTests
     [Test]
     public void AddSyrup_IncrementsCount()
     {
-        var drink = new Drink();
+        var drink = new MockDrink();
         drink.AddSyrup("Chocolate");
         drink.AddSyrup("Chocolate");
         drink.AddSyrup("Caramel");
@@ -37,7 +33,7 @@ public class DrinkTests
     [Test]
     public void AddMilk_SetsMilkType()
     {
-        var drink = new Drink();
+        var drink = new MockDrink();
         drink.AddMilk(MilkType.Oat);
         Assert.AreEqual(MilkType.Oat, drink.Milk);
     }
@@ -45,7 +41,7 @@ public class DrinkTests
     [Test]
     public void AddTopping_AddsUnique()
     {
-        var drink = new Drink();
+        var drink = new MockDrink();
         drink.AddTopping("WhippedCream");
         drink.AddTopping("WhippedCream");
         drink.AddTopping("CaramelDrizzle");
@@ -58,7 +54,7 @@ public class DrinkTests
     [Test]
     public void GetSpriteName_CoversAllCases()
     {
-        var drink = new Drink();
+        var drink = new MockDrink();
 
         // Hot Coffee
         drink.Temp = Temperature.Hot;
@@ -91,8 +87,8 @@ public class DrinkTests
     [Test]
     public void MultipleDrinks_HaveIndependentStates()
     {
-        var drink1 = new Drink { Temp = Temperature.Hot, Coffee = CoffeeType.Black };
-        var drink2 = new Drink { Temp = Temperature.Iced, Coffee = CoffeeType.Milk };
+        var drink1 = new MockDrink { Temp = Temperature.Hot, Coffee = CoffeeType.Black };
+        var drink2 = new MockDrink { Temp = Temperature.Iced, Coffee = CoffeeType.Milk };
 
         drink1.AddMilk(MilkType.Oat);
         drink2.AddMilk(MilkType.Almond);
