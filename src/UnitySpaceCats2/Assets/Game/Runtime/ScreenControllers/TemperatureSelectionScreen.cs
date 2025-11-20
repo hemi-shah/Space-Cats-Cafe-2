@@ -48,7 +48,7 @@ public class TemperatureSelectionScreen : ScreenController
         cupAnimator.SelectHot(hotDrinkSpawnPoint, hotDrinkObject);
         
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.ChoosingTemperature);
-        GameStateManager.Instance.ChangeState(GameStateType.ChoosingMilk);
+        GameStateManager.Instance.ChangeState(GameStateType.PumpingSyrup);
     }
 
     private void OnColdSelected()
