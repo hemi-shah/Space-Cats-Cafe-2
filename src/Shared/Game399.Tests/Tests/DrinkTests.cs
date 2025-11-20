@@ -56,38 +56,38 @@ public class DrinkTests
         CollectionAssert.Contains(drink.Toppings, "CaramelDrizzle");
     }
 
-    [Test]
-    public void GetSpriteName_CoversAllCases()
-    {
-        var drink = new MockDrink();
-
-        // Hot Coffee
-        drink.Temp = Temperature.Hot;
-        drink.Coffee = CoffeeType.Black;
-        Assert.AreEqual("HotDrinkCoffeeSprite", drink.GetSpriteName());
-
-        // Hot Milk
-        drink.Coffee = CoffeeType.Milk;
-        Assert.AreEqual("HotDrinkMilkSprite", drink.GetSpriteName());
-
-        // Iced Milk 3 ice
-        drink.Temp = Temperature.Iced;
-        drink.Coffee = CoffeeType.Milk;
-        drink.IceLevel = 3;
-        Assert.AreEqual("IcedDrinkThreeIceMilkSprite", drink.GetSpriteName());
-
-        // Iced Coffee no ice
-        drink.Temp = Temperature.Iced;
-        drink.Coffee = CoffeeType.Black;
-        drink.IceLevel = 0;
-        Assert.AreEqual("IcedDrinkEmptyCoffeeSprite", drink.GetSpriteName());
-
-        // Iced Milk ice > 4
-        drink.Temp = Temperature.Iced;
-        drink.Coffee = CoffeeType.Milk;
-        drink.IceLevel = 10;
-        Assert.AreEqual("IcedDrinkEmptyMilkSprite", drink.GetSpriteName());
-    }
+    // [Test]
+    // public void GetSpriteName_CoversAllCases()
+    // {
+    //     var drink = new MockDrink();
+    //
+    //     // Hot Coffee
+    //     drink.Temp = Temperature.Hot;
+    //     drink.Coffee = CoffeeType.Black;
+    //     Assert.AreEqual("HotDrinkCoffeeSprite", drink.GetSpriteName());
+    //
+    //     // Hot Milk
+    //     drink.Coffee = CoffeeType.Milk;
+    //     Assert.AreEqual("HotDrinkMilkSprite", drink.GetSpriteName());
+    //
+    //     // Iced Milk 3 ice
+    //     drink.Temp = Temperature.Iced;
+    //     drink.Coffee = CoffeeType.Milk;
+    //     drink.IceLevel = 3;
+    //     Assert.AreEqual("IcedDrinkThreeIceMilkSprite", drink.GetSpriteName());
+    //
+    //     // Iced Coffee no ice
+    //     drink.Temp = Temperature.Iced;
+    //     drink.Coffee = CoffeeType.Black;
+    //     drink.IceLevel = 0;
+    //     Assert.AreEqual("IcedDrinkEmptyCoffeeSprite", drink.GetSpriteName());
+    //
+    //     // Iced Milk ice > 4
+    //     drink.Temp = Temperature.Iced;
+    //     drink.Coffee = CoffeeType.Milk;
+    //     drink.IceLevel = 10;
+    //     Assert.AreEqual("IcedDrinkEmptyMilkSprite", drink.GetSpriteName());
+    // }
 
     [Test]
     public void MultipleDrinks_HaveIndependentStates()

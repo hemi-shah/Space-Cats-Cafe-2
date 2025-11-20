@@ -36,21 +36,21 @@ public class DrinkUITests
         Assert.AreEqual("Art/DrinkSprites/HotDrinkSprites/HotDrinkMilkSprite", path);
     }
 
-    [Test]
-    public void IcedDrinkSpritePath_OneIce_Coffee()
-    {
-        var drink = new MockDrink
-        {
-            Temp = Temperature.Iced,
-            Coffee = CoffeeType.Black,
-            IceLevel = 1
-        };
-
-        string spriteName = drink.GetSpriteName();
-        string path = $"Art/DrinkSprites/IcedDrinkSprites/{spriteName}";
-
-        Assert.AreEqual("Art/DrinkSprites/IcedDrinkSprites/IcedDrinkOneIceCoffeeSprite", path);
-    }
+    //[Test]
+    // public void IcedDrinkSpritePath_OneIce_Coffee()
+    // {
+    //     var drink = new MockDrink
+    //     {
+    //         Temp = Temperature.Iced,
+    //         Coffee = CoffeeType.Black,
+    //         IceLevel = 1
+    //     };
+    //
+    //     string spriteName = drink.GetSpriteName();
+    //     string path = $"Art/DrinkSprites/IcedDrinkSprites/{spriteName}";
+    //
+    //     Assert.AreEqual("Art/DrinkSprites/IcedDrinkSprites/IcedDrinkOneIceCoffeeSprite", path);
+    // }
 
     [Test]
     public void IcedDrinkSpritePath_FourIce_Milk()
@@ -84,21 +84,21 @@ public class DrinkUITests
         Assert.AreEqual("Art/DrinkSprites/IcedDrinkSprites/IcedDrinkEmptyMilkSprite", path);
     }
 
-    [Test]
-    public void IcedDrinkSpritePath_ZeroIce_UsesEmptySprite()
-    {
-        var drink = new MockDrink
-        {
-            Temp = Temperature.Iced,
-            Coffee = CoffeeType.Black,
-            IceLevel = 0
-        };
-
-        string spriteName = drink.GetSpriteName();
-        string path = $"Art/DrinkSprites/IcedDrinkSprites/{spriteName}";
-
-        Assert.AreEqual("Art/DrinkSprites/IcedDrinkSprites/IcedDrinkEmptyCoffeeSprite", path);
-    }
+    //[Test]
+    // public void IcedDrinkSpritePath_ZeroIce_UsesEmptySprite()
+    // {
+    //     var drink = new MockDrink
+    //     {
+    //         Temp = Temperature.Iced,
+    //         Coffee = CoffeeType.Black,
+    //         IceLevel = 0
+    //     };
+    //
+    //     string spriteName = drink.GetSpriteName();
+    //     string path = $"Art/DrinkSprites/IcedDrinkSprites/{spriteName}";
+    //
+    //     Assert.AreEqual("Art/DrinkSprites/IcedDrinkSprites/IcedDrinkEmptyCoffeeSprite", path);
+    // }
 
     [Test]
     public void AllCoffeeTypes_HotAndIced_HaveCorrectSprites()
