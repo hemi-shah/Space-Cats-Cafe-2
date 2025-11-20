@@ -12,14 +12,10 @@ public class DrinkServices
 
     private IGameLogger logger;
 
-    private void Awake()
-    {
-        logger = ServiceResolver.Resolve<IGameLogger>();
-    }
-
     public DrinkServices(List<IDrinkStation> stationPipeline)
     {
         stations = stationPipeline;
+        //logger = ServiceResolver.Resolve<IGameLogger>();
     }
 
     public IDrink CreateNewDrink()
@@ -74,6 +70,27 @@ public class DrinkServices
     public void CompleteDrink()
     {
         CurrentDrink.IsComplete = true;
+    }
+
+    public void ResetCurrentDrink()
+    {
+        // deactivate visual
+        if (CurrentDrinkObject != null)
+        {
+            CurrentDrinkObject.SetActive(false);
+            CurrentDrinkObject = null;
+        }
+
+        if (CurrentDrinkUI != null)
+        {
+            if (CurrentDrinkUI.gameObject != null)
+            {
+                CurrentDrinkUI.ResetUI();
+            }
+            CurrentDrinkUI = null;
+        }
+
+        //logger.Log("(DrinkServices) current drink reset!");
     }
     
 }

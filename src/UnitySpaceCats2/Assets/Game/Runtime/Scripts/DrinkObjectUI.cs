@@ -2,6 +2,8 @@ using UnityEngine;
 using Game.Runtime;
 using Game399.Shared.Enums;
 using TMPro;
+using UnityEngine.UI;
+using System;
 
 public class DrinkObjectUI : MonoBehaviour
 {
@@ -61,4 +63,24 @@ public class DrinkObjectUI : MonoBehaviour
         else
             return $"Art/DrinkSprites/IcedDrinkSprites/Empty/{spriteName}";
     }
+
+    public void ResetUI()
+    {
+        try
+        {
+            if (drinkSprite != null)
+                drinkSprite.SetActive(false);
+
+            if (toppingOverlay != null && toppingOverlay.gameObject != null)
+                toppingOverlay.gameObject.SetActive(false);
+
+            if (gameObject != null)
+                gameObject.SetActive(false);
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning($"ResetUI failed: {e.Message}");
+        }
+    }
+    
 }

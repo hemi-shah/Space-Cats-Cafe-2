@@ -13,6 +13,23 @@ public class TemperatureSelectionScreen : ScreenController
     [SerializeField] private Transform hotDrinkSpawnPoint;
     [SerializeField] private Transform coldDrinkSpawnPoint;
 
+    protected override void OnScreenShow()
+    {
+        base.OnScreenShow();
+        
+        /*
+        // deactivate drink objects initially
+        if (hotDrinkObject != null)
+            hotDrinkObject.SetActive(false);
+        if (coldDrinkObject != null)
+            coldDrinkObject.SetActive(false);
+        */
+        hotButton.gameObject.SetActive(true);
+        coldButton.gameObject.SetActive(true);
+        
+        SetupButtons();
+    }
+
     protected override void SetupButtons()
     {
         associatedState = GameStateType.ChoosingTemperature;
