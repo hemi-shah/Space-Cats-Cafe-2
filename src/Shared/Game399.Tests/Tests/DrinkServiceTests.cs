@@ -6,13 +6,17 @@ public class DrinkServiceTests
 {
     private class TestDrinkService : DrinkService
     {
-        public TestDrinkService() : base(EmptyGameLog.Instance) { }
-
-        public new bool CanMakeDrink(DrinkComponent component = DrinkComponent.None)
+        private class TestDrinkService : DrinkService
         {
-            if (component == DrinkComponent.None)
-                return Drinks.Count > 0;
-            return true;
+            public TestDrinkService() : base(EmptyGameLog.Instance) { }
+
+            public bool CanMakeDrink(DrinkComponent component = DrinkComponent.Milk)
+            {
+                if (Drinks.Count == 0) return false;
+                return true;
+            }
+
+            public void AddMockDrink(MockDrink drink) => Drinks.Add(drink);
         }
 
         public void AddMockDrink(MockDrink drink) => Drinks.Add(drink);

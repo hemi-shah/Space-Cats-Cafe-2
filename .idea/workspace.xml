@@ -5,24 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ad2458b-e20d-4090-b413-1ed7feabe5f6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/DrinkServiceTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/DrinkServiceTests.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/DrinkTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/DrinkTests.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/DrinkUITests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/DrinkUITests.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/EmptyGameLog.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/EmptyGameLog.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/MiniContainerTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/MiniContainerTests.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/MockDrink.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/MockDrink.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/ObservableValueTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/ObservableValueTests.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/OrderGeneratorTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/OrderGeneratorTests.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/OrderManagerTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Shared/Runtime/Tests/OrderManagerTests.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Tests/Tests/DrinkServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/Game399.Tests/Tests/DrinkServiceTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +63,7 @@
       <updated>1763669822570</updated>
       <workItem from="1763669823771" duration="1227000" />
       <workItem from="1763671271788" duration="245000" />
-      <workItem from="1763678148603" duration="327000" />
+      <workItem from="1763678148603" duration="740000" />
     </task>
     <servers />
   </component>
