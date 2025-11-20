@@ -1,3 +1,5 @@
+using Game.Runtime;
+using Game399.Shared.Services;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,26 +7,31 @@ public class ToppingsStationScreen : ScreenController
 {
     [SerializeField] private Button whippedCreamButton;
     [SerializeField] private Button caramelDrizzleButton;
-    [SerializeField] private Button cinnamonButton;
+    [SerializeField] private Button chocolateDrizzleButton;
     [SerializeField] private Button continueButton;
+
+    private IDrink currentDrink;
 
     protected override void SetupButtons()
     {
         associatedState = GameStateType.PlacingToppings;
         
+        var drinkService = ServiceResolver.Resolve<DrinkServices>();
+        currentDrink = drinkService.CurrentDrink;
+        
         if (whippedCreamButton != null)
         {
-            whippedCreamButton.onClick.AddListener(() => OnToppingSelected("Whipped Cream"));
+            whippedCreamButton.onClick.AddListener(() => OnToppingSelected("WhippedCream"));
         }
         
         if (caramelDrizzleButton != null)
         {
-            caramelDrizzleButton.onClick.AddListener(() => OnToppingSelected("Caramel Drizzle"));
+            caramelDrizzleButton.onClick.AddListener(() => OnToppingSelected("CaramelDrizzle"));
         }
         
-        if (cinnamonButton != null)
+        if (chocolateDrizzleButton != null)
         {
-            cinnamonButton.onClick.AddListener(() => OnToppingSelected("Cinnamon"));
+            chocolateDrizzleButton.onClick.AddListener(() => OnToppingSelected("ChocolateDrizzle"));
         }
         
         if (continueButton != null)
@@ -34,9 +41,18 @@ public class ToppingsStationScreen : ScreenController
         }
     }
 
-    private void OnToppingSelected(string topping)
+    public void OnToppingSelected(string topping)
     {
         logger.Log($"{topping} added");
+        var drinkServices = ServiceResolver.Resolve<DrinkServices>();
+        currentDrink = drinkServices.CurrentDrink;
+
+        if (currentDrink == null)
+            return;
+        
+        currentDrink.AddTopping(topping);
+
+        drinkServices.UpdateCurrentToppingOverlay();
     }
 
     private void OnContinue()

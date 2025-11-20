@@ -6,6 +6,7 @@ public class DrinkServices
 {
     private readonly List<IDrinkStation> stations = new();
     public IDrink CurrentDrink { get; private set; }
+    public DrinkObjectUI CurrentDrinkUI { get; private set; }
     
     public GameObject CurrentDrinkObject { get; private set; }
 
@@ -30,6 +31,16 @@ public class DrinkServices
     public void SetCurrentDrink(GameObject drinkObject)
     {
         CurrentDrinkObject = drinkObject;
+    }
+
+    public void RegisterCurrentDrinkUI(DrinkObjectUI drinkObjectUI)
+    {
+        CurrentDrinkUI = drinkObjectUI;
+    }
+
+    public void UpdateCurrentToppingOverlay()
+    {
+        CurrentDrinkUI?.UpdateToppingOverlay();
     }
 
     public IDrinkStation GetCurrentStation()
@@ -64,4 +75,5 @@ public class DrinkServices
     {
         CurrentDrink.IsComplete = true;
     }
+    
 }

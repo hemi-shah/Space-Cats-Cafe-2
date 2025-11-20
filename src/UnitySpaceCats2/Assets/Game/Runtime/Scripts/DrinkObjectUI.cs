@@ -1,11 +1,14 @@
 using UnityEngine;
 using Game.Runtime;
 using Game399.Shared.Enums;
+using TMPro;
 
 public class DrinkObjectUI : MonoBehaviour
 {
     public IDrink Drink { get; private set; }
     [SerializeField] private SpriteRenderer renderer;
+    [SerializeField] private GameObject drinkSprite;
+    [SerializeField] private ToppingOverlay toppingOverlay;
 
     private IGameLogger logger;
 
@@ -14,9 +17,21 @@ public class DrinkObjectUI : MonoBehaviour
         logger = ServiceResolver.Resolve<IGameLogger>();
     }
 
+    private void OnEnable()
+    {
+        if (drinkSprite != null)
+            drinkSprite.SetActive(true);
+        
+        if  (toppingOverlay != null)
+            toppingOverlay.gameObject.SetActive(true);
+    }
+
     private void Start()
     {
         Drink = ServiceResolver.Resolve<DrinkServices>().CurrentDrink;
+
+        ServiceResolver.Resolve<DrinkServices>().RegisterCurrentDrinkUI(this);
+        
         UpdateDrinkSprite();
     }
     
@@ -29,6 +44,12 @@ public class DrinkObjectUI : MonoBehaviour
     
         Sprite sprite = Resources.Load<Sprite>(path);
         renderer.sprite = sprite;
+    }
+
+    public void UpdateToppingOverlay()
+    {
+        if (toppingOverlay != null)
+            toppingOverlay.UpdateToppingOverlay(Drink);
     }
 
     private string GetIcedDrinkPath(string spriteName)
