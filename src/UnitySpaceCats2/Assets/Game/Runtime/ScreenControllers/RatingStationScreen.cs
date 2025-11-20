@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class RatingStationScreen : ScreenController
 {
@@ -11,6 +12,7 @@ public class RatingStationScreen : ScreenController
     [SerializeField] private Button playerChoice2Button;
     [SerializeField] private Text playerChoice1Text;
     [SerializeField] private Text playerChoice2Text;
+    [SerializeField] private Button completeOrderButton;
     [SerializeField] private Button nextOrderButton;
     [SerializeField] private Image catImage;
     
@@ -21,6 +23,23 @@ public class RatingStationScreen : ScreenController
     private CatDefinition currentCat;
     private int currentRating;
     private bool showingFollowUp = false;
+
+    protected void OnEnable()
+    {
+
+        OrderManager.Instance?.AddListener(OnOrderCompleted);
+    }
+
+    protected void OnDisable()
+    {
+        
+        OrderManager.Instance?.RemoveListener(OnOrderCompleted);
+    }
+
+    private void OnOrderCompleted(OrderTicketData orderTicket, Drink drink)
+    {
+        ShowDialogueButtons();
+    }
 
     protected override void SetupButtons()
     {
@@ -64,9 +83,63 @@ public class RatingStationScreen : ScreenController
             logger.LogWarning("RatingStation: no selected cat found in OrderManager!");
         }
 
+        if (!OrderManager.Instance.isDrinkCompleted)
+        {
+            completeOrderButton.gameObject.SetActive(true);
+            HideChoiceButtons();
+            scoreText.text = "";
+            dialogueText.text = "";
+            nextOrderButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            completeOrderButton.gameObject.SetActive(false);
+            playerChoice1Button.gameObject.SetActive(true);
+            playerChoice2Button.gameObject.SetActive(true);
+            ShowDialogue();
+        }
+
+        //currentRating = drinkVerifier.lastRating;
+        //logger.Log("Rating: " + currentRating);
+
+        /*
+        // Increment cat counter for good drinks (4-5 stars)
+        if (currentRating >= 4 && currentCat != null)
+        {
+            currentCat.counter++;
+            logger.Log($"Cat {currentCat.catName} counter increased to: {currentCat.counter}");
+        }
+
+        // Get and display dialogue
+        if (DialogueManager.Instance != null && currentCat != null)
+        {
+            currentDialogue = DialogueManager.Instance.GetDialogue(currentCat, currentRating);
+            DisplayInitialDialogue();
+        }
+        else
+        {
+            // Fallback if no dialogue system
+            DisplayFallbackFeedback();
+        }
+        */
+    }
+
+    public void ShowDialogueButtons()
+    {
+        SetupButtons();
+        playerChoice1Button.gameObject.SetActive(true);
+        playerChoice2Button.gameObject.SetActive(true);
+        completeOrderButton.gameObject.SetActive(false);
+        ShowDialogue();
+    }
+
+    // set rating and show dialogue
+    // only call if order is completed
+    private void ShowDialogue()
+    {
         currentRating = drinkVerifier.lastRating;
         logger.Log("Rating: " + currentRating);
-
+        
         // Increment cat counter for good drinks (4-5 stars)
         if (currentRating >= 4 && currentCat != null)
         {
@@ -268,7 +341,11 @@ public class RatingStationScreen : ScreenController
             RemoveCurrentCat();
         }
         
-        OrderManager.Instance.MarkDrinkCompleted(true);
+        OrderManager.Instance.MarkDrinkCompleted(false);
+        
+        HideChoiceButtons();
+        scoreText.text = "";
+        dialogueText.text = "";
         
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.ServingDrinks);
         GameStateManager.Instance.ClearHistory();
