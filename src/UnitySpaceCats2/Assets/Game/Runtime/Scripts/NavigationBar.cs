@@ -2,11 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using Game.Runtime;
-
-/// <summary>
-/// Navigation bar controller - handles button clicks to navigate between screens
-/// Locks/unlocks stations based on order progress
-/// </summary>
 public class NavigationBar : MonoBehaviour
 {
     [Header("Navigation Buttons")]
@@ -84,10 +79,7 @@ public class NavigationBar : MonoBehaviour
 
         GameStateManager.Instance.ChangeState(targetState);
     }
-
-    /// <summary>
-    /// Update button visuals and lock states based on current state
-    /// </summary>
+    
     private void OnStateChanged(GameStateType newState)
     {
         // Handle state-specific logic
@@ -112,6 +104,15 @@ public class NavigationBar : MonoBehaviour
             case GameStateType.ChoosingTemperature:
                 // When leaving temperature selection, track choice and lock appropriately
                 break;
+                
+            case GameStateType.ChoosingMilk:
+                // We're on milk screen - keep ice game locked if it was already locked
+                break;
+                
+            case GameStateType.PlayingIceGame:
+                // On the ice game screen - lock it so you can't come back once you leave
+                lockedStations.Add(GameStateType.PlayingIceGame);
+                break;
         }
 
         // Update all button visuals
@@ -124,10 +125,6 @@ public class NavigationBar : MonoBehaviour
         UpdateButtonVisual(toppingsButton, GameStateType.PlacingToppings, newState);
         UpdateButtonVisual(reviewButton, GameStateType.ServingDrinks, newState);
     }
-
-    /// <summary>
-    /// Called by screen controllers when they complete their action
-    /// </summary>
     public void MarkStationCompleted(GameStateType stationType)
     {
         completedStations.Add(stationType);
@@ -141,28 +138,28 @@ public class NavigationBar : MonoBehaviour
                 lockedStations.Add(GameStateType.WaitingforCustomers);
                 
                 // Check if we went hot or cold based on next state
-                if (GameStateManager.Instance.CurrentState.Value == GameStateType.ChoosingMilk)
+                if (GameStateManager.Instance.CurrentState.Value == GameStateType.PumpingSyrup)
                 {
-                    // Hot drink chosen - lock ice game, unlock milk
+                    // Hot drink chosen - lock ice game immediately
                     isHotDrink = true;
+                    isColdDrink = false;
                     lockedStations.Add(GameStateType.PlayingIceGame);
-                    lockedStations.Remove(GameStateType.ChoosingMilk);
+                    lockedStations.Remove(GameStateType.PumpingSyrup);
                 }
                 else if (GameStateManager.Instance.CurrentState.Value == GameStateType.PlayingIceGame)
                 {
-                    // Cold drink chosen - unlock ice game
+                    // Cold drink chosen - unlock ice game, but will lock once completed
                     isColdDrink = true;
+                    isHotDrink = false;
                     lockedStations.Remove(GameStateType.PlayingIceGame);
                 }
                 break;
 
             case GameStateType.PlayingIceGame:
-                // Lock ice game, temperature, and waiting after completing
+                // Lock ice game permanently after completing (can't go back)
                 lockedStations.Add(GameStateType.PlayingIceGame);
-                lockedStations.Add(GameStateType.ChoosingTemperature);
-                lockedStations.Add(GameStateType.WaitingforCustomers);
                 // Unlock milk
-                lockedStations.Remove(GameStateType.ChoosingMilk);
+                // lockedStations.Remove(GameStateType.ChoosingMilk);
                 break;
 
             case GameStateType.ChoosingMilk:
