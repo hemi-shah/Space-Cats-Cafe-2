@@ -1,3 +1,8 @@
+using NUnit.Framework;
+using Game399.Shared.Services;
+using Game399.Shared.Enums;
+using System.Collections.Generic;
+
 [TestFixture]
 public class DrinkTests
 {
