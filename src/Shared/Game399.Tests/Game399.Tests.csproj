@@ -22,7 +22,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Game399.Shared\Game399.Shared.csproj" />
-        <!-- Removed Unity reference -->
+        <ProjectReference Include="..\Game399.Unity\Game399.Unity.csproj" />
     </ItemGroup>
 
 </Project>
