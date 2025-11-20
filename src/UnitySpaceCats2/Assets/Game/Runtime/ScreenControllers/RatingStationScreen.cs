@@ -12,6 +12,7 @@ public class RatingStationScreen : ScreenController
     [SerializeField] private Button playerChoice2Button;
     [SerializeField] private Text playerChoice1Text;
     [SerializeField] private Text playerChoice2Text;
+    [SerializeField] private Button completeOrderButton;
     [SerializeField] private Button nextOrderButton;
     [SerializeField] private Image catImage;
     
@@ -84,12 +85,15 @@ public class RatingStationScreen : ScreenController
 
         if (!OrderManager.Instance.isDrinkCompleted)
         {
+            completeOrderButton.gameObject.SetActive(true);
             HideChoiceButtons();
             scoreText.text = "";
             dialogueText.text = "";
+            nextOrderButton.gameObject.SetActive(false);
         }
         else
         {
+            completeOrderButton.gameObject.SetActive(false);
             playerChoice1Button.gameObject.SetActive(true);
             playerChoice2Button.gameObject.SetActive(true);
             ShowDialogue();
@@ -125,6 +129,7 @@ public class RatingStationScreen : ScreenController
         SetupButtons();
         playerChoice1Button.gameObject.SetActive(true);
         playerChoice2Button.gameObject.SetActive(true);
+        completeOrderButton.gameObject.SetActive(false);
         ShowDialogue();
     }
 
