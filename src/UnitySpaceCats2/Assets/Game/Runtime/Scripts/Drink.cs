@@ -35,7 +35,6 @@ public class Drink : IDrink
             Toppings.Add(topping);
     }
 
-    
     public string GetSpriteName()
     {
         if (Temp == Temperature.Hot)
@@ -47,25 +46,27 @@ public class Drink : IDrink
                 _ => "HotDrinkEmptySprite"
             };
         }
-        else
+    
+        // Iced drink logic
+        string coffeeName = Coffee switch
         {
-            string content = Coffee switch
-            {
-                CoffeeType.Black => "Coffee",
-                CoffeeType.Milk => "Milk",
-                _ => "Empty"
-            };
+            CoffeeType.Black => "Coffee",
+            CoffeeType.Milk => "Milk",
+            _ => "Unknown"
+        };
 
-            string spriteName = IceLevel switch
-            {
-                1 => $"IcedDrinkOneIce{content}Sprite",
-                2 => $"IcedDrinkTwoIce{content}Sprite",
-                3 => $"IcedDrinkThreeIce{content}Sprite",
-                4 => $"IcedDrinkFourIce{content}Sprite",
-                _ => $"IcedDrinkEmpty{content}Sprite" // <--- fixed here
-            };
+        if (IceLevel == 0 || IceLevel > 4)
+            return $"IcedDrinkEmpty{coffeeName}Sprite";
 
-            return spriteName;
-        }
+        string iceWord = IceLevel switch
+        {
+            1 => "One",
+            2 => "Two",
+            3 => "Three",
+            4 => "Four",
+            _ => ""
+        };
+
+        return $"IcedDrink{iceWord}Ice{coffeeName}Sprite";
     }
 }

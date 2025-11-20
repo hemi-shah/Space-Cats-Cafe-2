@@ -20,8 +20,8 @@
         <Using Include="NUnit.Framework"/>
     </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="../Game399.Shared/Game399.Shared.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Game399.Shared\Game399.Shared.csproj" />
+    </ItemGroup>
 
 </Project>
