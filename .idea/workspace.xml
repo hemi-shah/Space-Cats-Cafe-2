@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ad2458b-e20d-4090-b413-1ed7feabe5f6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Shared/Game399.Tests/Tests/DrinkServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/Game399.Tests/Tests/DrinkServiceTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UnitySpaceCats2/Assets/Game/Runtime/Scripts/Drink.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/UnitySpaceCats2/Assets/Game/Runtime/Scripts/Drink.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +31,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Shared/Game399.Tests/DrinkServiceTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Shared/Game399.Tests/MockDrink.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/UnitySpaceCats2/Assets/Game/Runtime/Scripts/Drink.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -63,7 +65,7 @@
       <updated>1763669822570</updated>
       <workItem from="1763669823771" duration="1227000" />
       <workItem from="1763671271788" duration="245000" />
-      <workItem from="1763678148603" duration="740000" />
+      <workItem from="1763678148603" duration="980000" />
     </task>
     <servers />
   </component>
