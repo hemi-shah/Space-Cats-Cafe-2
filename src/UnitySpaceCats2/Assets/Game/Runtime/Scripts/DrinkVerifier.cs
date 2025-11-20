@@ -2,6 +2,7 @@ using Game.Runtime;
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
+using Game399.Shared.Enums;
 
 public class DrinkVerifier : ObserverMonoBehaviour
 {

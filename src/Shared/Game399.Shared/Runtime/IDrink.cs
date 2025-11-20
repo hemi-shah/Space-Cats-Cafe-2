@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using Game399.Shared.Enums;
 
 public interface IDrink
 {
     Temperature Temp { get; set; }
-    CoffeeType Type { get; set; }
+    CoffeeType Coffee { get; set; }
     MilkType Milk { get; set; }
     int IceLevel { get; set; }
     Dictionary<string, int> SyrupCounts { get; }

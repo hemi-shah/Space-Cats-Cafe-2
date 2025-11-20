@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Game.Runtime;
+using Game399.Shared.Enums;
 
 public class MilkStation : MonoBehaviour
 {

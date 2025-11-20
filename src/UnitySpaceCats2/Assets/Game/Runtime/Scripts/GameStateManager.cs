@@ -1,5 +1,6 @@
 using UnityEngine;
 using Game399.Shared;
+using Game399.Shared.Enums;
 using System.Collections.Generic;
 using Game.Runtime;
 

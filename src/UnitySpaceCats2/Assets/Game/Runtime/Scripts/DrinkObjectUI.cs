@@ -1,5 +1,6 @@
 using UnityEngine;
 using Game.Runtime;
+using Game399.Shared.Enums;
 
 public class DrinkObjectUI : MonoBehaviour
 {

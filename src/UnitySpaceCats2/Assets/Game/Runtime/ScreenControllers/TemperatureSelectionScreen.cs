@@ -1,6 +1,7 @@
 using Game.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
+using Game399.Shared.Enums;
 
 public class TemperatureSelectionScreen : ScreenController
 {

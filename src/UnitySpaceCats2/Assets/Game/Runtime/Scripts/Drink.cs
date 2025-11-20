@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Runtime;
+using Game399.Shared.Enums;
 
 public class Drink : IDrink
 {
     public Temperature Temp { get; set; }
-    public CoffeeType Type { get; set; }
+    public CoffeeType Coffee { get; set; }
     public MilkType Milk { get; set; } = MilkType.None;
     public int IceLevel { get; set; } = 0;
     public Dictionary<string, int> SyrupCounts { get; private set; } = new(); // used to keep track of syrup counts
@@ -34,11 +35,12 @@ public class Drink : IDrink
             Toppings.Add(topping);
     }
 
+    
     public string GetSpriteName()
     {
         if (Temp == Temperature.Hot)
         {
-            return Type switch
+            return Coffee switch
             {
                 CoffeeType.Black => "HotDrinkCoffeeSprite",
                 CoffeeType.Milk => "HotDrinkMilkSprite",
@@ -47,7 +49,7 @@ public class Drink : IDrink
         }
         else
         {
-            string content = Type switch
+            string content = Coffee switch
             {
                 CoffeeType.Black => "Coffee",
                 CoffeeType.Milk => "Milk",
@@ -60,7 +62,7 @@ public class Drink : IDrink
                 2 => $"IcedDrinkTwoIce{content}Sprite",
                 3 => $"IcedDrinkThreeIce{content}Sprite",
                 4 => $"IcedDrinkFourIce{content}Sprite",
-                _ => content == "Empty" ? "IcedDrinkEmptySprite" : $"IcedDrink{content}Sprite"
+                _ => $"IcedDrinkEmpty{content}Sprite" // <--- fixed here
             };
 
             return spriteName;

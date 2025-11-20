@@ -1,5 +1,6 @@
 using Game.Runtime;
 using UnityEngine;
+using Game399.Shared.Enums;
 
 public class IceStation : IDrinkStation
 {
