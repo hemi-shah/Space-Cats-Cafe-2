@@ -1,5 +1,3 @@
-using UnityEngine;
-
 /// <summary>
 /// Defines all possible game states/screens in the coffee sim
 /// </summary>
