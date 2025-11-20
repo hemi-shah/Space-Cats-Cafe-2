@@ -57,6 +57,11 @@ public class OrderManager : MonoBehaviour
         isDrinkCompleted = completed;
     }
 
+    public void ClearCurrentOrder()
+    {
+        currentOrder = default;
+    }
+
     public void SetSelectedCat(CatDefinition cat)
         => selectedCat = cat;
 
