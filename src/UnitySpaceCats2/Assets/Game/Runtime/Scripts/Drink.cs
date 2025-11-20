@@ -14,11 +14,7 @@ public class Drink : IDrink
     public bool IsComplete { get; set; } = false;
 
     private IGameLogger logger;
-
-    private void Awake()
-    {
-        logger = ServiceResolver.Resolve<IGameLogger>();
-    }
+    private IGameLogger Logger => logger ??= ServiceResolver.Resolve<IGameLogger>();
 
     public void AddSyrup(string syrup)
     {
@@ -27,7 +23,7 @@ public class Drink : IDrink
         else
             SyrupCounts[syrup] = 1;
 
-        logger.Log($"[Drink] Syrup counts: {string.Join(", ", SyrupCounts.Select(kvp => $"{kvp.Key}={kvp.Value}"))}");
+        //logger.Log($"[Drink] Syrup counts: {string.Join(", ", SyrupCounts.Select(kvp => $"{kvp.Key}={kvp.Value}"))}");
     }
 
     public void AddMilk(MilkType milk) => Milk = milk;

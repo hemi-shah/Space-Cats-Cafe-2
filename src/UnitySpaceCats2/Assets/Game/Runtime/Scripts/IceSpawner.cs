@@ -76,6 +76,8 @@ public class IceSpawner : MonoBehaviour
 
     void UpdateDrinkImage()
     {
+        AudioManager.Instance.PlayIceSfx();
+        
         if (drinkSprite == null)
         {
             logger.LogError("Cannot update drink image: drinkSprite is null!");

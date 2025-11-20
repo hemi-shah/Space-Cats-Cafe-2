@@ -8,11 +8,7 @@ public class IceCube : MonoBehaviour
     {
         if (collision.CompareTag("Drink"))
         {
-            Debug.Log("Ice hit the drink!");
-            if (AudioManager.Instance != null)
-            {
-                AudioManager.Instance.PlayIceSfx();
-            }
+            OnHitDrink?.Invoke(this);
         }
     }
 }
