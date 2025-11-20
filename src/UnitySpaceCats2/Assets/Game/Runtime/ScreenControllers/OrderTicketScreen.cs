@@ -32,7 +32,19 @@ public class OrderTicketScreen : ScreenController
 
             if (OrderManager.Instance != null)
             {
-                OrderTicketData ticketData = OrderManager.Instance.GenerateRandomOrderData();
+                OrderTicketData ticketData;
+
+                if (OrderManager.Instance.GetCurrentOrder().drinkName != null)
+                {
+                    ticketData = OrderManager.Instance.GetCurrentOrder();
+                    logger.Log("Reusing existing order ticket");
+                }
+                else
+                {
+                    ticketData = OrderManager.Instance.GenerateRandomOrderData();
+                    logger.Log("Generating new order ticket");
+                }
+                //OrderTicketData ticketData = OrderManager.Instance.GenerateRandomOrderData();
                 currentOrderData = ticketData;
                 int ticketNumber = OrderManager.Instance.GetAndIncrementNextOrderNumber();
                 orderTicket.Setup(ticketNumber, ticketData);

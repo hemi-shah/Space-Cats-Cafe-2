@@ -296,6 +296,8 @@ public class RatingStationScreen : ScreenController
     private void TriggerRemake()
     {
         logger.Log("Triggering drink remake...");
+        OrderManager.Instance.MarkDrinkCompleted(false);
+        //completeOrderButton.gameObject.SetActive(true);
         // Go back to drink making state
         GameStateManager.Instance.ChangeState(GameStateType.ChoosingTemperature);
     }
@@ -342,6 +344,7 @@ public class RatingStationScreen : ScreenController
         }
         
         OrderManager.Instance.MarkDrinkCompleted(false);
+        OrderManager.Instance.ClearCurrentOrder();
         
         HideChoiceButtons();
         scoreText.text = "";
