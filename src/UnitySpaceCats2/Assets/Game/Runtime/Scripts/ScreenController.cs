@@ -1,10 +1,6 @@
 using UnityEngine;
 using Game.Runtime;
 
-/// <summary>
-/// Simple base class for all screens
-/// Each screen GameObject must be ENABLED in the scene hierarchy
-/// </summary>
 public abstract class ScreenController : MonoBehaviour
 {
     [Header("Screen Settings")]
@@ -19,7 +15,6 @@ public abstract class ScreenController : MonoBehaviour
 
     void Start()
     {
-        // Set up button listeners immediately
         SetupButtons();
         
         // Subscribe to state changes
@@ -62,23 +57,13 @@ public abstract class ScreenController : MonoBehaviour
         gameObject.SetActive(false);
         OnScreenHide();
     }
-
-    /// <summary>
-    /// Override this in child classes to set up button listeners
-    /// </summary>
     protected abstract void SetupButtons();
-
-    /// <summary>
-    /// Called when screen becomes visible
-    /// </summary>
+    
     protected virtual void OnScreenShow()
     {
         logger.Log($"{GetType().Name} is now visible");
     }
-
-    /// <summary>
-    /// Called when screen is hidden
-    /// </summary>
+    
     protected virtual void OnScreenHide()
     {
         logger.Log($"{GetType().Name} is now hidden");

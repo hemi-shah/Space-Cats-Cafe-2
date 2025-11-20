@@ -4,20 +4,17 @@ using Game399.Shared.Enums;
 using System.Collections.Generic;
 using Game.Runtime;
 
-/// <summary>
-/// Manages game state transitions and notifies subscribers of changes
-/// </summary>
 public class GameStateManager : MonoBehaviour
 {
     public static GameStateManager Instance { get; private set; }
 
-    // Observable current state - any script can subscribe to state changes
+    // Observable current state 
     public ObservableValue<GameStateType> CurrentState { get; private set; }
 
     // History of states for back navigation if needed
     private Stack<GameStateType> stateHistory = new Stack<GameStateType>();
 
-    // Optional: track previous state
+    // track previous state
     public GameStateType PreviousState { get; private set; }
 
     private IGameLogger logger;
@@ -55,10 +52,7 @@ public class GameStateManager : MonoBehaviour
     {
         CurrentState.ChangeEvent -= OnStateChanged;
     }
-
-    /// <summary>
-    /// Changes to a new game state
-    /// </summary>
+    
     public void ChangeState(GameStateType newState)
     {
         if (newState == GameStateType.PlayingIceGame)
@@ -90,11 +84,7 @@ public class GameStateManager : MonoBehaviour
         stateHistory.Push(PreviousState);
         CurrentState.Value = newState;
     }
-
-
-    /// <summary>
-    /// Go back to the previous state (if history exists)
-    /// </summary>
+    
     public void GoToPreviousState()
     {
         if (stateHistory.Count > 0)
@@ -108,26 +98,15 @@ public class GameStateManager : MonoBehaviour
             logger.LogWarning("No previous state in history");
         }
     }
-
-    /// <summary>
-    /// Clear state history (useful when starting a new order)
-    /// </summary>
     public void ClearHistory()
     {
         stateHistory.Clear();
     }
-
-    /// <summary>
-    /// Called whenever state changes - useful for debugging
-    /// </summary>
+    
     private void OnStateChanged(GameStateType newState)
     {
         logger.Log($"State Changed: {PreviousState} -> {newState}");
     }
-
-    /// <summary>
-    /// Quick state check methods
-    /// </summary>
     public bool IsInState(GameStateType state)
     {
         return CurrentState.Value == state;

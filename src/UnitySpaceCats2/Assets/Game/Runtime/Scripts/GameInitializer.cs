@@ -1,10 +1,6 @@
 using UnityEngine;
 using Game.Runtime;
 
-/// <summary>
-/// Handles game initialization tasks like assigning dialogue paths to cats
-/// Attach this to a GameObject in your first/main scene
-/// </summary>
 public class GameInitializer : MonoBehaviour
 {
     [SerializeField] private bool initializeOnStart = true;
@@ -26,26 +22,23 @@ public class GameInitializer : MonoBehaviour
 
     public void InitializeGame()
     {
-        logger.Log("Initializing game...");
+        logger.Log("initializing game");
         
-        // Initialize dialogue paths for all cats
+        // initialize dialogue paths for all cats
         if (DialogueManager.Instance != null)
         {
             DialogueManager.Instance.InitializeCatDialoguePaths();
-            logger.Log("Cat dialogue paths initialized!");
+            logger.Log("dialogue paths initialized");
         }
         else
         {
-            logger.LogWarning("DialogueManager not found!");
+            logger.LogWarning("DialogueManager not found");
         }
     }
-
-    /// <summary>
-    /// Call this to reset the game (new game button, etc.)
-    /// </summary>
+    
     public void ResetGame()
     {
-        logger.Log("Resetting game...");
+        logger.Log("resetting game");
         
         if (DialogueManager.Instance != null)
         {

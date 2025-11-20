@@ -1,10 +1,6 @@
 using UnityEngine;
 using Game.Runtime;
 
-/// <summary>
-/// Ensures all screen content is set up properly before the game starts
-/// Attach this to your Canvas
-/// </summary>
 [DefaultExecutionOrder(-100)]
 public class ScreenInitializer : MonoBehaviour
 {
@@ -19,9 +15,7 @@ public class ScreenInitializer : MonoBehaviour
         
         if (logInitialization)
         {
-            logger.Log("═══════════════════════════════════════");
-            logger.Log("<color=cyan>[ScreenInitializer] Setting up screens...</color>");
-            logger.Log("═══════════════════════════════════════");
+            logger.Log("Setting up screens");
         }
         
         // Find all ScreenControllers
@@ -29,13 +23,12 @@ public class ScreenInitializer : MonoBehaviour
         
         if (allScreens.Length == 0)
         {
-            logger.LogWarning("[ScreenInitializer] No ScreenControllers found!");
             return;
         }
         
         foreach (var screen in allScreens)
         {
-            // Make sure the GameObject with ScreenController is enabled
+
             if (!screen.gameObject.activeSelf)
             {
                 screen.gameObject.SetActive(true);
@@ -53,14 +46,12 @@ public class ScreenInitializer : MonoBehaviour
             // If screenRoot is assigned and different from the GameObject
             if (root != null && root != screen.gameObject)
             {
-                // IMPORTANT: Make sure screenRoot STARTS enabled
-                // ScreenController will handle hiding it if needed
                 if (!root.activeSelf)
                 {
                     root.SetActive(true);
                     if (logInitialization)
                     {
-                        logger.Log($"  • Enabled {root.name} content (will be hidden by ScreenController if needed)");
+                        logger.Log($" enabled {root.name} content ");
                     }
                 }
             }
@@ -68,8 +59,7 @@ public class ScreenInitializer : MonoBehaviour
         
         if (logInitialization)
         {
-            logger.Log($"<color=green>[ScreenInitializer] Prepared {allScreens.Length} screens</color>");
-            logger.Log("═══════════════════════════════════════");
+            logger.Log($" prepared {allScreens.Length} screens</color>");
         }
     }
 }
