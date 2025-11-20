@@ -7,7 +7,7 @@ public class DrinkUITests
     [Test]
     public void HotDrinkSpritePath_BlackCoffee_IsCorrect()
     {
-        var drink = new Drink
+        var drink = new MockDrink
         {
             Temp = Temperature.Hot,
             Coffee = CoffeeType.Black
@@ -22,7 +22,7 @@ public class DrinkUITests
     [Test]
     public void HotDrinkSpritePath_MilkCoffee_IsCorrect()
     {
-        var drink = new Drink
+        var drink = new MockDrink
         {
             Temp = Temperature.Hot,
             Coffee = CoffeeType.Milk
@@ -37,7 +37,7 @@ public class DrinkUITests
     [Test]
     public void IcedDrinkSpritePath_OneIce_Coffee()
     {
-        var drink = new Drink
+        var drink = new MockDrink
         {
             Temp = Temperature.Iced,
             Coffee = CoffeeType.Black,
@@ -53,7 +53,7 @@ public class DrinkUITests
     [Test]
     public void IcedDrinkSpritePath_FourIce_Milk()
     {
-        var drink = new Drink
+        var drink = new MockDrink
         {
             Temp = Temperature.Iced,
             Coffee = CoffeeType.Milk,
@@ -69,7 +69,7 @@ public class DrinkUITests
     [Test]
     public void IcedDrinkSpritePath_AboveFourIce_UsesEmptyIceSprite()
     {
-        var drink = new Drink
+        var drink = new MockDrink
         {
             Temp = Temperature.Iced,
             Coffee = CoffeeType.Milk,
@@ -85,7 +85,7 @@ public class DrinkUITests
     [Test]
     public void IcedDrinkSpritePath_ZeroIce_UsesEmptySprite()
     {
-        var drink = new Drink
+        var drink = new MockDrink
         {
             Temp = Temperature.Iced,
             Coffee = CoffeeType.Black,
@@ -103,8 +103,8 @@ public class DrinkUITests
     {
         foreach (CoffeeType type in (CoffeeType[])System.Enum.GetValues(typeof(CoffeeType)))
         {
-            var hotDrink = new Drink { Temp = Temperature.Hot, Coffee = type };
-            var icedDrink = new Drink { Temp = Temperature.Iced, Coffee = type, IceLevel = 2 };
+            var hotDrink = new MockDrink { Temp = Temperature.Hot, Coffee = type };
+            var icedDrink = new MockDrink { Temp = Temperature.Iced, Coffee = type, IceLevel = 2 };
 
             string hotSprite = hotDrink.GetSpriteName();
             string icedSprite = icedDrink.GetSpriteName();
@@ -119,7 +119,7 @@ public class DrinkUITests
     [Test]
     public void IcedDrink_SpriteNameChangesWithIceLevel()
     {
-        var drink = new Drink { Temp = Temperature.Iced, Coffee = CoffeeType.Milk };
+        var drink = new MockDrink { Temp = Temperature.Iced, Coffee = CoffeeType.Milk };
 
         for (int ice = 0; ice <= 5; ice++)
         {
@@ -135,7 +135,6 @@ public class DrinkUITests
         }
     }
 
-    // convert numbers to words (for sprite names)
     private string NumberToWord(int number) => number switch
     {
         1 => "One",
