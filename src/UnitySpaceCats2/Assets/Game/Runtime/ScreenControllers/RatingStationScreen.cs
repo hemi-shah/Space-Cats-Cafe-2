@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Game.Runtime;
 
 public class RatingStationScreen : ScreenController
 {
@@ -296,7 +297,13 @@ public class RatingStationScreen : ScreenController
     private void TriggerRemake()
     {
         logger.Log("Triggering drink remake...");
+        
+        // clear drink
+        ServiceResolver.Resolve<DrinkServices>().ResetCurrentDrink();
+        
+        // mark drink not completed
         OrderManager.Instance.MarkDrinkCompleted(false);
+        
         //completeOrderButton.gameObject.SetActive(true);
         // Go back to drink making state
         GameStateManager.Instance.ChangeState(GameStateType.ChoosingTemperature);
@@ -344,7 +351,6 @@ public class RatingStationScreen : ScreenController
         }
         
         OrderManager.Instance.MarkDrinkCompleted(false);
-        OrderManager.Instance.ClearCurrentOrder();
         
         HideChoiceButtons();
         scoreText.text = "";
@@ -353,6 +359,12 @@ public class RatingStationScreen : ScreenController
         NavigationBar.Instance?.MarkStationCompleted(GameStateType.ServingDrinks);
         GameStateManager.Instance.ClearHistory();
         GameStateManager.Instance.ChangeState(GameStateType.WaitingforCustomers);
+        
+        // clear current drink
+        ServiceResolver.Resolve<DrinkServices>().ResetCurrentDrink();
+        
+        OrderManager.Instance.ClearCurrentOrder();
+        
     }
 
     private void RemoveCurrentCat()
