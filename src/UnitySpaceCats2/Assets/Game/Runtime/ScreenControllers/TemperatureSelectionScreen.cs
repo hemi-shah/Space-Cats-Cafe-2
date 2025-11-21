@@ -53,7 +53,7 @@ public class TemperatureSelectionScreen : ScreenController
         
         if (coldButton != null)
         {
-            hotButton.onClick.RemoveAllListeners();
+            coldButton.onClick.RemoveAllListeners();
             coldButton.onClick.AddListener(OnColdSelected);
         }
     }
