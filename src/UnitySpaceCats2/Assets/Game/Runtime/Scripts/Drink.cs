@@ -32,7 +32,13 @@ public class Drink : IDrink
     public void AddTopping(string topping)
     {
         if (!Toppings.Contains(topping))
+        {
+            if ((topping == "CaramelDrizzle" || topping == "ChocolateDrizzle") && !Toppings.Contains("WhippedCream"))
+            {
+                return;
+            }
             Toppings.Add(topping);
+        }
     }
 
     public string GetSpriteName()
