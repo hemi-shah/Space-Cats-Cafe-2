@@ -17,17 +17,25 @@ public class TemperatureSelectionScreen : ScreenController
     {
         base.OnScreenShow();
         
-        /*
+        
         // deactivate drink objects initially
         if (hotDrinkObject != null)
             hotDrinkObject.SetActive(false);
         if (coldDrinkObject != null)
             coldDrinkObject.SetActive(false);
-        */
-        hotButton.gameObject.SetActive(true);
-        coldButton.gameObject.SetActive(true);
         
-        SetupButtons();
+        hotButton.gameObject.SetActive(true);
+        hotButton.interactable = true;
+        
+        coldButton.gameObject.SetActive(true);
+        coldButton.interactable = true;
+
+        if (cupAnimator != null)
+        {
+            cupAnimator.ResetCups();
+        }
+        
+        //SetupButtons();
     }
 
     protected override void SetupButtons()
@@ -39,11 +47,13 @@ public class TemperatureSelectionScreen : ScreenController
         
         if (hotButton != null)
         {
+            hotButton.onClick.RemoveAllListeners();
             hotButton.onClick.AddListener(OnHotSelected);
         }
         
         if (coldButton != null)
         {
+            hotButton.onClick.RemoveAllListeners();
             coldButton.onClick.AddListener(OnColdSelected);
         }
     }
